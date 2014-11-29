@@ -1,0 +1,45 @@
+[submodule "files/.vim/bundle/ack.vim"]
+	path = files/.vim/bundle/ack.vim
+	url = git@github.com:mileszs/ack.vim.git
+[submodule "files/.vim/bundle/ctrlp.vim"]
+	path = files/.vim/bundle/ctrlp.vim
+	url = git@github.com:kien/ctrlp.vim.git
+[submodule "files/.vim/bundle/nerdtree"]
+	path = files/.vim/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule "files/.vim/bundle/supertab"]
+	path = files/.vim/bundle/supertab
+	url = git@github.com:ervandew/supertab.git
+[submodule "files/.vim/bundle/syntastic"]
+	path = files/.vim/bundle/syntastic
+	url = git@github.com:scrooloose/syntastic.git
+[submodule "files/.vim/bundle/tComment"]
+	path = files/.vim/bundle/tComment
+	url = git@github.com:vim-scripts/tComment.git
+[submodule "files/.vim/bundle/vim-airline"]
+	path = files/.vim/bundle/vim-airline
+	url = git@github.com:bling/vim-airline.git
+[submodule "files/.vim/bundle/vim-fugitive"]
+	path = files/.vim/bundle/vim-fugitive
+	url = git@github.com:tpope/vim-fugitive.git
+[submodule "files/.vim/bundle/vim-sensible"]
+	path = files/.vim/bundle/vim-sensible
+	url = git@github.com:tpope/vim-sensible.git
+[submodule "files/.vim/bundle/vim-trailing-whitespace"]
+	path = files/.vim/bundle/vim-trailing-whitespace
+	url = git@github.com:bronson/vim-trailing-whitespace.git
+[submodule "files/.vim/bundle/vim-snippets"]
+	path = files/.vim/bundle/vim-snippets
+	url = git@github.com:honza/vim-snippets.git
+[submodule "files/.vim/bundle/vim-jade"]
+	path = files/.vim/bundle/vim-jade
+	url = git@github.com:digitaltoad/vim-jade.git
+[submodule "files/.vim/bundle/vim-snipmate"]
+	path = files/.vim/bundle/vim-snipmate
+	url = git@github.com:garbas/vim-snipmate.git
+[submodule "files/.vim/bundle/vim-colors-solarized"]
+	path = files/.vim/bundle/vim-colors-solarized
+	url = git@github.com:altercation/vim-colors-solarized.git
+[submodule "files/.vim/bundle/vim-addon-mw-utils"]
+	path = files/.vim/bundle/vim-addon-mw-utils
+	url = git@github.com:MarcWeber/vim-addon-mw-utils.git

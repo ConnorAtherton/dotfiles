@@ -1,0 +1,25 @@
+set nocompatible
+call pathogen#infect()
+filetype plugin indent on
+
+" vim airline config
+let g:airline#extensions#tabline#enabled = 1
+
+" CTRLP config
+let g:ctrlp_working_path_mode = 'a'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn))|(node_modules|dist)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': '',
+  \ }
+
+nnoremap <leader>f :CtrlP<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>T :CtrlPBufTag<CR>
+nnoremap <leader>t :CtrlPTag<CR>
+nnoremap <leader>F :CtrlPCurWD<CR>
+nnoremap <leader>M :CtrlPMRUFiles<CR>
+nnoremap <leader>m :CtrlPMixed<CR>
+nnoremap <leader>l :CtrlPLine<CR>
+
