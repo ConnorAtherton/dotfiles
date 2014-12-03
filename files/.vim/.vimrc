@@ -44,6 +44,11 @@ set timeout
 set timeoutlen=100
 set ttimeoutlen=100
 
+" Enable whitespace strip on save
+let g:strip_whitespace_on_save = 1
+" Uncomment below line to change color for whitespace
+" highlight ExtraWhitespace ctermbg=<desired_color>
+
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
 " http://items.sjbach.com/319/configuring-vim-right

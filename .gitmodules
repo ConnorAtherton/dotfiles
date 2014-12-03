@@ -25,9 +25,6 @@
 [submodule "files/.vim/bundle/vim-sensible"]
 	path = files/.vim/bundle/vim-sensible
 	url = git@github.com:tpope/vim-sensible.git
-[submodule "files/.vim/bundle/vim-trailing-whitespace"]
-	path = files/.vim/bundle/vim-trailing-whitespace
-	url = git@github.com:bronson/vim-trailing-whitespace.git
 [submodule "files/.vim/bundle/vim-snippets"]
 	path = files/.vim/bundle/vim-snippets
 	url = git@github.com:honza/vim-snippets.git
@@ -43,3 +40,9 @@
 [submodule "files/.vim/bundle/vim-addon-mw-utils"]
 	path = files/.vim/bundle/vim-addon-mw-utils
 	url = git@github.com:MarcWeber/vim-addon-mw-utils.git
+[submodule "files/.vim/bundle/vim-better-whitespace"]
+	path = files/.vim/bundle/vim-better-whitespace
+	url = git@github.com:ntpeters/vim-better-whitespace.git
+[submodule "files/.vim/bundle/tlib_vim"]
+	path = files/.vim/bundle/tlib_vim
+	url = https://github.com/tomtom/tlib_vim.git
