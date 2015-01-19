@@ -49,3 +49,9 @@
 [submodule "files/.vim/bundle/vim-gitgutter"]
 	path = files/.vim/bundle/vim-gitgutter
 	url = git@github.com:airblade/vim-gitgutter.git
+[submodule "files/.vim/bundle/vim-rails"]
+	path = files/.vim/bundle/vim-rails
+	url = git://github.com/tpope/vim-rails.git
+[submodule "files/.vim/bundle/vim-commentary"]
+	path = files/.vim/bundle/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
