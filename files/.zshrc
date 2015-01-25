@@ -14,6 +14,9 @@ ZSH_THEME="robbyrussell"
 # source all aliases
 source $HOME/.aliases
 
+# plugins
+source $HOME/peco.zsh
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 

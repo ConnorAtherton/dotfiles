@@ -11,6 +11,9 @@ rm -f $HOME/.aliases
 rm -f $HOME/.tmux.conf
 rm -f $HOME/.osx
 
+# remove zsh plugins
+rm -f $HOME/*.zsh
+
 FILEPATH=$PWD/files
 
 cd files
