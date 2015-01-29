@@ -1,4 +1,14 @@
 #!/usr/bin/env zsh
+#
+# DETERMINE OS
+case $( uname -s ) in
+Linux)
+    OS="LINUX"
+    ;;
+Darwin)
+    OS="MAC"
+    ;;
+esac
 
 #
 # REMOVE OLD DOTFILES
@@ -9,6 +19,8 @@ rm -f $HOME/.zshrc
 rm -f $HOME/.zprofile
 rm -f $HOME/.aliases
 rm -f $HOME/.tmux.conf
+
+# conditiional on being osx
 rm -f $HOME/.osx
 
 # remove zsh plugins
