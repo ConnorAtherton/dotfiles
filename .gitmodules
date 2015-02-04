@@ -55,6 +55,3 @@
 [submodule "files/.vim/bundle/vim-commentary"]
 	path = files/.vim/bundle/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
-[submodule "files/.vim/bundle/YouCompleteMe"]
-	path = files/.vim/bundle/YouCompleteMe
-	url = git@github.com:Valloric/YouCompleteMe.git

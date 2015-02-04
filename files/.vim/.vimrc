@@ -18,7 +18,7 @@ endif
 ino jk <esc>
 cno jk <c-c>
 vno v <esc>
-nmap jk <esc>
+nnoremap jk <esc>
 
 " Remap cycling through buffers
 nnoremap <C-n> :bnext<CR>
@@ -114,10 +114,11 @@ set undolevels=1000      " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
 " YOU WILL NOT USE ARROW KEYS!!
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+noremap <esc> <nop>
 
 " Lets us edit a file that requires root privs
 " once it's already open (think /etc/hosts)
@@ -126,6 +127,14 @@ cmap w!! w !sudo tee % >/dev/null
 " Move visual block on scroll
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" opens .vimrc in split for easy editing
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" source .vimuu
+nnoremap <leader>sv :source $MYVIMRC<cr>
+"surround work in quotes
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 
 " Plugin mappings in here
 if filereadable(expand("~/.vim/.vimrc.after"))
