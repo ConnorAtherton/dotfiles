@@ -2,6 +2,6 @@
 ```cd ~/.dotfiles```
 
 ### Run the configure script
-```./configure```
+```./install```
 
 Everything works!

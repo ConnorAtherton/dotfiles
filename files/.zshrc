@@ -14,9 +14,6 @@ ZSH_THEME="robbyrussell"
 # source all aliases
 source $HOME/.aliases
 
-# plugins
-source $HOME/peco.zsh
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -51,6 +48,10 @@ export DOCKER_HOST="tcp://localhost:2375"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+if which ruby >/dev/null && which gem >/dev/null; then
+  PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
+
 
 ### Enable fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -58,5 +59,29 @@ export PATH="/usr/local/heroku/bin:$PATH"
 ### Remap some keys
 bindkey '^b' beginning-of-line
 
-## Just a nice welcome
-echo "Welcome back Connor\n"
+# so useful!
+function restart_finder() {
+  killall Finder
+}
+
+function show_hidden_files() {
+  defaults write com.apple.finder AppleShowAllFiles TRUE
+  restart_finder
+}
+
+function hide_hidden_files() {
+  defaults write com.apple.finder AppleShowAllFiles FALSE
+  restart_finder
+}
+
+# find shorthand
+# find ./ -name '*.js'
+function f() {
+  find . -name "$1"
+}
+
+# Create a new directory and enter it
+function md() {
+  mkdir -p "$@" && cd "$@"
+}
+

@@ -6,6 +6,9 @@ if filereadable(expand("~/.vim/.vimrc.before"))
   source ~/.vim/.vimrc.before
 endif
 
+" Don't show intro
+set shortmess+=I
+
 " Color schemes
 colorscheme solarized
 if has('gui_running')
@@ -37,6 +40,7 @@ set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 set nobackup                    "Backup files tend to get in the way
 set noswapfile                  "Same as above
+set nowritebackup
 
 " This needs to exist so the 'j' key is still snappy in normal
 " mode due to the fact that 'jk' replaces <esc>
@@ -114,11 +118,11 @@ set undolevels=1000      " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
 " YOU WILL NOT USE ARROW KEYS!!
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-noremap <right> <nop>
-noremap <esc> <nop>
+noremap <up> <NOP>
+noremap <down> <NOP>
+noremap <left> <NOP>
+noremap <right> <NOP>
+noremap <esc> <NOP>
 
 " Lets us edit a file that requires root privs
 " once it's already open (think /etc/hosts)
@@ -135,6 +139,10 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 "surround work in quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+
+" auto commands
+" convert spaces to tabs for Makefiles
+autocmd FileType make setlocal noexpandtab
 
 " Plugin mappings in here
 if filereadable(expand("~/.vim/.vimrc.after"))
