@@ -48,40 +48,14 @@ export DOCKER_HOST="tcp://localhost:2375"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
 if which ruby >/dev/null && which gem >/dev/null; then
   PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
-
 
 ### Enable fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ### Remap some keys
 bindkey '^b' beginning-of-line
-
-# so useful!
-function restart_finder() {
-  killall Finder
-}
-
-function show_hidden_files() {
-  defaults write com.apple.finder AppleShowAllFiles TRUE
-  restart_finder
-}
-
-function hide_hidden_files() {
-  defaults write com.apple.finder AppleShowAllFiles FALSE
-  restart_finder
-}
-
-# find shorthand
-# find ./ -name '*.js'
-function f() {
-  find . -name "$1"
-}
-
-# Create a new directory and enter it
-function md() {
-  mkdir -p "$@" && cd "$@"
-}
 
