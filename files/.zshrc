@@ -41,9 +41,14 @@ fi
 ### Remap some keys
 bindkey '^b' beginning-of-line
 
-rm -f "$PWD/scripts/all.zsh"
-for a in `ls scripts`; do
+GEN_SCRIPTS=( peco general )
+scripts=$HOME/.dotfiles/scripts
+rm -f $scripts/all.zsh
+for a in $GEN_SCRIPTS; do
   echo "found script - $a"
-  cat "$PWD/scripts/$a" >> "$PWD/scripts/all.zsh"
+  cat "$scripts/$a.zsh" >> "$scripts/all.zsh"
 done
-# source "$PWD/scripts/all.zsh"
+
+# When sourcing .zshrc we only want the general functions
+# to be sourced
+source $HOME/.dotfiles/scripts/all.zsh

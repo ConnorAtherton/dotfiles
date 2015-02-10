@@ -49,9 +49,13 @@ ln -fs $HOME/.vim/.vimrc.before $HOME/.vimrc.before
 if [ $OS = "Linux" ]; then
   # config for thinkpad...
 else
-  echo "Resetting .osx new settings"
+  echo "OSX detected: installing relevant files."
   # cd ~ && ./.osx
+  # install brew
+  `sh $PWD/scripts/brew.sh`
 fi
 
+# config for linux and mac
+
+# installs useful function aliases into shell
 source ~/.zshrc
-source "$PWD/scripts/all.zsh"

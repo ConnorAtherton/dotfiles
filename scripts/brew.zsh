@@ -6,7 +6,8 @@ function install_brews() {
   brew tap caskroom/homebrew-cask
 
   brews=( vim git node tmux reattach-to-user-namespace \
-          rename tree wget cmake brew-cask ctags wireshark )
+          rename tree wget cmake brew-cask ctags wireshark \
+          peco )
 
   for item in "${brews[@]}"
   do
