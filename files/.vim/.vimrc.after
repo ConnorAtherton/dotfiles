@@ -10,22 +10,33 @@ nnoremap <leader>M :CtrlPMRUFiles<CR>
 nnoremap <leader>m :CtrlPMixed<CR>
 nnoremap <leader>l :CtrlPLine<CR>
 
+" CTRLP config
+let g:ctrlp_working_path_mode = 'a'
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn))|(node_modules|dist|vendor)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': '',
+  \ }
+
 " CTRLP settings
 let g:ctrlp_show_hidden=1
 let g:ctrlp_working_path_mode=0
-let g:ctrlp_max_height=30
+let g:ctrlp_max_height=20
 
 " override <C-o> to provide options for how to open files
 let g:ctrlp_arg_map = 1
 
-" files matched are ignored when expanding wildcards
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
 
 " CtrlP -> use Ag for searching instead of VimScript
 " (ustom_ignore)
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" let g:ctrlp_user_command = 'ack %s -l --nocolor""'
 
-" directories to ignore when fuzzy finding
-let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
-
+"
+" vim airline config
+"
+let g:airline#extensions#tabline#enabled = 1
 

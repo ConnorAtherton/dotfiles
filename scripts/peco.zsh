@@ -4,3 +4,4 @@ function peco-kill-process() {
 }
 
 alias pkp='peco-kill-process'
+

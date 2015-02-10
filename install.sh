@@ -38,6 +38,7 @@ do
 	echo 'SYMLINKING -> ' ${file:2};
 	ln -s $PWD/${file:2} $HOME/${file:2};
 done
+cd ..
 
 echo "Creating symlinks for vim to root"
 ln -fs $FILEPATH $HOME
@@ -52,11 +53,5 @@ else
   # cd ~ && ./.osx
 fi
 
-# cd out of files
-cd ../scripts
-for a in `ls`; do
-  source $a
-done
-
 source ~/.zshrc
-
+source "$PWD/scripts/all.zsh"

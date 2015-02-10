@@ -31,5 +31,6 @@ function f() {
 
 # Create a new directory and enter it
 function md() {
-  mkdir -p "$@" && cd "$@"
+  mkdir -p "$1" && cd "$1"
 }
+

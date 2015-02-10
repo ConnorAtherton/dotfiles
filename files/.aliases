@@ -11,8 +11,33 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 alias tree='tree -L 1 -C -h'
 
+# git
+alias gitl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an %cr)%Creset' --abbrev-commit --date=relative"
+alias gitlp='gl -p'
+alias gitls='git shortlog -s --'
+
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias gp='git pull'
+alias gpu='git push'
+alias gpr='git pull --rebase'
+alias gst='git stash'
+alias gco='git checkout '
+alias gk='gitk --all&'
+alias gx='gitx --all'
+alias got='git '
+alias get='git '
+
+# tig
+alias ts='tig status'
+alias td='tig diff'
+alias tl='tig log'
+
 # Shortcuts
-alias d="cd ~/Documents/Dropbox"
+alias dbox="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias p="cd ~/projects"
@@ -93,27 +118,3 @@ alias copy="tr -d '\n' | pbcopy"
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
-# git alias
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an %cr)%Creset' --abbrev-commit --date=relative"
-alias glp='gl -p'
-alias gls='git shortlog -s --'
-
-alias gs='git status '
-alias ga='git add '
-alias gb='git branch '
-alias gc='git commit'
-alias gd='git diff'
-alias gp='git pull'
-alias gpu='git push'
-alias gpr='git pull --rebase'
-alias gst='git stash'
-alias gco='git checkout '
-alias gk='gitk --all&'
-alias gx='gitx --all'
-alias got='git '
-alias get='git '
-
-# tig
-alias ts='tig status'
-alias td='tig diff'
-alias tl='tig log'

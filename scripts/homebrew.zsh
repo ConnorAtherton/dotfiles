@@ -1,6 +1,5 @@
 function install_homebrew() {
-  ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-  echo "finished installing homebrew"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 }
 
 function install_brews() {
@@ -23,7 +22,7 @@ function install_brews() {
 
 function install_casks() {
   casks=( dropbox vlc google-chrome suspicious-package \
-          transmission )
+          transmission skitch )
 
   for item in "${casks[@]}"
   do
@@ -31,6 +30,6 @@ function install_casks() {
   done
 }
 
-install_homebrew && \
-install_brews && \
-install_casks
+install_homebrew
+install_brews && install_casks
+

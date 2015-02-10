@@ -8,3 +8,4 @@ function install_npm_packages() {
 }
 
 install_npm_packages
+

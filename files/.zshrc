@@ -1,9 +1,7 @@
 export PATH="/usr/local/bin:/Users/Connor/Bitnami/arc/arcanist/bin:/Users/Connor/.rbenv/bin:/Users/Connor/google-cloud-sdk/bin:$PATH"
-# Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-
-# Set JAVA_HOME ENV variable
 export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/home'
+export EDITOR='vim'
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -13,9 +11,7 @@ ZSH_THEME="robbyrussell"
 
 # source all aliases
 source $HOME/.aliases
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+source $ZSH/oh-my-zsh.sh
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -25,21 +21,7 @@ COMPLETION_WAITING_DOTS="true"
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(git ruby)
-
-source $ZSH/oh-my-zsh.sh
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vim'
-fi
-
-# Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
-# ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # rbenv init
@@ -59,3 +41,9 @@ fi
 ### Remap some keys
 bindkey '^b' beginning-of-line
 
+rm -f "$PWD/scripts/all.zsh"
+for a in `ls scripts`; do
+  echo "found script - $a"
+  cat "$PWD/scripts/$a" >> "$PWD/scripts/all.zsh"
+done
+# source "$PWD/scripts/all.zsh"
