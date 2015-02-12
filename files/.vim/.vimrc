@@ -1,6 +1,5 @@
 set nocompatible
 
-" TODO: this may not be in the correct place. It is intended to allow overriding <Leader>.
 " source ~/.vimrc.before if it exists.
 if filereadable(expand("~/.vim/.vimrc.before"))
   source ~/.vim/.vimrc.before
@@ -43,7 +42,7 @@ set noswapfile                  "Same as above
 set nowritebackup
 filetype plugin indent on
 
-" This needs to exist so the 'j' key is still snappy in normal
+" " This needs to exist so the 'j' key is still snappy in normal
 " mode due to the fact that 'jk' replaces <esc>
 set timeout
 set timeoutlen=100
@@ -119,11 +118,14 @@ set undolevels=1000      " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
 " YOU WILL NOT USE ARROW KEYS!!
-noremap <up> <NOP>
-noremap <down> <NOP>
-noremap <left> <NOP>
-noremap <right> <NOP>
-noremap <esc> <NOP>
+nnoremap <up>    <nop>
+nnoremap <down>  <nop>
+nnoremap <left>  <nop>
+nnoremap <right> <nop>
+inoremap <up>    <nop>
+inoremap <down>  <nop>
+inoremap <left>  <nop>
+inoremap <right> <nop>
 
 " Lets us edit a file that requires root privs
 " once it's already open (think /etc/hosts)
