@@ -46,6 +46,10 @@ ln -fs $HOME/.vim/.vimrc $HOME/.vimrc
 ln -fs $HOME/.vim/.vimrc.after $HOME/.vimrc.after
 ln -fs $HOME/.vim/.vimrc.before $HOME/.vimrc.before
 
+# install vim.plug to manage deps
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 if [ $OS = "Linux" ]; then
   # config for thinkpad...
 else

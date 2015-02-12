@@ -13,7 +13,7 @@ nnoremap <leader>l :CtrlPLine<CR>
 " CTRLP config
 let g:ctrlp_working_path_mode = 'a'
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.rsync*
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
 
 let g:ctrlp_custom_ignore = {

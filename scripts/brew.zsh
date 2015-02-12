@@ -7,7 +7,7 @@ function install_brews() {
 
   brews=( vim git node tmux reattach-to-user-namespace \
           rename tree wget cmake brew-cask ctags wireshark \
-          peco )
+          peco coreutils findutils  )
 
   for item in "${brews[@]}"
   do
@@ -30,6 +30,12 @@ function install_casks() {
     brew cask install $item
   done
 }
+
+# ensure latest homebrew
+brew update
+
+# upgrade formulae we already have installed
+brew upgrade
 
 install_homebrew
 install_brews && install_casks

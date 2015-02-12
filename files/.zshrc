@@ -45,7 +45,6 @@ GEN_SCRIPTS=( peco general )
 scripts=$HOME/.dotfiles/scripts
 rm -f $scripts/all.zsh
 for a in $GEN_SCRIPTS; do
-  echo "found script - $a"
   cat "$scripts/$a.zsh" >> "$scripts/all.zsh"
 done
 

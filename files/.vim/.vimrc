@@ -41,6 +41,7 @@ set autoread                    "Reload files changed outside vim
 set nobackup                    "Backup files tend to get in the way
 set noswapfile                  "Same as above
 set nowritebackup
+filetype plugin indent on
 
 " This needs to exist so the 'j' key is still snappy in normal
 " mode due to the fact that 'jk' replaces <esc>
