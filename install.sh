@@ -50,13 +50,14 @@ ln -fs $HOME/.vim/.vimrc.before $HOME/.vimrc.before
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+echo "$PWD ---------"
 if [ $OS = "Linux" ]; then
   # config for thinkpad...
 else
   echo "OSX detected: installing relevant files."
   # cd ~ && ./.osx
   # install brew
-  `sh $PWD/scripts/brew.sh`
+  `sh $PWD/scripts/brew.zsh`
 fi
 
 # config for linux and mac

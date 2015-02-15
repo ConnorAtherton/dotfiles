@@ -4,10 +4,11 @@ function install_homebrew() {
 
 function install_brews() {
   brew tap caskroom/homebrew-cask
+  brew tap homebrew/boneyard
 
   brews=( vim git node tmux reattach-to-user-namespace \
           rename tree wget cmake brew-cask ctags wireshark \
-          peco coreutils findutils  )
+          peco coreutils docker the_silver_searcher )
 
   for item in "${brews[@]}"
   do

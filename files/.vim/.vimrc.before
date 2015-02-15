@@ -2,7 +2,7 @@ set nocompatible
 
 " install all plugins here
 call plug#begin('~/.vim/plugged')
-  Plug 'mileszs/ack.vim'
+  Plug 'rking/ag.vim'
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   Plug 'kien/ctrlp.vim'
   Plug 'scrooloose/syntastic'
@@ -19,5 +19,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'digitaltoad/vim-jade'
   Plug 'garbas/vim-snipmate'
   Plug 'honza/vim-snippets'
+  Plug 'tomtom/tlib_vim'
 call plug#end()
 
