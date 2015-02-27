@@ -8,7 +8,7 @@ function install_brews() {
 
   brews=( vim git node tmux reattach-to-user-namespace \
           rename tree wget cmake brew-cask ctags wireshark \
-          peco coreutils docker the_silver_searcher )
+          peco coreutils docker the_silver_searcher gnupg gnupg2 )
 
   for item in "${brews[@]}"
   do
