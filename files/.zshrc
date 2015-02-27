@@ -1,4 +1,4 @@
-export PATH="/usr/local/bin:/Users/Connor/Bitnami/arc/arcanist/bin:/Users/Connor/.rbenv/bin:/Users/Connor/google-cloud-sdk/bin:/usr/texbin:$PATH"
+export PATH="/usr/local/bin:/Users/Connor/Bitnami/arc/arcanist/bin:/Users/Connor/.rbenv/bin:/Users/Connor/google-cloud-sdk/bin:/usr/texbin:~/pebble-dev/PebbleSDK-3.0-dp1/bin:$PATH"
 export ZSH=$HOME/.oh-my-zsh
 export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/home'
 export EDITOR='vim'

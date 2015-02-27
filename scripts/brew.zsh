@@ -6,9 +6,10 @@ function install_brews() {
   brew tap caskroom/homebrew-cask
   brew tap homebrew/boneyard
 
-  brews=( vim git node tmux reattach-to-user-namespace \
+  brews=( vim git node tmux reattach-to-user-namespace python \
           rename tree wget cmake brew-cask ctags wireshark \
-          peco coreutils docker the_silver_searcher gnupg gnupg2 )
+          peco coreutils docker the_silver_searcher gnupg  \
+          freetype boost-python glib pixman )
 
   for item in "${brews[@]}"
   do
@@ -16,6 +17,8 @@ function install_brews() {
       brew install $item --override-system-vim
     elif [[ $item == "wireshark" ]]; then
       brew install wireshark --with-qt
+    elif [[ $item == "boost-python" ]]; then
+      brew install boost-python --build-from-source
     else
       brew install $item
     fi
