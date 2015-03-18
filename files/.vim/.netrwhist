@@ -1,9 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/Connor/.vim'
-let g:netrw_dirhist_2='/Users/Connor/Repos/bitnami-portal'
-let g:netrw_dirhist_3='/Users/Connor/Repos/buildsystem-playground'
-let g:netrw_dirhist_4='/Library/Ruby/Gems/2.0.0/gems/pry-0.9.10'
-let g:netrw_dirhist_5='/usr/include/sys'
-let g:netrw_dirhist_6='/usr/include/sys/_types'
-let g:netrw_dirhist_7='/usr/include/sys'
+let g:netrw_dirhist_cnt =0

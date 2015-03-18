@@ -7,7 +7,7 @@ nnoremap <leader>T :CtrlPBufTag<CR>
 nnoremap <leader>t :CtrlPTag<CR>
 nnoremap <leader>F :CtrlPCurWD<CR>
 nnoremap <leader>M :CtrlPMRUFiles<CR>
-nnoremap <leader>m :CtrlPMixed<CR>
+" nnoremap <leader>m :CtrlPMixed<CR>
 nnoremap <leader>l :CtrlPLine<CR>
 
 " CTRLP config
@@ -40,3 +40,12 @@ let g:ctrlp_arg_map = 1
 "
 let g:airline#extensions#tabline#enabled = 1
 
+"
+" Syntastic
+"
+let g:syntastic_ruby_checkers = ['rubocop']
+
+"
+" NerdTabs
+"
+let g:nerdtree_tabs_open_on_console_startup=1

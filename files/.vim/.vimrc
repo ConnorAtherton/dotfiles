@@ -74,6 +74,7 @@ set cursorline
 " That means all \x commands turn into ,x
 let mapleader=","
 nmap <Leader>n :NERDTreeToggle<CR>
+nmap <Leader>m :NERDTreeTabsToggle<CR>
 
 " ================ Indentation ======================
 

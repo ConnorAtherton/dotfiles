@@ -20,5 +20,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'garbas/vim-snipmate'
   Plug 'honza/vim-snippets'
   Plug 'tomtom/tlib_vim'
+  Plug 'Valloric/YouCompleteMe'
+  Plug 'jistr/vim-nerdtree-tabs'
 call plug#end()
 
