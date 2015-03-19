@@ -1,8 +1,9 @@
 # Vim alias to load ~/.vimrc automatically
 alias vim="vim -u ~/.vimrc"
 alias vi=vim
+alias MYVIMRC="~/.vimrc"
 
-# Easier navigation: .., ..., ...., ....., ~ and -
+# Easier navigation
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -13,7 +14,6 @@ alias tree='tree -L 1 -C -h'
 
 # git
 alias gitl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an %cr)%Creset' --abbrev-commit --date=relative"
-alias gitlp='gl -p'
 alias gitls='git shortlog -s --'
 
 alias gs='git status '

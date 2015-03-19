@@ -21,6 +21,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'honza/vim-snippets'
   Plug 'tomtom/tlib_vim'
   Plug 'Valloric/YouCompleteMe'
-  Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'junegunn/goyo.vim'
 call plug#end()
 
