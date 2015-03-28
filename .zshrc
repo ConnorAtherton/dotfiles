@@ -16,18 +16,21 @@ ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+unset path
+unset PATH
+echo $PATH
+echo "========"
+echo path
+echo PATH
+
 #
 # Create a list of directories to add to the path
 #
 pathdirs=(
-    /Applications/VMWare\ Fusion.app/Contents/Library
-    /Library/Frameworks/Python.framework/Versions/Current/bin
     /usr/local/bin
-    /usr/local/git/bin
-    /usr/local/libexec/git-core
-    /opt/local/bin
     /usr/local/opt/coreutils/libexec/gnubin
 		/usr/local/heroku/bin
+    /bin
 
     $HOME/Applications/VMWare\ Fusion.app/Content/Library
     $HOME/bin
@@ -49,9 +52,13 @@ fi
 # Add directories which exist to the path
 for dir ($pathdirs) {
     if [[ -d $dir ]]; then
+      echo "adding to path" $dir
         path=($dir $path)
     fi
 }
+
+echo $path
+export path
 
 #
 # Create a list of function paths for zsh
@@ -107,8 +114,8 @@ done
 # TODO: find out exactly what /dev/null is
 # TODO: find a way to clear this path first.
 #
-export path >/dev/null
-export fpath >/dev/null
+# export path >/dev/null
+# export fpath >/dev/null
 
 #
 # TODO: what does this actually do?
