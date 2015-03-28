@@ -1,3 +1,7 @@
+# TODO: only if not already
+# use zsh
+chsh -s $(which zsh)
+
 local pathdirs funcdirs
 
 #
