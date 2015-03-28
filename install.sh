@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 
+#
 # DETERMINE OS
-case $( uname -s ) in
+#
+case $(uname -s) in
 Linux)
     OS="LINUX"
     ;;
@@ -12,55 +14,54 @@ esac
 
 #
 # REMOVE OLD DOTFILES
-echo "Removing old dotfiles"
-files=( .vim .zprofile .zshrc .aliases .tmux.conf \
-        .osx )
-for f in "${files[@]}"; do
-  FILEPATH=$HOME/$f
-  if [[ -a $FILEPATH ]]
-  then
-    if [[ -d $FILEPATH ]]
-    then
+#
+remove_from_home () {
+  FILEPATH=$HOME/$1
+
+  if [[ -a $FILEPATH ]]; then
+    if [[ -d $FILEPATH ]]; then
       rm -rf $FILEPATH
     else
       rm -r $FILEPATH
     fi
   fi
-done
-
-FILEPATH=$PWD/files
+}
 
 #
 # Symlink files back into correct dir
-cd files
-find . ! -path . -maxdepth 1 | while read file
+#
+find . ! -path . -maxdepth 1 -iname ".*" | while read file
 do
+  if [ $(echo "${file:2}" | grep -q -E '^.git*') ]; then
+    continue
+  fi
+
+  echo 'Removing from home. ' ${file:2}
+  remove_from_home ${file:2}
 	echo 'SYMLINKING -> ' ${file:2};
-	ln -s $PWD/${file:2} $HOME/${file:2};
+	ln -fs $PWD/${file:2} $HOME/${file:2};
 done
-cd ..
 
-echo "Creating symlinks for vim to root"
-ln -fs $FILEPATH $HOME
-ln -fs $HOME/.vim/.vimrc $HOME/.vimrc
-ln -fs $HOME/.vim/.vimrc.after $HOME/.vimrc.after
-ln -fs $HOME/.vim/.vimrc.before $HOME/.vimrc.before
-
+#
 # install vim.plug to manage deps
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#
+if ! [ -e ~/.vim/autoload/plug.vim ]; then
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
-echo "$PWD ---------"
 if [ $OS = "Linux" ]; then
   # config for thinkpad...
 else
   echo "OSX detected: installing relevant files."
   # cd ~ && ./.osx
   # install brew
-  `sh $PWD/scripts/brew.zsh`
+  # `sh $PWD/scripts/brew.zsh`
 fi
 
+#
 # config for linux and mac
+#
 
-# installs useful function aliases into shell
 source ~/.zshrc
+
