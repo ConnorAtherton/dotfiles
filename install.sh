@@ -4,10 +4,10 @@
 # DETERMINE OS
 #
 case $(uname -s) in
-Linux)
+  Linux)
     OS="LINUX"
     ;;
-Darwin)
+  Darwin)
     OS="MAC"
     ;;
 esac
@@ -32,22 +32,29 @@ remove_from_home () {
 #
 find . ! -path . -maxdepth 1 -iname ".*" | while read file
 do
-  if [ $(echo "${file:2}" | grep -q -E '^.git*') ]; then
+  if [ $(echo "${file:2}" | grep -E '.git*') ]; then
+    echo "Ignoring ${file:2}"
     continue
   fi
 
   echo 'Removing from home. ' ${file:2}
   remove_from_home ${file:2}
-	echo 'SYMLINKING -> ' ${file:2};
-	ln -fs $PWD/${file:2} $HOME/${file:2};
+  echo 'SYMLINKING -> ' ${file:2};
+  ln -fs $PWD/${file:2} $HOME/${file:2};
 done
+
+#
+# TODO: include this above in find
+#
+remove_from_home "scripts"
+ln -fs $PWD/scripts $HOME/scripts
 
 #
 # install vim.plug to manage deps
 #
 if ! [ -e ~/.vim/autoload/plug.vim ]; then
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 if [ $OS = "Linux" ]; then

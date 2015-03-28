@@ -1,48 +1,101 @@
-# TODO: adding items to path one per line so
-# it immediatly clear what the order is
-export PATH="/usr/local/sbin:/usr/local/bin:/Users/Connor/Bitnami/arc/arcanist/bin:/Users/Connor/.rbenv/bin:/Users/Connor/google-cloud-sdk/bin:/usr/texbin:~/pebble-dev/PebbleSDK-3.0-dp1/bin:$PATH"
+local pathdirs funcdirs
+
+#
+# Environment variables
+#
 export ZSH=$HOME/.oh-my-zsh
 export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/home'
 export EDITOR='vim'
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+export DOCKER_HOST="tcp://localhost:2375"
+# export ARCHFLAGS="-arch x86_64"
+#
+# TODO: copy private key into google instance too.
+#
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 ZSH_THEME="robbyrussell"
-
-# source all aliases
-source $HOME/.aliases
-source $ZSH/oh-my-zsh.sh
-
-# Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# export ARCHFLAGS="-arch x86_64"
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+#
+# Create a list of directories to add to the path
+#
+pathdirs=(
+    /Applications/VMWare\ Fusion.app/Contents/Library
+    /Library/Frameworks/Python.framework/Versions/Current/bin
+    /usr/local/bin
+    /usr/local/git/bin
+    /usr/local/libexec/git-core
+    /opt/local/bin
+    /usr/local/opt/coreutils/libexec/gnubin
+		/usr/local/heroku/bin
 
-# rbenv init
-if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-export DOCKER_HOST="tcp://localhost:2375"
+    $HOME/Applications/VMWare\ Fusion.app/Content/Library
+    $HOME/bin
+    $HOME/.rbenv/bin
+    $HOME/google-cloud-sdk/bin
+    $HOME/Bitnami/arc/arcanist/bin
+    $HOME/pebble-dev/PebbleSDK-3.0-dp1/bin
+)
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-if which ruby >/dev/null && which gem >/dev/null; then
-  PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+# Query the gem configuration to get the correct path
+# XXX: This might cause problems if you alias 'gem' to something else after the path has been setup.
+if [[ -x $(which gem) ]]; then
+    # 's.:.' creates an array by splitting on ':'.
+    gemdirs=(${(s.:.)"$(gem environment gempath)"})
+    # The paths above don't end with /bin.
+    for dir ($gemdirs) { pathdirs=($pathdirs "$dir/bin") }
 fi
 
-### Enable fzf
+# Add directories which exist to the path
+for dir ($pathdirs) {
+    if [[ -d $dir ]]; then
+        path=($dir $path)
+    fi
+}
+
+#
+# Create a list of function paths for zsh
+#
+funcdirs=(
+    /usr/share/zsh/$ZSH_VERSION/functions
+    /usr/share/zsh/functions
+    /usr/share/zsh/site-functions
+    /usr/share/zsh-completions
+    /usr/local/share/zsh-completions
+		$HOME/scripts
+)
+
+#
+# Add existing function directories to the fpath
+#
+for dir ($funcdirs) {
+  if [[ -x $dir ]]; then
+    fpath=($dir $fpath)
+  fi
+}
+
+#
+# rbenv init
+#
+if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+
+# if which ruby >/dev/null && which gem >/dev/null; then
+#   PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+# fi
+
+#
+# Enable fzf
+#
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-### Remap some keys
+#
+# Remap some keys
+#
 bindkey '^b' beginning-of-line
 
+#
+# TODO: make function path work so don't need this step
+#
 GEN_SCRIPTS=( peco general )
 scripts=$HOME/.dotfiles/scripts
 rm -f $scripts/all.zsh
@@ -50,6 +103,25 @@ for a in $GEN_SCRIPTS; do
   cat "$scripts/$a.zsh" >> "$scripts/all.zsh"
 done
 
+#
+# TODO: find out exactly what /dev/null is
+# TODO: find a way to clear this path first.
+#
+export path >/dev/null
+export fpath >/dev/null
+
+#
+# TODO: what does this actually do?
+#
+typeset path fpath >/dev/null
+
 # When sourcing .zshrc we only want the general functions
 # to be sourced
+
+#
+# Source everything into the shell
+#
+source $HOME/.aliases
+source $ZSH/oh-my-zsh.sh
 source $HOME/.dotfiles/scripts/all.zsh
+
