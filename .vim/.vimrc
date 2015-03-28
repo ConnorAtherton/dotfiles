@@ -140,7 +140,8 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 " source .vimuu
 nnoremap <leader>sv :source $MYVIMRC<cr>
-"surround work in quotes
+
+" surround word in quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 

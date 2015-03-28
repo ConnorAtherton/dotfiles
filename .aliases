@@ -33,16 +33,24 @@ alias got='git '
 alias get='git '
 alias g="git"
 
+#
+# Verbose file utils/
+#
+# for c in cp rm chmod chown rename; do
+#   alias $c="$c -v"
+# done
+
 # tig
 alias ts='tig status'
 alias td='tig diff'
 alias tl='tig log'
 
 # Shortcuts
-alias dbox="cd ~/Documents/Dropbox"
+alias dbox="cd ~/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias p="cd ~/Repos/Personal"
+alias prepos="cd ~/Repos/Personal"
+alias wrepos="cd ~/Repos/Bitnami"
 alias h="history"
 alias j="jobs"
 
@@ -105,11 +113,6 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 
 # OS X has no `sha1sum`, so use `shasum` as a fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
-
-# JavaScriptCore REPL
-jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc";
-[ -e "${jscbin}" ] && alias jsc="${jscbin}";
-unset jscbin;
 
 # Trim new lines and copy to clipboard
 alias copy="tr -d '\n' | pbcopy"
