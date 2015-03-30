@@ -1,6 +1,7 @@
 # TODO: only if not already
 # use zsh
-chsh -s $(which zsh)
+# chsh -s $(which zsh)
+rm -f ~/.zcompdump*
 
 local pathdirs funcdirs
 
@@ -11,7 +12,8 @@ export ZSH=$HOME/.oh-my-zsh
 export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/home'
 export EDITOR='vim'
 export DOCKER_HOST="tcp://localhost:2375"
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
+
 #
 # TODO: copy private key into google instance too.
 #
@@ -21,20 +23,23 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 unset path
+unset fpath
 unset PATH
-echo $PATH
-echo "========"
-echo path
-echo PATH
+unset FPATH
 
 #
 # Create a list of directories to add to the path
 #
+#PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 pathdirs=(
     /usr/local/bin
     /usr/local/opt/coreutils/libexec/gnubin
 		/usr/local/heroku/bin
+    /usr/bin
     /bin
+    /sbin
+    /usr/sbin
+    /usr/X11/bin
 
     $HOME/Applications/VMWare\ Fusion.app/Content/Library
     $HOME/bin
@@ -56,24 +61,35 @@ fi
 # Add directories which exist to the path
 for dir ($pathdirs) {
     if [[ -d $dir ]]; then
-      echo "adding to path" $dir
-        path=($dir $path)
+        path=($path $dir)
     fi
 }
-
-echo $path
-export path
 
 #
 # Create a list of function paths for zsh
 #
+local binary=$(which zsh)
+local install_path=$binary:h:h # Strip bin/zsh to find installation path.
+
 funcdirs=(
-    /usr/share/zsh/$ZSH_VERSION/functions
-    /usr/share/zsh/functions
-    /usr/share/zsh/site-functions
-    /usr/share/zsh-completions
-    /usr/local/share/zsh-completions
-		$HOME/scripts
+  $HOME/.zsh/func
+  # $install_path/share/zsh/$ZSH_VERSION/functions
+  # $install_path/share/zsh/functions
+  # $install_path/share/zsh/site-functions
+  /share/zsh/$ZSH_VERSION/functions
+  /share/zsh/functions
+  /share/zsh/site-functions
+  /usr/share/zsh/$ZSH_VERSION/functions
+  /usr/share/zsh/functions
+  /usr/share/zsh/site-functions
+  /usr/share/zsh-completions
+  /usr/local/share/zsh-completions
+  /usr/share/zsh/$ZSH_VERSION/functions
+  /usr/share/zsh/functions
+  /usr/share/zsh/site-functions
+  /usr/share/zsh-completions
+  /usr/local/share/zsh-completions
+  $HOME/scripts
 )
 
 #
@@ -81,18 +97,18 @@ funcdirs=(
 #
 for dir ($funcdirs) {
   if [[ -x $dir ]]; then
-    fpath=($dir $fpath)
+    echo $dir
+    fpath=($dir $path)
   fi
 }
+echo $fpath
+
+# export fpath
 
 #
 # rbenv init
 #
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-
-# if which ruby >/dev/null && which gem >/dev/null; then
-#   PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-# fi
 
 #
 # Enable fzf
@@ -115,24 +131,15 @@ for a in $GEN_SCRIPTS; do
 done
 
 #
-# TODO: find out exactly what /dev/null is
-# TODO: find a way to clear this path first.
-#
-# export path >/dev/null
-# export fpath >/dev/null
-
-#
 # TODO: what does this actually do?
 #
-typeset path fpath >/dev/null
-
-# When sourcing .zshrc we only want the general functions
-# to be sourced
+# typeset path fpath >/dev/null 2>&1
+export path
 
 #
 # Source everything into the shell
 #
 source $HOME/.aliases
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 source $HOME/.dotfiles/scripts/all.zsh
 
