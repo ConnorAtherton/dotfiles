@@ -1,7 +1,7 @@
 # TODO: only if not already
 # use zsh
 # chsh -s $(which zsh)
-rm -f ~/.zcompdump*
+rm -f ~/.zcompdump* > /dev/null
 
 local pathdirs funcdirs
 
@@ -97,11 +97,9 @@ funcdirs=(
 #
 for dir ($funcdirs) {
   if [[ -x $dir ]]; then
-    echo $dir
-    fpath=($dir $path)
+    fpath=($dir $fpath)
   fi
 }
-echo $fpath
 
 # export fpath
 
@@ -140,6 +138,6 @@ export path
 # Source everything into the shell
 #
 source $HOME/.aliases
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 source $HOME/.dotfiles/scripts/all.zsh
 
