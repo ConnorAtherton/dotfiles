@@ -1,0 +1,6 @@
+#/usr/bin/env zsh
+
+function hide_hidden_files() {
+  defaults write com.apple.finder AppleShowAllFiles FALSE
+  restart_finder
+}

@@ -1,5 +1,8 @@
 function install_homebrew() {
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  # TODO: do a whcih check here
+  if ! [ $(which brew) ]; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
 }
 
 function install_brews() {
