@@ -30,6 +30,7 @@ nnoremap Y y$
 
 " ================ General Config ====================
 set number                      "Line numbers are good
+set numberwidth=5
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
@@ -111,6 +112,8 @@ set sidescroll=1
 " ================ Search ===========================
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.rsync*
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
 nmap <silent> ,/ :nohlsearch<CR>
 
 " ================ History ==========================
@@ -137,9 +140,9 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " opens .vimrc in split for easy editing
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :vsplit $VIMRC<cr>
 " source .vimuu
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>sv :source $VIMRC<cr>
 
 " surround word in quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel

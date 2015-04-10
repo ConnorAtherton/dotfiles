@@ -13,6 +13,7 @@ export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/hom
 export EDITOR='vim'
 export DOCKER_HOST="tcp://localhost:2375"
 export ARCHFLAGS="-arch x86_64"
+export VIMRC="~/.vimrc"
 
 #
 # TODO: copy private key into google instance too.

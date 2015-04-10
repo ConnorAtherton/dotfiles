@@ -1,5 +1,6 @@
 function install_npm_packages() {
-  packages=( vtop is-up fcount tasc )
+  packages=( vtop is-up fcount tasc instant-markdown-d /
+             gen-todo )
 
   for item in "${packages[@]}"
   do

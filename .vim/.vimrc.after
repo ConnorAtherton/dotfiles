@@ -1,5 +1,5 @@
 "
-" Key mappings for CTRLP
+" CTRLP
 "
 nnoremap <leader>f :CtrlP<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
@@ -7,45 +7,48 @@ nnoremap <leader>T :CtrlPBufTag<CR>
 nnoremap <leader>t :CtrlPTag<CR>
 nnoremap <leader>F :CtrlPCurWD<CR>
 nnoremap <leader>M :CtrlPMRUFiles<CR>
-" nnoremap <leader>m :CtrlPMixed<CR>
 nnoremap <leader>l :CtrlPLine<CR>
 
-" CTRLP config
+let g:ctrlp_show_hidden=1
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_max_height=20
 let g:ctrlp_working_path_mode = 'a'
-
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.rsync*
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
-
+let g:ctrlp_arg_map = 1
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.(git|hg|svn))|(node_modules|dist|vendor)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': '',
   \ }
 
-" CTRLP settings
-let g:ctrlp_show_hidden=1
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_max_height=20
-
-" override <C-o> to provide options for how to open files
-let g:ctrlp_arg_map = 1
-
-
-" CtrlP -> use Ag for searching instead of VimScript
-" (ustom_ignore)
-" let g:ctrlp_user_command = 'ack %s -l --nocolor""'
-
 "
-" vim airline config
+" Airline
 "
 let g:airline#extensions#tabline#enabled = 1
 
 "
 " Syntastic
 "
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_ruby_checkers = ['rubocop']
 
 "
-" NerdTabs
+" YCM
 "
-let g:nerdtree_tabs_open_on_console_startup=1
+" I find it easier to use tab for complete and
+" other mappings for cycling through ycm suggestions.
+"
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_next_completion = ['<c-j>', '<down>']
+let g:ycm_key_list_previous_completion = ['<c-k>', '<up>']
+
+"
+" Tagbar
+"
+nnoremap <Leader>. :TagbarToggle<CR>
+
+"
+" Instant Markdown
+"
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0

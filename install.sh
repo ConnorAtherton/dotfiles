@@ -47,7 +47,9 @@ done
 # TODO: include this above in find
 #
 remove_from_home "functions"
+echo $PWD
 ln -fs $PWD/functions $HOME/functions
+# cp -rf $PWD/functions $HOME/functions
 
 #
 # install vim.plug to manage deps
