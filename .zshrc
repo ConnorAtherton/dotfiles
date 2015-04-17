@@ -14,6 +14,7 @@ export EDITOR='vim'
 export DOCKER_HOST="tcp://localhost:2375"
 export ARCHFLAGS="-arch x86_64"
 export VIMRC="~/.vimrc"
+export GOPATH=$HOME/go
 
 #
 # TODO: copy private key into google instance too.
@@ -44,6 +45,9 @@ pathdirs=(
     /sbin
     /usr/sbin
     /usr/X11/bin
+    /usr/local/opt/go/libexec/bin
+    $GOPATH
+    $GOPATH/bin
 
     $HOME/Applications/VMWare\ Fusion.app/Content/Library
     $HOME/bin
@@ -109,6 +113,11 @@ source $ZSH/oh-my-zsh.sh
 # rbenv init
 #
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+
+#
+# Karn for git identities
+#
+if which karn > /dev/null; then eval "$(karn init)"; fi
 
 #
 # Enable fzf
