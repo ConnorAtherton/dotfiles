@@ -1,0 +1,6 @@
+#/usr/bin/env zsh
+
+permission () {
+  echo "permission function"
+  stat --format=%a $1
+}

@@ -16,13 +16,14 @@ export ARCHFLAGS="-arch x86_64"
 export VIMRC="~/.vimrc"
 export GOPATH=$HOME/go
 
-#
-# TODO: copy private key into google instance too.
-#
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
 ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+#
+# Kick of oh-my-zsh
+#
+source $ZSH/oh-my-zsh.sh
 
 #
 # Unset everything from scratch so we control the
@@ -40,25 +41,29 @@ pathdirs=(
     /usr/local/bin
     /usr/local/opt/coreutils/libexec/gnubin
 		/usr/local/heroku/bin
-    /usr/bin
+    /usr/local/opt/go/libexec/bin
+
     /bin
     /sbin
+    /usr/bin
     /usr/sbin
     /usr/X11/bin
-    /usr/local/opt/go/libexec/bin
+
     $GOPATH
     $GOPATH/bin
 
-    $HOME/Applications/VMWare\ Fusion.app/Content/Library
     $HOME/bin
+    $HOME/Applications/VMWare\ Fusion.app/Content/Library
     $HOME/.rbenv/bin
     $HOME/google-cloud-sdk/bin
     $HOME/Bitnami/arc/arcanist/bin
     $HOME/pebble-dev/PebbleSDK-3.0-dp1/bin
 )
 
+#
 # Query the gem configuration to get the correct path
 # XXX: This might cause problems if you alias 'gem' to something else after the path has been setup.
+#
 if [[ -x $(which gem) ]]; then
   # 's.:.' creates an array by splitting on ':'.
   gemdirs=(${(s.:.)"$(gem environment gempath)"})
@@ -66,7 +71,9 @@ if [[ -x $(which gem) ]]; then
   for dir ($gemdirs) { pathdirs=($pathdirs "$dir/bin") }
 fi
 
+#
 # Add directories which exist to the path
+#
 for dir ($pathdirs) {
   if [[ -d $dir ]]; then
     path=($path $dir)
@@ -95,6 +102,7 @@ funcdirs=(
   /usr/share/zsh-completions
   /usr/local/share/zsh-completions
   $HOME/functions
+  $HOME/.dotfiles/functions
 )
 
 #
@@ -105,9 +113,6 @@ for dir ($funcdirs) {
     fpath=($fpath $dir)
   fi
 }
-
-# source $ZSH/oh-my-zsh
-source $ZSH/oh-my-zsh.sh
 
 #
 # rbenv init
@@ -134,6 +139,13 @@ bindkey '^b' beginning-of-line
 #
 export path
 export fpath
+export PATH
+export FPATH
+
+#
+# Autoload functions
+#
+autoload -Uz peco-kill-process
 
 #
 # Source everything into the shell

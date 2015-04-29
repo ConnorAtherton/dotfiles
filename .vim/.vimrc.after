@@ -15,7 +15,7 @@ let g:ctrlp_max_height=20
 let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_arg_map = 1
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn|rsync_cache))|(node_modules|dist|vendor)$',
+  \ 'dir':  '\v[\/](\.(git|hg|svn|rsync_cache|sass_cache))|(node_modules|dist|vendor|tmp)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': '',
   \ }
