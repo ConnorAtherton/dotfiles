@@ -24,5 +24,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/goyo.vim'
   Plug 'majutsushi/tagbar'
   Plug 'suan/vim-instant-markdown'
+  Plug 'ap/vim-css-color'
 call plug#end()
 

@@ -52,3 +52,8 @@ nnoremap <Leader>. :TagbarToggle<CR>
 "
 let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
+
+"
+" Strip whitespace
+"
+let g:strip_whitespace_on_save = 1

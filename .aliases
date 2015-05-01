@@ -1,7 +1,6 @@
 # Vim alias to load ~/.vimrc automatically
 alias vim="vim -u ~/.vimrc"
 alias vi=vim
-alias MYVIMRC="~/.vimrc"
 
 # Easier navigation
 alias ..="cd .."
@@ -124,3 +123,5 @@ alias copy="tr -d '\n' | pbcopy"
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
+# Utility
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"

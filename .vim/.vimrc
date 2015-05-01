@@ -30,18 +30,16 @@ nnoremap Y y$
 
 " ================ General Config ====================
 set number                      "Line numbers are good
-set numberwidth=5
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
-set gcr=a:blinkon0              "Disable cursor blink
+" set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 set nobackup                    "Backup files tend to get in the way
 set noswapfile                  "Same as above
 set nowritebackup
-filetype plugin indent on
 
 " " This needs to exist so the 'j' key is still snappy in normal
 " mode due to the fact that 'jk' replaces <esc>
@@ -49,8 +47,6 @@ set timeout
 set timeoutlen=100
 set ttimeoutlen=100
 
-" Enable whitespace strip on save
-let g:strip_whitespace_on_save = 1
 " Uncomment below line to change color for whitespace
 " highlight ExtraWhitespace ctermbg=<desired_color>
 
@@ -141,7 +137,7 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " opens .vimrc in split for easy editing
 nnoremap <leader>ev :vsplit $VIMRC<cr>
-" source .vimuu
+" source .vimrc
 nnoremap <leader>sv :source $VIMRC<cr>
 
 " surround word in quotes
