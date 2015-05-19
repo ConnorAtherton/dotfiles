@@ -145,8 +145,8 @@ export FPATH
 #
 # Autoload functions
 #
-# autoload -Uz peco-kill-process hide-hidden-files md permission \
-#   restart-finder show-hidden-files start-fokus
+autoload -Uz peco-kill-process hide-hidden-files md permission \
+  restart-finder show-hidden-files start-fokus
 
 #
 # Source everything into the shell
