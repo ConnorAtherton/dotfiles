@@ -1,6 +1,6 @@
 #/usr/bin/env zsh
 
-show_hidden_files () {
+show-hidden-files () {
   defaults write com.apple.finder AppleShowAllFiles TRUE
-  restart_finder
+  restart-finder
 }

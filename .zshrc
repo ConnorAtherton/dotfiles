@@ -135,7 +135,7 @@ if which karn > /dev/null; then eval "$(karn init)"; fi
 bindkey '^b' beginning-of-line
 
 #
-# TODO: what does this actually do?
+# Export everything
 #
 export path
 export fpath
@@ -145,11 +145,11 @@ export FPATH
 #
 # Autoload functions
 #
-autoload -Uz peco-kill-process
+# autoload -Uz peco-kill-process hide-hidden-files md permission \
+#   restart-finder show-hidden-files start-fokus
 
 #
 # Source everything into the shell
 #
 source $HOME/.aliases
-source $HOME/.dotfiles/scripts/all.zsh
 

@@ -1,0 +1,6 @@
+module.exports = [
+ "www.facebook.com",
+ "www.connoratherton.com",
+ "news.ycombinator.com",
+ "connoratherton.com"
+]

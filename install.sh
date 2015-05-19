@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 #
-# DETERMINE OS
+# Store current OS
 #
 case $(uname -s) in
   Linux)
@@ -13,7 +13,8 @@ case $(uname -s) in
 esac
 
 #
-# REMOVE OLD DOTFILES
+# Remove a file from the
+# home dir
 #
 remove_from_home () {
   FILEPATH=$HOME/$1
@@ -49,7 +50,6 @@ done
 remove_from_home "functions"
 echo $PWD
 ln -fs $PWD/functions $HOME/functions
-# cp -rf $PWD/functions $HOME/functions
 
 #
 # install vim.plug to manage deps
@@ -60,6 +60,7 @@ if ! [ -e ~/.vim/autoload/plug.vim ]; then
 fi
 
 if [ $OS = "Linux" ]; then
+  echo "Linux detected: installing relevant files."
   # config for thinkpad...
 else
   echo "OSX detected: installing relevant files."
