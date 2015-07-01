@@ -1,0 +1,6 @@
+#/usr/bin/env zsh
+
+disable-drop-shadows () {
+  defaults write com.apple.screencapture disable-shadow -bool false
+  killall SystemUIServer
+}

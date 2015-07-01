@@ -72,6 +72,7 @@ fi
 #
 # config for linux and mac
 #
+`sh $PWD/scripts/nvm.zsh`
 
-source ~/.zshrc
+. ~/.zshrc
 

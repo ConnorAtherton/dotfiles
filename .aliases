@@ -2,6 +2,9 @@
 alias vim="vim -u ~/.vimrc"
 alias vi=vim
 
+# Bitnami server
+alias bitnami_admin_prod="open 'https://localhost:9876/admin' && ssh -NL 9876:127.0.0.1:443 bitnami@bitnami.com”
+
 # Easier navigation
 alias ..="cd .."
 alias ...="cd ../.."
@@ -36,14 +39,9 @@ alias g="git"
 #
 # Verbose file utils/
 #
-# for c in cp rm chmod chown rename; do
-#   alias $c="$c -v"
-# done
-
-# tig
-alias ts='tig status'
-alias td='tig diff'
-alias tl='tig log'
+for c in cp rm chmod chown rename; do
+  alias $c="$c -v"
+done
 
 # Shortcuts
 alias dbox="cd ~/Dropbox"
@@ -53,6 +51,9 @@ alias prepos="cd ~/Repos/Personal"
 alias wrepos="cd ~/Repos/Bitnami"
 alias h="history"
 alias j="jobs"
+
+# Pretty printing
+alias path='echo $PATH | tr -s ":" "\n"'
 
 ## tmux stuff
 alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
@@ -78,7 +79,7 @@ alias pkp='peco-kill-process'
 
 alias username='echo "p7825520"'
 
-# alias clear because I use it so ofte
+# alias clear because I use it so often
 alias c='clear'
 
 # Enable aliases to be sudo’ed
@@ -103,10 +104,6 @@ alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
-# View HTTP traffic
-alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 # Canonical hex dump; some systems have this symlinked
 command -v hd > /dev/null || alias hd="hexdump -C"

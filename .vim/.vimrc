@@ -10,11 +10,9 @@ set shortmess+=I
 
 " Color schemes
 colorscheme solarized
-if has('gui_running')
-  set background=light
-else
-  set background=dark
-endif
+
+" set background=dark
+set background=dark
 
 " Remap esc to <j-j>
 ino jk <esc>
