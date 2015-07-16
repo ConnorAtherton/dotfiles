@@ -8,7 +8,11 @@ endif
 " Don't show intro
 set shortmess+=I
 
+"
 " Color schemes
+"
+" TODO: change color scheme based on time of day
+"
 colorscheme solarized
 
 " set background=dark
@@ -27,7 +31,6 @@ nnoremap <C-m> :bprevious<CR>
 nnoremap Y y$
 
 " ================ General Config ====================
-set number                      "Line numbers are good
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
@@ -35,11 +38,17 @@ set showmode                    "Show current mode down the bottom
 " set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
-set nobackup                    "Backup files tend to get in the way
-set noswapfile                  "Same as above
+
+" Backup files get in the way
+set nobackup
+set noswapfile
 set nowritebackup
 
-" " This needs to exist so the 'j' key is still snappy in normal
+" Show line numbers relative to the current line
+set number                      "Line numbers are good
+set relativenumber
+
+" This needs to exist so the 'j' key is still snappy in normal
 " mode due to the fact that 'jk' replaces <esc>
 set timeout
 set timeoutlen=100
@@ -71,8 +80,9 @@ let mapleader=","
 nmap <Leader>n :NERDTreeToggle<CR>
 nmap <Leader>m :NERDTreeTabsToggle<CR>
 
+"
 " ================ Indentation ======================
-
+"
 set autoindent
 set smartindent
 set smarttab

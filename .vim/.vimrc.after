@@ -57,3 +57,8 @@ let g:instant_markdown_autostart = 0
 " Strip whitespace
 "
 let g:strip_whitespace_on_save = 1
+
+"
+" Scratch buffer
+"
+nnoremap <Leader>s :Scratch<CR>

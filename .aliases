@@ -2,9 +2,6 @@
 alias vim="vim -u ~/.vimrc"
 alias vi=vim
 
-# Bitnami server
-alias bitnami_admin_prod="open 'https://localhost:9876/admin' && ssh -NL 9876:127.0.0.1:443 bitnami@bitnami.com”
-
 # Easier navigation
 alias ..="cd .."
 alias ...="cd ../.."
@@ -35,13 +32,6 @@ alias gx='gitx --all'
 alias got='git '
 alias get='git '
 alias g="git"
-
-#
-# Verbose file utils/
-#
-for c in cp rm chmod chown rename; do
-  alias $c="$c -v"
-done
 
 # Shortcuts
 alias dbox="cd ~/Dropbox"

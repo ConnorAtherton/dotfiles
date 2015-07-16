@@ -2,28 +2,44 @@ set nocompatible
 
 " install all plugins here
 call plug#begin('~/.vim/plugged')
+  " Search and file navigation
   Plug 'rking/ag.vim'
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   Plug 'kien/ctrlp.vim'
-  Plug 'scrooloose/syntastic'
+
+  " #tpope
   Plug 'tpope/vim-sensible'
-  Plug 'bling/vim-airline'
-  Plug 'MarcWeber/vim-addon-mw-utils'
-  Plug 'ntpeters/vim-better-whitespace'
-  Plug 'kchmck/vim-coffee-script'
-  Plug 'altercation/vim-colors-solarized'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
-  Plug 'Valloric/YouCompleteMe'
+
+  " Look and feel
+  Plug 'bling/vim-airline'
+  Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'airblade/vim-gitgutter'
-  Plug 'digitaltoad/vim-jade'
+  Plug 'tomtom/tlib_vim'
+
+  " Useful tools and syntax stuff
+  Plug 'ap/vim-css-color'
+  Plug 'scrooloose/syntastic'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
-  Plug 'tomtom/tlib_vim'
-  Plug 'junegunn/goyo.vim'
+  Plug 'Valloric/YouCompleteMe'
+  Plug 'ntpeters/vim-better-whitespace'
+
+  " Tech dependant
+  Plug 'digitaltoad/vim-jade'
+  Plug 'kchmck/vim-coffee-script'
+
+  " For CTags
   Plug 'majutsushi/tagbar'
+
+  " Writing markdown and note taking
   Plug 'suan/vim-instant-markdown'
-  Plug 'ap/vim-css-color'
+  Plug 'junegunn/goyo.vim'
+  Plug 'mtth/scratch.vim'
+
+  " Color schemes
+  Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
