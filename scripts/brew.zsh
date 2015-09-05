@@ -12,7 +12,8 @@ function install_brews() {
   brews=( vim git node tmux reattach-to-user-namespace python \
           rename tree wget cmake brew-cask ctags wireshark \
           peco coreutils docker the_silver_searcher gnupg  \
-          freetype boost-python glib pixman go )
+          freetype boost-python glib pixman go zsh-syntax-highlighting \
+          docker-compose )
 
   for item in "${brews[@]}"
   do

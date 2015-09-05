@@ -152,7 +152,13 @@ autoload -Uz peco-kill-process hide-hidden-files md permission \
 # Source everything into the shell
 #
 source $HOME/.aliases
-
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export NVM_DIR="/usr/local/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/Connor/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/Connor/google-cloud-sdk/completion.zsh.inc'
