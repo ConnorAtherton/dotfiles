@@ -1,0 +1,5 @@
+#/usr/bin/env zsh
+
+flush-dns-cache () {
+  sudo killall -HUP mDNSResponder
+}

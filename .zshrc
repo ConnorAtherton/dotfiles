@@ -21,7 +21,7 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 #
-# Kick of oh-my-zsh
+# Gimme that zsh goodness
 #
 source $ZSH/oh-my-zsh.sh
 
@@ -125,7 +125,17 @@ if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
 if which karn > /dev/null; then eval "$(karn init)"; fi
 
 #
-# Enable fzf
+# Ruby version
+#
+if which rbenv > /dev/null; then rbenv global 2.1.5 > /dev/null 2>&1; fi
+
+#
+# Node version
+#
+if which nvm > /dev/null; then nvm use iojs > /dev/null 2>&1; fi
+
+#
+# FZF fuzzy searching
 #
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -146,7 +156,7 @@ export FPATH
 # Autoload functions
 #
 autoload -Uz peco-kill-process hide-hidden-files md permission \
-  restart-finder show-hidden-files start-fokus
+  restart-finder show-hidden-files start-fokus flush-dns-cache
 
 #
 # Source everything into the shell
@@ -158,7 +168,6 @@ export NVM_DIR="/usr/local/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # The next line updates PATH for the Google Cloud SDK.
+# and enables shell command completion for gcloud.
 source '/Users/Connor/google-cloud-sdk/path.zsh.inc'
-
-# The next line enables shell command completion for gcloud.
 source '/Users/Connor/google-cloud-sdk/completion.zsh.inc'
