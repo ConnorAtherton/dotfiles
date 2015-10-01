@@ -11,10 +11,17 @@ local pathdirs funcdirs
 export ZSH=$HOME/.oh-my-zsh
 export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/home'
 export EDITOR='vim'
-export DOCKER_HOST="tcp://localhost:2375"
 export ARCHFLAGS="-arch x86_64"
 export VIMRC="~/.vimrc"
 export GOPATH=$HOME/go
+
+#
+# Docker dingy setup
+#
+export DOCKER_HOST=tcp://192.168.116.160:2376
+export DOCKER_CERT_PATH=/Users/Connor/.docker/machine/machines/dinghy
+export DOCKER_TLS_VERIFY=1
+export DOCKER_MACHINE_NAME=dinghy
 
 ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
