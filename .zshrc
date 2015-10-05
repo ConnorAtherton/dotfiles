@@ -171,6 +171,13 @@ autoload -Uz peco-kill-process hide-hidden-files md permission \
 source $HOME/.aliases
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+#
+# TODO: move this to a flobal config file or something
+#
+# Give git colored output by default. Make sure to
+# add auto so piping strips all control characters.
+git config --global --add color.ui auto
+
 export NVM_DIR="/usr/local/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
