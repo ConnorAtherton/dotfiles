@@ -46,7 +46,7 @@ alias dc='docker-compose'
 alias dcu='docker-compose up -d'
 alias dck='docker-compose kill'
 alias dcr='docker-compose rm'
-alias dcs='docker-compose status'
+alias dcs='docker-compose ps'
 
 ## tmux stuff
 alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
