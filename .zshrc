@@ -46,14 +46,16 @@ unset FPATH
 #
 pathdirs=(
     /usr/local/bin
+    # NOTE: Homebrew's sbin
+    /usr/local/sbin
     /usr/local/opt/coreutils/libexec/gnubin
 		/usr/local/heroku/bin
     /usr/local/opt/go/libexec/bin
 
     /bin
     /sbin
-    /usr/bin
     /usr/sbin
+    /usr/bin
     /usr/X11/bin
 
     $GOPATH
@@ -125,11 +127,6 @@ for dir ($funcdirs) {
 # rbenv init
 #
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-
-#
-# Karn for git identities
-#
-if which karn > /dev/null; then eval "$(karn init)"; fi
 
 #
 # Ruby version

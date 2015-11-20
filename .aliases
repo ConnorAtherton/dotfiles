@@ -1,5 +1,5 @@
 # Vim alias to load ~/.vimrc automatically
-alias vim="vim -u ~/.vimrc"
+alias v="vim -u ~/.vimrc"
 alias vi=vim
 
 # Easier navigation

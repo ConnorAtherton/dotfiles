@@ -1,12 +1,12 @@
 function install_homebrew() {
-  # TODO: do a whcih check here
-  if ! [ $(which brew) ]; then
+  if ! which brew >/dev/null ; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 }
 
 function install_brews() {
   brew tap caskroom/homebrew-cask
+  brew tap caskroom/versions
   brew tap homebrew/boneyard
 
   brews=( vim git node tmux reattach-to-user-namespace python \
@@ -17,22 +17,25 @@ function install_brews() {
 
   for item in "${brews[@]}"
   do
+    local args=""
+
     if [[ $item == "vim" ]]; then
-      brew install $item --override-system-vim
+      args="--override-system-vim"
     elif [[ $item == "wireshark" ]]; then
-      brew install wireshark --with-qt
+      args="--with-qt"
     elif [[ $item == "boost-python" ]]; then
-      brew install boost-python --build-from-source
-    else
-      brew install $item
+      args="--build-from-source"
     fi
+
+    brew install $item $args
   done
 }
 
 function install_casks() {
   casks=( dropbox vlc google-chrome suspicious-package \
           transmission skitch adium alfred caffeine \
-          f-lux iterm2 spectacle vagrant virtualbox )
+          f-lux iterm2 spectacle vagrant virtualbox \
+          google-chrome-canary firefoxdeveloperedition )
 
   for item in "${casks[@]}"
   do
