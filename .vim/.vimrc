@@ -173,8 +173,13 @@ nnoremap <leader>sv :source $VIMRC<cr>
 nnoremap <leader>vs :vsplit<cr>
 " opens a new vsplit
 nnoremap <leader>hs :split<cr>
-" quick use for ag
-nnoremap <leader>a :Ag
+" Start using ag and place cursor in the quotes
+nnoremap <leader>ag :Ag ""<Left>
+nnoremap <leader>agf :AgFile ""<Left>
+" I want to go to the first character far more often
+" than the beginning of the line so let's switch
+nnoremap 0 ^
+nnoremap ^ 0
 
 " convert spaces to tabs for Makefiles
 autocmd FileType make setlocal noexpandtab
