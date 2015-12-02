@@ -1,3 +1,10 @@
+" ============================================
+"
+" This file defines options related to
+" vim plugins.
+"
+" =============================================
+
 "
 " CTRLP
 "
@@ -28,10 +35,12 @@ let g:airline#extensions#tabline#enabled = 1
 "
 " Syntastic
 "
+let g:syntastic_check_on_open = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_c_checkers = ['make']
 
 "
 " YCM
@@ -39,9 +48,12 @@ let g:syntastic_javascript_checkers = ['eslint']
 " I find it easier to use tab for complete and
 " other mappings for cycling through ycm suggestions.
 "
-let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_next_completion = ['<c-j>', '<down>']
 let g:ycm_key_list_previous_completion = ['<c-k>', '<up>']
+
+" We will keep the default conf here for .c and .cc files
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 "
 " Tagbar

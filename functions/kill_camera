@@ -1,0 +1,6 @@
+#/usr/bin/env zsh
+
+# kills all apps using the isight camers
+kill_camera() {
+  lsof | grep -i "AppleCamera" | awk '{ print $2 }' | xargs kill -9
+}
