@@ -8,6 +8,9 @@ endif
 " Don't show intro
 set shortmess+=I
 
+" Set the Ruby path correctly
+let g:ruby_path = system('echo $HOME/.rbenv/shims')
+
 "
 " Color schemes
 "
@@ -64,7 +67,8 @@ set ttimeoutlen=100
 set hidden
 
 " Look and feel
-set ttyfast
+" set ttyfast
+" set lazyredraw
 
 " Don’t add empty newlines at the end of files
 set binary
@@ -127,7 +131,7 @@ set incsearch     " show search matches as you type
 set smartcase    "Search better
 set ignorecase
 set smartcase
-set gdefault
+set gdefault " replace every occurence on the line by default
 set incsearch
 set showmatch
 set hlsearch
@@ -135,8 +139,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.rsync*
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
 
 nmap <silent> ,/ :nohlsearch<CR>
-nnoremap / /\v
-vnoremap / /\v
 
 " make tab match brackets
 nnoremap <tab> %
@@ -174,8 +176,8 @@ nnoremap <leader>vs :vsplit<cr>
 " opens a new vsplit
 nnoremap <leader>hs :split<cr>
 " Start using ag and place cursor in the quotes
-nnoremap <leader>ag :Ag ""<Left>
-nnoremap <leader>agf :AgFile ""<Left>
+nnoremap <leader>s :Ag ""<Left>
+nnoremap <leader>sf :AgFile ""<Left>
 " I want to go to the first character far more often
 " than the beginning of the line so let's switch
 nnoremap 0 ^
@@ -185,6 +187,13 @@ nnoremap ^ 0
 autocmd FileType make setlocal noexpandtab
 " Save a file when the focus is lost
 au FocusLost * :wa
+
+" Remove the line when switching windows
+augroup BgHighlight
+  autocmd!
+  autocmd WinEnter * set cul
+  autocmd WinLeave * set nocul
+augroup END
 
 " Plugin mappings in here
 if filereadable(expand("~/.vim/.vimrc.after"))
