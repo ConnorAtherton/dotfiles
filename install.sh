@@ -31,33 +31,35 @@ remove_from_home () {
 #
 # Symlink files back into correct dir
 #
-find . ! -path . -maxdepth 1 -iname ".*" | while read file
+find ./config ! -path . -maxdepth 1 -iname ".*" | while read file
 do
-  if [ $(echo "${file:2}" | grep -E '.git*') ]; then
+  # file=$(basename $file)
+  echo $file
+
+  if [ $(echo basename "${file:2}" | grep -E '.git*') ]; then
     echo "Ignoring ${file:2}"
     continue
   fi
 
-  echo 'Removing from home. ' ${file:2}
-  remove_from_home ${file:2}
-  echo 'SYMLINKING -> ' ${file:2};
-  ln -fs $PWD/${file:2} $HOME/${file:2};
+  echo "Removing from home. ${file}"
+  remove_from_home ${file}
+  echo "SYMLINKING $PWD${file:1} to $HOME/$(basename $file)"
+  ln -fs $PWD${file:1} $HOME/$(basename $file);
 done
 
 #
 # TODO: include this above in find
 #
 remove_from_home "functions"
-echo $PWD
 ln -fs $PWD/functions $HOME/functions
 
 #
 # install vim.plug to manage deps
 #
-if ! [ -e ~/.vim/autoload/plug.vim ]; then
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
+# if ! [ -e ~/.vim/autoload/plug.vim ]; then
+#   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+#     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# fi
 
 if [ $OS = "Linux" ]; then
   echo "Linux detected: installing relevant files."
@@ -72,7 +74,7 @@ fi
 #
 # config for linux and mac
 #
-`sh $PWD/scripts/nvm.zsh`
+# `sh $PWD/scripts/nvm.zsh`
 
 . ~/.zshrc
 

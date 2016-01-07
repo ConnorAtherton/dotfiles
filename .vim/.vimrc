@@ -1,6 +1,8 @@
 set nocompatible
 
+"
 " source ~/.vimrc.before if it exists.
+"
 if filereadable(expand("~/.vim/.vimrc.before"))
   source ~/.vim/.vimrc.before
 endif
@@ -105,26 +107,34 @@ filetype indent on
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
 
-" Wrapping
+"
+" ================ Wrapping ============================
+"
 set nowrap       "Don't wrap lines
-set textwidth=79 " most linters I use are set at 80
+set textwidth=80
 set formatoptions=qrn1
-set colorcolumn=85 " show long lines
-set linebreak    "Wrap lines at convenient points
+set colorcolumn=100 " show long lines
+set linebreak       "Wrap lines at convenient points
 
+"
 " ================ Folds ============================
+"
 
 set foldmethod=indent   "fold based on indent
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 
+"
 " ================ Scrolling ========================
+"
 
 set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
+"
 " ================ Search ===========================
+"
 
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
@@ -144,7 +154,10 @@ nmap <silent> ,/ :nohlsearch<CR>
 nnoremap <tab> %
 vnoremap <tab> %
 
+"
 " ================ History ==========================
+"
+
 set history=1000
 set undolevels=1000      " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
@@ -159,29 +172,38 @@ inoremap <down>  <nop>
 inoremap <left>  <nop>
 inoremap <right> <nop>
 
+" Easier window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " Lets us edit a file that requires root privs
 " once it's already open (think /etc/hosts)
-cnoremap w!! w !sudo tee % >/dev/null
+nnoremap w!! w !sudo tee % >/dev/null
 
 " Move visual block on scroll
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+nnoremap <leader>vs :vsplit<cr>
 
 " opens .vimrc in split for easy editing
 nnoremap <leader>ev :vsplit $VIMRC<cr>
 " source .vimrc
 nnoremap <leader>sv :source $VIMRC<cr>
 " opens a new vsplit
-nnoremap <leader>vs :vsplit<cr>
 " opens a new vsplit
 nnoremap <leader>hs :split<cr>
 " Start using ag and place cursor in the quotes
 nnoremap <leader>s :Ag ""<Left>
-nnoremap <leader>sf :AgFile ""<Left>
 " I want to go to the first character far more often
 " than the beginning of the line so let's switch
 nnoremap 0 ^
 nnoremap ^ 0
+
+"
+" ================ Autocommands ============================
+"
 
 " convert spaces to tabs for Makefiles
 autocmd FileType make setlocal noexpandtab
@@ -195,7 +217,9 @@ augroup BgHighlight
   autocmd WinLeave * set nocul
 augroup END
 
-" Plugin mappings in here
+"
+" Plugin settings in here
+"
 if filereadable(expand("~/.vim/.vimrc.after"))
   source ~/.vim/.vimrc.after
 endif
