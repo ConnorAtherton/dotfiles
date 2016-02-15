@@ -1,0 +1,11 @@
+#/usr/bin/env zsh
+
+function clear-ports() {
+  local ports=$(echo "$1" | tr " " "\n")
+
+  for port in $ports; do
+    lsof -i tcp:${port} | awk 'NR!=1 {print $2}' | xargs kill
+  done
+
+  return $?
+}

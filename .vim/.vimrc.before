@@ -40,6 +40,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mtth/scratch.vim', { 'on': 'Scratch' }
 
   " Color schemes
-  Plug 'altercation/vim-colors-solarized'
+  " Plug 'altercation/vim-colors-solarized'
+  Plug 'junegunn/seoul256.vim'
 call plug#end()
 

@@ -34,7 +34,7 @@ function install_brews() {
 function install_casks() {
   casks=( dropbox vlc google-chrome suspicious-package \
           transmission skitch adium alfred caffeine \
-          f-lux iterm2 spectacle vagrant virtualbox \
+          flux iterm2 spectacle vagrant virtualbox \
           google-chrome-canary firefoxdeveloperedition )
 
   for item in "${casks[@]}"

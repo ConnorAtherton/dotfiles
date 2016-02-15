@@ -17,10 +17,17 @@ let g:ruby_path = system('echo $HOME/.rbenv/shims')
 " Color schemes
 "
 " TODO: change color scheme based on time of day
+" TODO: Sync up color scheme with terminal
 "
-colorscheme solarized
+" if strftime("%H") > 12
+"   colorscheme seoul256-light
+"   set background=light
+" else
+"   colorscheme seoul256
+"   set background=dark
+" endif
 
-" set background=dark
+colorscheme seoul256
 set background=dark
 
 " Remap esc to <j-j>
@@ -110,11 +117,11 @@ set list listchars=tab:\ \ ,trail:·
 "
 " ================ Wrapping ============================
 "
-set nowrap       "Don't wrap lines
-set textwidth=80
+set nowrap             " Don't wrap lines
+set textwidth=100      " But wrap text object at 100 chars
 set formatoptions=qrn1
-set colorcolumn=100 " show long lines
-set linebreak       "Wrap lines at convenient points
+set colorcolumn=100    " Show long lines
+set linebreak          " Wrap lines at convenient points
 
 "
 " ================ Folds ============================
@@ -207,8 +214,9 @@ nnoremap ^ 0
 
 " convert spaces to tabs for Makefiles
 autocmd FileType make setlocal noexpandtab
+
 " Save a file when the focus is lost
-au FocusLost * :wa
+autocmd FocusLost * :wa
 
 " Remove the line when switching windows
 augroup BgHighlight

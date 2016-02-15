@@ -44,6 +44,7 @@ alias j="jobs"
 # Docker stuff
 alias dl='docker logs -f'
 alias de='docker exec -it'
+alias da='docker attach'
 
 alias dc='docker-compose'
 alias dcu='docker-compose up -d'

@@ -1,4 +1,4 @@
-#!?/bin/zsh
+#!/bin/zsh
 
 ### Makes you owner of /usr/local
 sudo chown -R `whoami` /usr/local
