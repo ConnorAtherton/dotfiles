@@ -1,12 +1,5 @@
 set nocompatible
 
-"
-" source ~/.vimrc.before if it exists.
-"
-if filereadable(expand("~/.vim/.vimrc.before"))
-  source ~/.vim/.vimrc.before
-endif
-
 " Don't show intro
 set shortmess+=I
 
@@ -76,8 +69,8 @@ set ttimeoutlen=100
 set hidden
 
 " Look and feel
-" set ttyfast
-" set lazyredraw
+set ttyfast
+set lazyredraw
 
 " Don’t add empty newlines at the end of files
 set binary
@@ -94,8 +87,6 @@ set cursorline
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
 let mapleader=","
-nmap <Leader>n :NERDTreeToggle<CR>
-nmap <Leader>m :NERDTreeTabsToggle<CR>
 
 "
 " ================ Indentation ======================
@@ -152,8 +143,8 @@ set gdefault " replace every occurence on the line by default
 set incsearch
 set showmatch
 set hlsearch
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.rsync*
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.rsync*,*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store,*/dist/*,*/vendor/*,*/bower/*,*/node_modules/*
 
 nmap <silent> ,/ :nohlsearch<CR>
 
@@ -228,6 +219,5 @@ augroup END
 "
 " Plugin settings in here
 "
-if filereadable(expand("~/.vim/.vimrc.after"))
-  source ~/.vim/.vimrc.after
-endif
+source ~/.vim/.vimrc.plugins
+source ~/.vim/.vimrc.mappings

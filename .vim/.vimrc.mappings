@@ -1,20 +1,15 @@
-" ============================================
-"
-" This file defines options related to
-" vim plugins.
-"
-" =============================================
+"/
+"/ NERDTree
+"/
+nmap <Leader>n :NERDTreeToggle<CR>
 
-"
-" NERDTree
-"
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 35
 
-"
-" CTRLP
-"
+"/
+"/ CTRLP
+"/
 nnoremap <leader>f :CtrlP<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>T :CtrlPBufTag<CR>
@@ -23,37 +18,30 @@ nnoremap <leader>F :CtrlPCurWD<CR>
 nnoremap <leader>M :CtrlPMRUFiles<CR>
 nnoremap <leader>l :CtrlPLine<CR>
 
-
-" Use ag over grep
-set grepprg=ag\ --nogroup\ --nocolor
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --hidden --ignore-case --ignore ".git|vendor|dist"'
-" ag is fast enough that CtrlP doesn't need to cache
-let g:ctrlp_use_caching = 0
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
+let g:ctrlp_use_caching = 1
 let g:ctrlp_working_path_mode = 0
-" More than enough room when searching
-let g:ctrlp_max_height = 15
 
-"
-" Airline
-"
+"/
+"/ Airline
+"/
 let g:airline#extensions#tabline#enabled = 1
 
-"
-" Syntastic
-"
+"/
+"/ Syntastic
+"/
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_c_checkers = ['make']
 
-"
-" YCM
-"
-" I find it easier to use tab for complete and
-" other mappings for cycling through ycm suggestions.
-"
+"/
+"/ YCM
+"/
+"/ I find it easier to use tab for complete and
+"/ other mappings for cycling through ycm suggestions.
+"/
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_next_completion = ['<c-j>', '<down>']
 let g:ycm_key_list_previous_completion = ['<c-k>', '<up>']
@@ -61,28 +49,28 @@ let g:ycm_key_list_previous_completion = ['<c-k>', '<up>']
 " We will keep the default conf here for .c and .cc files
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
-"
-" Tagbar
-"
+"/
+"/ Tagbar
+"/
 nnoremap <Leader>. :TagbarToggle<CR>
 
-"
-" Instant Markdown
-"
+"/
+"/ Instant Markdown
+"/
 let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
 
-"
-" Strip whitespace
-"
+"/
+"/ Strip whitespace
+"/
 let g:strip_whitespace_on_save = 1
 
-"
-" Scratch buffer
-"
+"/
+"/ Scratch buffer
+"/
 nnoremap <Leader>sc :Scratch<CR>
 
-"
-" Markdown
-"
+"/
+"/ Markdown
+"/
 let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh']

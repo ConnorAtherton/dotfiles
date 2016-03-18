@@ -15,17 +15,31 @@ export ARCHFLAGS="-arch x86_64"
 export VIMRC="~/.vimrc"
 export GOPATH=$HOME/go
 
+ZSH_THEME="robbyrussell"
+COMPLETION_WAITING_DOTS="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
 #
-# Docker dingy setup
+# Docker settings
 #
 export DOCKER_HOST=tcp://192.168.116.160:2376
 export DOCKER_CERT_PATH=/Users/Connor/.docker/machine/machines/dinghy
 export DOCKER_TLS_VERIFY=1
 export DOCKER_MACHINE_NAME=dinghy
 
-ZSH_THEME="robbyrussell"
-COMPLETION_WAITING_DOTS="true"
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+#
+# History settings
+#
+
+# Huge history without duplicates and a nice
+# time format please.
+HISTSIZE=500000
+HISTFILESIZE=100000
+HISTCONTROL="erasedups:ignoreboth"
+HISTTIMEFORMAT='%F %T '
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 
 #
 # Gimme that zsh goodness

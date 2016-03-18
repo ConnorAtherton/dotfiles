@@ -1,6 +1,6 @@
-set nocompatible
-
-" install all plugins here
+"/
+"/ Install all plugins here
+"/
 call plug#begin('~/.vim/plugged')
   " Search and file navigation
   Plug 'rking/ag.vim', { 'on': 'Ag' }
@@ -43,4 +43,3 @@ call plug#begin('~/.vim/plugged')
   " Plug 'altercation/vim-colors-solarized'
   Plug 'junegunn/seoul256.vim'
 call plug#end()
-

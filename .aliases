@@ -1,8 +1,11 @@
+#
 # Vim alias to load ~/.vimrc automatically
+#
 alias v="vim -u ~/.vimrc"
-alias vi=vim
 
-# Easier navigation
+#
+# Navigation
+#
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -11,7 +14,9 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 alias tree='tree -L 1 -C -h'
 
+#
 # git
+#
 alias gitl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an %cr)%Creset' --abbrev-commit --date=relative"
 alias gitls='git shortlog -s --'
 alias gs='git status '
@@ -26,13 +31,13 @@ alias gst='git stash'
 alias gsu='git submodule update --init'
 alias gcp='git cherry-pick'
 alias gco='git checkout '
-alias gk='gitk --all&'
-alias gx='gitx --all'
 alias got='git '
 alias get='git '
 alias g="git"
 
+#
 # Shortcuts
+#
 alias dbox="cd ~/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
@@ -41,7 +46,9 @@ alias wrepos="cd ~/Repos/Bitnami"
 alias h="history"
 alias j="jobs"
 
-# Docker stuff
+#
+# Docker
+#
 alias dl='docker logs -f'
 alias de='docker exec -it'
 alias da='docker attach'
@@ -54,21 +61,30 @@ alias dcre='docker-compose restart'
 alias dcs='docker-compose ps'
 alias dcst='docker-compose start'
 
-## tmux stuff
-alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
+#
+# tmux stuff
+#
+# tmux kill all sessions
+alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}"
 alias tmuxsrc="tmux source-file ~/.tmux.conf"
 
+#
+# Journal
+#
+alias journal='mkdir -p ~/Dropbox/journal && cd ~/Dropbox/journal && mkdir -p `date +%B` && cd `data +%B` && vim `date +"%Y-%m-%d"`.md'
+
 # Detect which `ls` flavor is in use
+
+# List all files colorized in long format and in
+# order of modification but hide hidden files.
+#
+# NOTE: see man ls
 if ls --color > /dev/null 2>&1; then # GNU `ls`
   colorflag="--color"
 else # OS   X `ls`
   colorflag="-G"
 fi
 
-# List all files colorized in long format and in
-# order of modification but hide hidden files.
-#
-# NOTE: see man ls
 alias ls="ls -lhtrF ${colorflag}"
 # List all files colorized in long format, including dot files
 alias la="ls -lahtF ${colorflag}"
@@ -81,13 +97,9 @@ alias path='echo $PATH | tr -s ":" "\n"'
 
 # Custom aliases for user defined functions
 alias pkp='peco-kill-process'
-alias username='echo "p7825520"'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
-
-# Get week number
-alias week='date +%V'
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
