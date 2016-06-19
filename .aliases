@@ -98,6 +98,10 @@ alias path='echo $PATH | tr -s ":" "\n"'
 # Custom aliases for user defined functions
 alias pkp='peco-kill-process'
 
+# Filesystem alises
+# - Find the top 10 largest files/directories in the current directory.
+alias ducks='du -cks * | sort -rn | head'
+
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
