@@ -78,9 +78,6 @@ pathdirs=(
     $HOME/bin
     $HOME/Applications/VMWare\ Fusion.app/Content/Library
     $HOME/.rbenv/bin
-    $HOME/google-cloud-sdk/bin
-    $HOME/Bitnami/arc/arcanist/bin
-    $HOME/pebble-dev/PebbleSDK-3.0-dp1/bin
 )
 
 #
@@ -184,8 +181,3 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export NVM_DIR="/usr/local/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# The next line updates PATH for the Google Cloud SDK.
-# and enables shell command completion for gcloud.
-source '/Users/Connor/google-cloud-sdk/path.zsh.inc'
-source '/Users/Connor/google-cloud-sdk/completion.zsh.inc'
