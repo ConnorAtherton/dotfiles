@@ -38,15 +38,23 @@ print_yellow() {
 }
 
 print_green() {
-  print_color 32 "$1"
-}
-
-print_blue() {
   print_color 48 "$1"
 }
 
+print_blue() {
+  print_color 32 "$1"
+}
+
 print_gray() {
-  print_color 65 "$1"
+  print_color 8 "$1"
+}
+
+step() {
+  print_green "[ ] $1"
+}
+
+finish() {
+  echo -en "\e[1A"; echo -e "\e[0K\r [x] $version. Done."
 }
 
 
@@ -66,10 +74,13 @@ remove_from_home () {
   FILEPATH=$HOME/$1
 
   if [[ -a $FILEPATH ]]; then
+
     if [[ -d $FILEPATH ]]; then
       rm -rf $FILEPATH
+    elif [ -h $FILEPATH ]; then
+      unlink $FILEPATH
     else
-      rm -r $FILEPATH
+      rm $FILEPATH
     fi
   fi
 }
@@ -84,9 +95,25 @@ do
     continue
   fi
 
-  remove_from_home ${file}
-  print_gray "==> Symlinking to $HOME/$(basename $file)"
-  ln -fs $PWD${file:1} $HOME/$(basename $file);
+  local name=$(basename $file)
+
+  remove_from_home $name
+  print_gray "==> Symlinking to $HOME/$name"
+  ln -fs $PWD${file:1} $HOME/$name;
+done
+
+print_blue "==> Replacing all vim files..."
+find ./.vim ! -path . -maxdepth 1 -iname ".*" | while read file
+do
+  if echo basename "$file" | grep -E '^.git*' >/dev/null; then
+    continue
+  fi
+
+  local name=$(basename $file)
+
+  remove_from_home $name
+  print_gray "==> Symlinking to $HOME/$name"
+  ln -fs $PWD${file:1} $HOME/$name;
 done
 print_green "==> Done."
 
@@ -109,18 +136,38 @@ print_green "==> Done."
 if [ os = "Linux" ]; then
   print_blue "==> Installing files for Linux."
 else
-  print_blue "==> Installing files for OSX."
+  print_blue "==>  OSX detected: installing relevant files."
+
+  # permissions
+  # sudo chown -R $(whoami):admin /usr/local
+  # chmod 775 ~/.osx
+  # chmod 775 ~/scripts
   # cd ~ && ./.osx
   # install brew
   # `sh $PWD/scripts/brew.zsh`
+
+  if ! [ $(which xcode-select) ]; then
+    xcode-select --install
+  fi
 fi
 print_green "==> Done."
 
-exit 0
 #
 # config for linux and mac
 #
 # `sh $PWD/scripts/nvm.zsh`
+print_blue "==> Installing latest Ruby versions"
+rbenv install -l | grep "^\s*\d.\d.\d$" | sort -r | head -n 3 | sed s/' '/''/g | sort | while read -r version; do
+  print_green "==> $version"
+  rbenv install $version &>/dev/null
+  echo -en "\e[1A"; echo -e "\e[0K\r ==> $version. Done."
+  rbenv global $version
+done
+print_green "==> Done."
+
+print_blue "==> Installing npm modules"
+. $PWD/scripts/npm.zsh
+print_green "==> Done."
 
 . ~/.zshrc
 

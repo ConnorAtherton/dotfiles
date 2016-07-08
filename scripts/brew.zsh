@@ -13,7 +13,7 @@ function install_brews() {
           rename tree wget cmake brew-cask ctags wireshark \
           peco coreutils docker the_silver_searcher gnupg  \
           freetype boost-python glib pixman go zsh-syntax-highlighting \
-          docker-compose )
+          docker-compose fzf rbenv )
 
   for item in "${brews[@]}"
   do
@@ -27,7 +27,7 @@ function install_brews() {
       args="--build-from-source"
     fi
 
-    brew install $item $args
+    brew install $item "$args"
   done
 }
 
@@ -35,7 +35,9 @@ function install_casks() {
   casks=( dropbox vlc google-chrome suspicious-package \
           transmission skitch adium alfred caffeine \
           flux iterm2 spectacle vagrant virtualbox \
-          google-chrome-canary firefoxdeveloperedition )
+          google-chrome-canary google-cloud-sdk \
+          caskroom/versions/firefoxdeveloperedition \
+          caskroom/versions/google-chrome-canary )
 
   for item in "${casks[@]}"
   do
@@ -43,12 +45,13 @@ function install_casks() {
   done
 }
 
+# Make sure it is on the system
+install_homebrew
+
 # ensure latest homebrew
 brew update
 
 # upgrade formulae we already have installed
 brew upgrade
 
-install_homebrew
 install_brews && install_casks
-

@@ -219,5 +219,5 @@ augroup END
 "
 " Plugin settings in here
 "
-source ~/.vim/.vimrc.plugins
-source ~/.vim/.vimrc.mappings
+source ~/.vimrc.plugins
+source ~/.vimrc.mappings

@@ -7,8 +7,8 @@
   email = c.liam.atherton@gmail.com
 
 [personal]
-  ~/repos/personal/**/*
-  ~/repos/ideas/**/*
+  ~/code/personal/**/*
+  ~/code/ideas/**/*
 
 [work]
-  /Users/Connor/Repos/work/*
+  /Users/Connor/work/*

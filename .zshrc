@@ -1,7 +1,7 @@
 # use zsh
 # chsh -s $(which zsh)
 #
-rm -f ~/.zcompdump* >/dev/null 2>&1
+rm -f ~/.zcompdump >/dev/null 2>&1
 
 local pathdirs funcdirs
 

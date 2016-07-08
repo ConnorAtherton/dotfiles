@@ -1,10 +1,10 @@
 function install_npm_packages() {
   packages=( vtop is-up fcount tasc instant-markdown-d /
-             gen-todo fokus )
+             fokus )
 
   for item in "${packages[@]}"
   do
-    npm install -g $item
+    npm install -g $item &>/dev/null
   done
 }
 
