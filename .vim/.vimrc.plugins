@@ -39,6 +39,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
   Plug 'mtth/scratch.vim', { 'on': 'Scratch' }
 
+  " Own
+  Plug 'ConnorAtherton/uiscript-vim'
+
   " Color schemes
   " Plug 'altercation/vim-colors-solarized'
   Plug 'junegunn/seoul256.vim'
