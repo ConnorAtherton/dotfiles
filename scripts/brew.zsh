@@ -35,9 +35,10 @@ function install_casks() {
   casks=( dropbox vlc google-chrome suspicious-package \
           transmission skitch adium alfred caffeine \
           flux iterm2 spectacle vagrant virtualbox \
-          google-chrome-canary google-cloud-sdk \
+          google-chrome-canary google-cloud-sdk spotify \
           caskroom/versions/firefoxdeveloperedition \
-          caskroom/versions/google-chrome-canary )
+          caskroom/versions/google-chrome-canary \
+          slack )
 
   for item in "${casks[@]}"
   do

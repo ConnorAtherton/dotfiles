@@ -20,14 +20,6 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 #
-# Docker settings
-#
-export DOCKER_HOST=tcp://192.168.116.160:2376
-export DOCKER_CERT_PATH=/Users/Connor/.docker/machine/machines/dinghy
-export DOCKER_TLS_VERIFY=1
-export DOCKER_MACHINE_NAME=dinghy
-
-#
 # History settings
 #
 
@@ -180,4 +172,6 @@ source $HOME/.aliases
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export NVM_DIR="/usr/local/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+
+. "$(brew --prefix nvm)/nvm.sh"

@@ -49,6 +49,10 @@ print_gray() {
   print_color 8 "$1"
 }
 
+print_red() {
+  print_color 196 "$1"
+}
+
 step() {
   print_green "[ ] $1"
 }
@@ -115,6 +119,16 @@ do
   print_gray "==> Symlinking to $HOME/$name"
   ln -fs $PWD${file:1} $HOME/$name;
 done
+print_green "==> Done."
+
+print_blue "==> Checking for oh-my-zsh..."
+if ! [ -e ~/.oh-my-zsh ]; then
+  print_red "==> Install oh-my-zsh and run it again."
+  print_red "==> "
+  print_red '==> sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+  print_red "==> "
+  exit 1
+fi
 print_green "==> Done."
 
 #
