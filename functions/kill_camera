@@ -1,4 +1,4 @@
-#/usr/bin/env zsh
+#!/bin/zsh
 
 # kills all apps using the isight camers
 kill_camera() {

@@ -1,4 +1,4 @@
-#/usr/bin/env zsh
+#!/bin/zsh
 
 permission () {
   stat --format=%a $1

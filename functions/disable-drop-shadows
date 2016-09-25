@@ -1,4 +1,4 @@
-#/usr/bin/env zsh
+#!/bin/zsh
 
 disable-drop-shadows () {
   defaults write com.apple.screencapture disable-shadow -bool false

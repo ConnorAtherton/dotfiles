@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+# iTerm uses a special escape sequence to change the profile
+# information http://stackoverflow.com/questions/8598021/iterm-2-profiles
+change-iterm-theme () {
+  echo -e "\033]50;SetProfile=$#\a"
+}

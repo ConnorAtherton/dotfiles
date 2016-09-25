@@ -26,6 +26,7 @@ let g:ctrlp_working_path_mode = 0
 "/ Airline
 "/
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
 
 "/
 "/ Syntastic
@@ -61,11 +62,6 @@ let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
 
 "/
-"/ Strip whitespace
-"/
-let g:strip_whitespace_on_save = 1
-
-"/
 "/ Scratch buffer
 "/
 nnoremap <Leader>sc :Scratch<CR>
@@ -74,3 +70,8 @@ nnoremap <Leader>sc :Scratch<CR>
 "/ Markdown
 "/
 let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh']
+
+"/
+"/ JSX support
+"/
+let g:jsx_ext_required = 0

@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 
 start-fokus () {
   sudo fokus -u ~/.fokusrc --no-defaults

@@ -1,6 +1,14 @@
 "/
 "/ Install all plugins here
 "/
+
+"/
+"/ Plugged - Needs to be loaded before installing.
+"/
+"/ NOTE: Setting a huge timeout here because YCM is massive.
+"/
+let g:plug_timeout = 1000
+
 call plug#begin('~/.vim/plugged')
   " Search and file navigation
   Plug 'rking/ag.vim', { 'on': 'Ag' }
@@ -11,9 +19,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-markdown'
 
   " Look and feel
-  Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'airblade/vim-gitgutter'
   Plug 'tomtom/tlib_vim'
@@ -23,13 +33,16 @@ call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/syntastic'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
-  Plug 'Valloric/YouCompleteMe'
-  Plug 'ntpeters/vim-better-whitespace'
+  Plug 'Valloric/YouCompleteMe', { 'on': 'CompleteMe' }
+  Plug 'editorconfig/editorconfig-vim'
 
   " Syntax highlighting
   Plug 'digitaltoad/vim-jade'
-  Plug 'kchmck/vim-coffee-script'
+  Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
   Plug 'evanmiller/nginx-vim-syntax'
+  Plug 'ConnorAtherton/uiscript-vim', { 'for': 'uiscript' }
+  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+  Plug 'mxw/vim-jsx'
 
   " For CTags
   Plug 'majutsushi/tagbar'
@@ -39,10 +52,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
   Plug 'mtth/scratch.vim', { 'on': 'Scratch' }
 
-  " Own
-  Plug 'ConnorAtherton/uiscript-vim'
-
   " Color schemes
   " Plug 'altercation/vim-colors-solarized'
+  " Plug 'chriskempson/vim-tomorrow-theme'
   Plug 'junegunn/seoul256.vim'
 call plug#end()

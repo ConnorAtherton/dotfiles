@@ -8,6 +8,5 @@
 
 ## Todo
 
-- automatically install rbenv
 - customize .osx file (it's a dump right now)
 
