@@ -30,6 +30,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'digitaltoad/vim-jade'
   Plug 'kchmck/vim-coffee-script'
   Plug 'evanmiller/nginx-vim-syntax'
+  Plug 'mxw/vim-jsx'
 
   " For CTags
   Plug 'majutsushi/tagbar'

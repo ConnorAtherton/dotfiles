@@ -9,7 +9,7 @@ local pathdirs funcdirs
 # Environment variables
 #
 export ZSH=$HOME/.oh-my-zsh
-export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/home'
+export JAVA_HOME="$(/usr/libexec/java_home)"
 export EDITOR='vim'
 export ARCHFLAGS="-arch x86_64"
 export VIMRC="~/.vimrc"

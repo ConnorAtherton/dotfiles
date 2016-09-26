@@ -5,7 +5,7 @@ nmap <Leader>n :NERDTreeToggle<CR>
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let g:NERDTreeWinSize = 35
+let g:NERDTreeWinSize = 30
 
 "/
 "/ CTRLP
@@ -74,3 +74,8 @@ nnoremap <Leader>sc :Scratch<CR>
 "/ Markdown
 "/
 let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh']
+
+"/
+"/ JSX support
+"/
+let g:jsx_ext_required = 0

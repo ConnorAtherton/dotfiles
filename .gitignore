@@ -1,3 +1,4 @@
 .vim/.netrwhist
 config/.npmrc
 startuptime.txt
+*.log
