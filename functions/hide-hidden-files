@@ -1,4 +1,4 @@
-#/usr/bin/env zsh
+#!/bin/zsh
 
 hide-hidden-files () {
   defaults write com.apple.finder AppleShowAllFiles FALSE

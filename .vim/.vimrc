@@ -1,41 +1,52 @@
 set nocompatible
 
+"
+" Plugin settings in here
+"
+" NOTE: Load everything here so the runtime path can be modified before referring
+" to colorschemes.
+"
+source ~/.vimrc.plugins
+
 " Don't show intro
 set shortmess+=I
 
 " Set the Ruby path correctly
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
-"
-" Color schemes
-"
-" TODO: change color scheme based on time of day
-" TODO: Sync up color scheme with terminal
-"
-" if strftime("%H") > 12
-"   colorscheme seoul256-light
-"   set background=light
-" else
-"   colorscheme seoul256
-"   set background=dark
-" endif
+" Default color scheme
+colo seoul256
 
-colorscheme seoul256
-set background=dark
-
+"
+" ================ Tabs, Windows, and Buffers ==================
+"
 " Remap esc to <j-j>
 ino jk <esc>
 cno jk <c-c>
 vno v <esc>
 nnoremap jk <esc>
+" Keep yank consistent with Delete to eol
+nnoremap Y y$
 
 " Remap cycling through buffers
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-m> :bprevious<CR>
-" Keep yank consistent with Delete to eol
-nnoremap Y y$
 
+" Change buffer closing behaviour to something better
+map <leader>bd :Bclose<cr>
+
+" This makes vim act like all other editors, buffers can
+" exist in the background without being in a window.
+" http://items.sjbach.com/319/configuring-vim-right
+set hidden
+
+" More Intuituve split positions
+set splitbelow
+set splitright
+
+"
 " ================ General Config ====================
+"
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
@@ -45,7 +56,7 @@ set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 set backspace=indent,eol,start
 
-" Backup files get in the way
+" Backup files get in the way, everything is in version control anyway.
 set nobackup
 set noswapfile
 set nowritebackup
@@ -60,25 +71,18 @@ set timeout
 set timeoutlen=100
 set ttimeoutlen=100
 
-" Uncomment below line to change color for whitespace
-" highlight ExtraWhitespace ctermbg=<desired_color>
-
-" This makes vim act like all other editors, buffers can
-" exist in the background without being in a window.
-" http://items.sjbach.com/319/configuring-vim-right
-set hidden
-
 " Look and feel
 set ttyfast
 set lazyredraw
 
+" Show matching brackets when text indicator is over them
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
 " Don’t add empty newlines at the end of files
 set binary
 set noeol
-
-" More Intuituve split positions
-set splitbelow
-set splitright
 
 " Turn on syntax highlighting
 syntax on
@@ -141,7 +145,6 @@ set ignorecase
 set smartcase
 set gdefault " replace every occurence on the line by default
 set incsearch
-set showmatch
 set hlsearch
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.rsync*,*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store,*/dist/*,*/vendor/*,*/bower/*,*/node_modules/*
@@ -159,6 +162,9 @@ vnoremap <tab> %
 set history=1000
 set undolevels=1000      " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
+
+" Fast saving
+nmap <leader>w :w!<cr>
 
 " YOU WILL NOT USE ARROW KEYS!!
 nnoremap <up>    <nop>
@@ -203,6 +209,36 @@ nnoremap ^ 0
 " ================ Autocommands ============================
 "
 
+" Delete trailing whitespace before saving any file
+func! DeleteTrailingWhitespace()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
+" Don't close window when deleting a buffer, show something else
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
+
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+
+   if buflisted(l:currentBufNum)
+     execute("bdelete! ".l:currentBufNum)
+   endif
+endfunction
+
+autocmd BufWritePre * call DeleteTrailingWhitespace()
+
 " convert spaces to tabs for Makefiles
 autocmd FileType make setlocal noexpandtab
 
@@ -216,8 +252,4 @@ augroup BgHighlight
   autocmd WinLeave * set nocul
 augroup END
 
-"
-" Plugin settings in here
-"
-source ~/.vimrc.plugins
 source ~/.vimrc.mappings

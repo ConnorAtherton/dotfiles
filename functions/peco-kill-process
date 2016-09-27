@@ -1,4 +1,4 @@
-#/usr/bin/env zsh
+#!/bin/zsh
 
 peco-kill-process () {
     ps ax -o pid,time,command | peco --query "$LBUFFER" | awk '{print $1}' | xargs kill

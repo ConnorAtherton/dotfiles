@@ -14,6 +14,7 @@ export EDITOR='vim'
 export ARCHFLAGS="-arch x86_64"
 export VIMRC="~/.vimrc"
 export GOPATH=$HOME/go
+export TERM=screen-256color
 
 ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"

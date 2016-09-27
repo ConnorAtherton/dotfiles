@@ -1,4 +1,4 @@
-#/usr/bin/env zsh
+#!/bin/zsh
 
 function clear-ports() {
   local ports=$(echo "$1" | tr " " "\n")
