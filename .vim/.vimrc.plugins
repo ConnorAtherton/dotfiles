@@ -33,7 +33,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/syntastic'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
-  Plug 'Valloric/YouCompleteMe', { 'on': 'CompleteMe' }
+  Plug 'Valloric/YouCompleteMe'
   Plug 'editorconfig/editorconfig-vim'
 
   " Syntax highlighting
