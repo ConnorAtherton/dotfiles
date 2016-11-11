@@ -15,6 +15,7 @@ export ARCHFLAGS="-arch x86_64"
 export VIMRC="~/.vimrc"
 export GOPATH=$HOME/go
 export TERM=screen-256color
+export NVM_DIR="/usr/local/nvm"
 
 ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
@@ -56,7 +57,6 @@ pathdirs=(
     # NOTE: Homebrew's sbin
     /usr/local/sbin
     /usr/local/opt/coreutils/libexec/gnubin
-		/usr/local/heroku/bin
     /usr/local/opt/go/libexec/bin
 
     /bin
@@ -69,7 +69,6 @@ pathdirs=(
     $GOPATH/bin
 
     $HOME/bin
-    $HOME/Applications/VMWare\ Fusion.app/Content/Library
     $HOME/.rbenv/bin
 )
 
@@ -130,17 +129,19 @@ for dir ($funcdirs) {
 #
 # rbenv init
 #
-if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+if ! which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
 
 #
 # Ruby version
 #
-if which rbenv > /dev/null; then rbenv global 2.1.5 > /dev/null 2>&1; fi
+if ! which rbenv > /dev/null; then rbenv global 2.2 > /dev/null 2>&1; fi
 
 #
 # Node version
 #
-if which nvm > /dev/null; then nvm use iojs > /dev/null 2>&1; fi
+if ! which nvm > /dev/null; then [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; fi
+if ! nvm ls | grep boron > /dev/null; then nvm install lts/boron; fi
+if which nvm > /dev/null; then nvm use lts/boron --delete-prefix --silent > /dev/null 2>&1; fi
 
 #
 # FZF fuzzy searching
@@ -171,8 +172,3 @@ autoload -Uz peco-kill-process hide-hidden-files md permission \
 #
 source $HOME/.aliases
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export NVM_DIR="/usr/local/nvm"
-export NVM_DIR="$HOME/.nvm"
-
-. "$(brew --prefix nvm)/nvm.sh"

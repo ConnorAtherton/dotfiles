@@ -55,4 +55,11 @@ brew update
 # upgrade formulae we already have installed
 brew upgrade
 
+# Install all brew packages and casks
 install_brews && install_casks
+
+# Upgrade any already-installed formulae.
+brew upgrade --all
+
+# Remove outdated versions from the cellar.
+brew cleanup
