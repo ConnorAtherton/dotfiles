@@ -13,9 +13,11 @@ export JAVA_HOME="$(/usr/libexec/java_home)"
 export EDITOR='vim'
 export ARCHFLAGS="-arch x86_64"
 export VIMRC="~/.vimrc"
-export GOPATH=$HOME/go
+export GOPATH=$HOME/code/go
+export GOBIN=$GOPATH/bin
 export TERM=screen-256color
 export NVM_DIR="/usr/local/nvm"
+export NODE_VERSION="lts/boron"
 
 ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
@@ -65,7 +67,6 @@ pathdirs=(
     /usr/bin
     /usr/X11/bin
 
-    $GOPATH
     $GOPATH/bin
 
     $HOME/bin
@@ -115,6 +116,7 @@ funcdirs=(
   /usr/local/share/zsh-completions
   $HOME/functions
   $HOME/.dotfiles/functions
+  $GOPATH/bin
 )
 
 #
@@ -140,8 +142,11 @@ if ! which rbenv > /dev/null; then rbenv global 2.2 > /dev/null 2>&1; fi
 # Node version
 #
 if ! which nvm > /dev/null; then [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; fi
-if ! nvm ls | grep boron > /dev/null; then nvm install lts/boron; fi
-if which nvm > /dev/null; then nvm use lts/boron --delete-prefix --silent > /dev/null 2>&1; fi
+
+#
+# Go programming
+#
+mkdir -p "$GOPATH/bin"
 
 #
 # FZF fuzzy searching

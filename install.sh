@@ -24,7 +24,7 @@ os() {
     Darwin*) os=darwin ;;
   esac
 
-  echo "$os"
+  bcho "$os"
 }
 
 # $1 - ANSII color code
@@ -169,7 +169,6 @@ print_green "==> Done."
 #
 # config for linux and mac
 #
-# `sh $PWD/scripts/nvm.zsh`
 print_blue "==> Installing latest Ruby versions"
 rbenv install -l | grep "^\s*\d.\d.\d$" | sort -r | head -n 3 | sed s/' '/''/g | sort | while read -r version; do
   print_green "==> $version"
@@ -177,6 +176,10 @@ rbenv install -l | grep "^\s*\d.\d.\d$" | sort -r | head -n 3 | sed s/' '/''/g |
   echo -en "\e[1A"; echo -e "\e[0K\r ==> $version. Done."
   rbenv global $version
 done
+print_green "==> Done."
+
+print_blue "==> Installing nvm and setting node version"
+. $PWD/scripts/nvm.zsh
 print_green "==> Done."
 
 print_blue "==> Installing npm modules"
