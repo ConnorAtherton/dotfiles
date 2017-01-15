@@ -240,7 +240,8 @@ endfunction
 autocmd BufWritePre * call DeleteTrailingWhitespace()
 
 " convert spaces to tabs for Makefiles
-autocmd FileType make setlocal noexpandtab
+autocmd FileType make set noexpandtab shiftwidth=8 tabstop=8 softtabstop=0
+autocmd FileType go set noexpandtab shiftwidth=4 tabstop=4 softtabstop=0
 
 " Save a file when the focus is lost
 autocmd FocusLost * :wa
