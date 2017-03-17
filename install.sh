@@ -33,25 +33,12 @@ print_color() {
   echo -e "\e[38;05;${1}m ${2}"
 }
 
-print_yellow() {
-  print_color 33 "$1"
-}
-
-print_green() {
-  print_color 48 "$1"
-}
-
-print_blue() {
-  print_color 32 "$1"
-}
-
-print_gray() {
-  print_color 8 "$1"
-}
-
-print_red() {
-  print_color 196 "$1"
-}
+print_yellow() { print_color 33 "$1" }
+print_green()  { print_color 48 "$1" }
+print_blue()   { print_color 32 "$1" }
+print_gray()   { print_color 8 "$1" }
+print_red()    { print_color 196 "$1" }
+debug()        { print_red "[DEBUG] $1" }
 
 step() {
   print_green "[ ] $1"
@@ -95,10 +82,6 @@ remove_from_home () {
 print_blue "==> Replacing all config files..."
 find ./config ! -path . -maxdepth 1 -iname ".*" | while read file
 do
-  if [ $(echo basename "${file:2}" | grep -E '.git*') ]; then
-    continue
-  fi
-
   local name=$(basename $file)
 
   remove_from_home $name
@@ -150,7 +133,7 @@ print_green "==> Done."
 if [ os = "Linux" ]; then
   print_blue "==> Installing files for Linux."
 else
-  print_blue "==>  OSX detected: installing relevant files."
+  print_blue "==> OSX detected: installing relevant files."
 
   # permissions
   # sudo chown -R $(whoami):admin /usr/local

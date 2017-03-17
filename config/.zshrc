@@ -131,12 +131,9 @@ for dir ($funcdirs) {
 #
 # rbenv init
 #
-if ! which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-
-#
-# Ruby version
-#
-if ! which rbenv > /dev/null; then rbenv global 2.2 > /dev/null 2>&1; fi
+eval "$(rbenv init -)"
+# TODO: Move this to a var
+rbenv global 2.3.0
 
 #
 # Node version
