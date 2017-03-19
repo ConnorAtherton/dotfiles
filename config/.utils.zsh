@@ -57,17 +57,23 @@ newline_join() {
 # $1 - ANSII color code
 # $2 - Message to print
 print_color() {
-  echo -e "\e[38;05;${1}m ${2}"
+  echo -e "\e[38;05;${1}m ${2}\e[0m"
+}
+
+print_color_bold() {
+  echo -e "\e[38;05;${1}m\e[1m ${2}\e[0m"
 }
 
 local prependStr="==>"
 
 print_yellow() { print_color 33 "$prependStr $1" }
 print_green()  { print_color 48 "$prependStr $1" }
+print_green_bold()  { print_color_bold 48 "$prependStr $1" }
 print_blue()   { print_color 32 "$prependStr $1" }
 print_gray()   { print_color 8 "$prependStr $1" }
 print_red()    { print_color 196 "$prependStr $1" }
 debug()        { print_red "[DEBUG] $prependStr $1" }
+bold()   { echo -e "\e[1m$1\e[0m" }
 
 # Prints the dotfiles header. Only useful for the install script.
 print_dotfiles_header() {
@@ -139,5 +145,5 @@ stop_spinner() {
   kill $pid >/dev/null 2>&1
 
   up_n_lines 1
-  print_green "✔ $spinner_message"
+  print_green_bold "✔ $spinner_message"
 }

@@ -115,3 +115,7 @@ stop_spinner
 start_spinner "Sourcing rc file"
 . ~/.zshrc
 stop_spinner
+
+# Add a trap here for SIGINT, or SIGHUP to stop the spinner
+
+exit 0
