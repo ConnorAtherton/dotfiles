@@ -104,13 +104,14 @@ echo $ruby_versions | while read -r version; do
 done
 stop_spinner
 
-start_spinner "Installing nvm and setting node version"
-. $PWD/scripts/nvm.zsh
-stop_spinner
-
-start_spinner "Installing npm modules"
-. $PWD/scripts/npm.zsh
-stop_spinner
+# TODO: This is buggy because it re-installs nvm every time
+# start_spinner "Installing nvm and setting node version"
+# . $PWD/scripts/nvm.zsh
+# stop_spinner
+#
+# start_spinner "Installing npm modules"
+# . $PWD/scripts/npm.zsh
+# stop_spinner
 
 start_spinner "Sourcing rc file"
 . ~/.zshrc

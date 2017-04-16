@@ -17,12 +17,14 @@ alias tree='tree -L 1 -C -h'
 #
 # git
 #
-alias gitl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an %cr)%Creset' --abbrev-commit --date=relative"
+alias gl="git l"
+alias glg="git graph"
 alias gitls='git shortlog -s --'
-alias gs='git status '
+alias gs='git s'
 alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
+alias gcl='git c'
 alias gd='git diff'
 alias gp='git pull --no-rebase'
 alias gpr='git pull --rebase'
