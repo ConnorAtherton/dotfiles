@@ -55,22 +55,23 @@ unset FPATH
 # Create a list of directories to add to the path
 #
 pathdirs=(
-    /usr/local/bin
-    # NOTE: Homebrew's sbin
-    /usr/local/sbin
-    /usr/local/opt/coreutils/libexec/gnubin
-    /usr/local/opt/go/libexec/bin
+  /usr/local/bin
+  # NOTE: Homebrew's sbin
+  /usr/local/sbin
+  /usr/local/opt/coreutils/libexec/gnubin
+  /usr/local/opt/go/libexec/bin
 
-    /bin
-    /sbin
-    /usr/sbin
-    /usr/bin
-    /usr/X11/bin
+  /bin
+  /sbin
+  /usr/sbin
+  /usr/bin
+  /usr/X11/bin
 
-    $GOPATH/bin
+  $GOPATH/bin
 
-    $HOME/bin
-    $HOME/.rbenv/bin
+  $HOME/bin
+  $HOME/.rbenv/bin
+  $HOME/.cargo/bin
 )
 
 #
