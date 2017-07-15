@@ -45,6 +45,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'leafgarland/typescript-vim'
   Plug 'fatih/vim-go', { 'for': 'go' }
   Plug 'mxw/vim-jsx'
+  Plug 'rust-lang/rust.vim'
 
   " For CTags
   Plug 'majutsushi/tagbar'
