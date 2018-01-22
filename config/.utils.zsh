@@ -64,15 +64,15 @@ print_color_bold() {
   echo -e "\e[38;05;${1}m\e[1m ${2}\e[0m"
 }
 
-local prependStr="==>"
+local prependStr=""
 
-print_yellow() { print_color 33 "$prependStr $1" }
-print_green()  { print_color 48 "$prependStr $1" }
-print_green_bold()  { print_color_bold 48 "$prependStr $1" }
-print_blue()   { print_color 32 "$prependStr $1" }
-print_gray()   { print_color 8 "$prependStr $1" }
-print_red()    { print_color 196 "$prependStr $1" }
-debug()        { print_red "[DEBUG] $prependStr $1" }
+print_yellow() { print_color 33 "$prependStr$1" }
+print_green()  { print_color 48 "$prependStr$1" }
+print_green_bold()  { print_color_bold 48 "$prependStr$1" }
+print_blue()   { print_color 32 "$prependStr$1" }
+print_gray()   { print_color 8 "$prependStr$1" }
+print_red()    { print_color 196 "$prependStr$1" }
+debug()        { print_red "[DEBUG] $prependStr$1" }
 bold()   { echo -e "\e[1m$1\e[0m" }
 
 # Prints the dotfiles header. Only useful for the install script.
@@ -108,6 +108,10 @@ start_spinner() {
   disown
 }
 
+# TODO
+SPINNER_DOTS=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
+SPINNER_ARROWS=(▹▹▹▹▹ ▸▹▹▹▹ ▹▸▹▹▹ ▹▹▸▹▹ ▹▹▹▸▹ ▹▹▹▹▸)
+
 # The actual loop of the spinner.
 #
 # $1 - Optional message to display with the spinner
@@ -115,22 +119,27 @@ start_spinner() {
 # private
 spinner_loop() {
   local delay=0.1
-  local spinnerChars='\|/-'
-  local length=${#spinnerChars}
+
+  # NOTE: Doing this because in the future I would like to have multiple different dots to choose
+  # from when configuring the dotfiles.
+  local spinnerArray=('\' '|' '/' '-')
+  local length=${#spinnerArray[*]}
 
   i=0
+  charIndex=0
+  arrChar=''
 
-  # start spinning
+  # Start spinning
   while true
   do
-    i=$(($i+1))
     charIndex=$(($i%$length))
-    char=${spinnerChars:$charIndex:1}
+    arrChar=${spinnerArray:$charIndex:1}
 
     up_n_lines 1
-
-    print_green "$char $1"
+    print_green "$arrChar $1"
     sleep $delay
+
+    i=$(($i+1))
   done
 }
 

@@ -14,10 +14,6 @@ finish() {
   echo -en "\e[1A"; echo -e "\e[0K\r [x] $version. Done."
 }
 
-# start_spinner
-# sleep 2
-# stop_spinner
-
 # Kick it off, maestro..
 print_dotfiles_header
 

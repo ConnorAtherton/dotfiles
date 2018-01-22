@@ -1,0 +1,32 @@
+#!/bin/bash
+
+del_stopped () {
+	local name=$1
+	local state
+	state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
+
+	if [[ "$state" == "false" ]]; then
+		docker rm "$name"
+	fi
+}
+
+del_stopped 'chrome'
+
+docker run -d \
+		--memory 2gb \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-v "${HOME}/Downloads:/root/Downloads" \
+		-v "${HOME}/Pictures:/root/Pictures" \
+		-v "${HOME}/.chrome:/data" \
+		-v /dev/shm:/dev/shm \
+		-v /etc/hosts:/etc/hosts \
+		--name chrome \
+		jess/chrome
+
+  # --device /dev/snd \
+  # --device /dev/dri \
+  # --device /dev/video0 \
+  # --device /dev/usb \
+  # --device /dev/bus/usb \
+  # --group-add audio \
+  # --group-add video \
