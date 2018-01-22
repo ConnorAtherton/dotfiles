@@ -87,6 +87,7 @@ set noeol
 " Turn on syntax highlighting
 syntax on
 set cursorline
+set cursorcolumn
 
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
@@ -113,10 +114,16 @@ set list listchars=tab:\ \ ,trail:·
 " ================ Wrapping ============================
 "
 set nowrap             " Don't wrap lines
-set textwidth=100      " But wrap text object at 100 chars
+set textwidth=120      " But wrap text object at 100 chars
 set formatoptions=qrn1
-set colorcolumn=100    " Show long lines
+set colorcolumn=120    " Show long lines
 set linebreak          " Wrap lines at convenient points
+
+"
+" ================ Error Handling ============================
+"
+match ErrorMsg '\%>120v.\+'
+match ErrorMsg '\s\+$'
 
 "
 " ================ Folds ============================
@@ -242,6 +249,7 @@ autocmd BufWritePre * call DeleteTrailingWhitespace()
 " convert spaces to tabs for Makefiles
 autocmd FileType make set noexpandtab shiftwidth=8 tabstop=8 softtabstop=0
 autocmd FileType go set noexpandtab shiftwidth=4 tabstop=4 softtabstop=0
+autocmd BufRead,BufNewFile,FileType java set smartindent expandtab shiftwidth=4 tabstop=4 softtabstop=0
 
 " Save a file when the focus is lost
 autocmd FocusLost * :wa

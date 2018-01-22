@@ -96,13 +96,13 @@ stop_spinner
 #
 # config for linux and mac
 #
-local ruby_versions=$(rbenv install -l | grep "^\s*\d.\d.\d$" | sort -r | head -n 3 | sed s/' '/''/g | sort)
-start_spinner "Installing latest Ruby versions: $(newline_join $ruby_versions)"
-echo $ruby_versions | while read -r version; do
-  rbenv install $version &>/dev/null
-  rbenv global $version
-done
-stop_spinner
+# local ruby_versions=$(rbenv install -l | grep "^\s*\d.\d.\d$" | sort -r | head -n 3 | sed s/' '/''/g | sort)
+# start_spinner "Installing latest Ruby versions: $(newline_join $ruby_versions)"
+# echo $ruby_versions | while read -r version; do
+#   rbenv install $version &>/dev/null
+#   rbenv global $version
+# done
+# stop_spinner
 
 # TODO: This is buggy because it re-installs nvm every time
 # start_spinner "Installing nvm and setting node version"
