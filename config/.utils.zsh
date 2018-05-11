@@ -116,13 +116,15 @@ SPINNER_ARROWS=(▹▹▹▹▹ ▸▹▹▹▹ ▹▸▹▹▹ ▹▹▸▹▹ 
 #
 # $1 - Optional message to display with the spinner
 #
-# private
+# ~private
 spinner_loop() {
   local delay=0.1
 
   # NOTE: Doing this because in the future I would like to have multiple different dots to choose
   # from when configuring the dotfiles.
-  local spinnerArray=('\' '|' '/' '-')
+  local -a spinnerArray
+  spinnerArray=('\' '|' '/' '-')
+
   local length=${#spinnerArray[*]}
 
   i=0
