@@ -2,3 +2,6 @@
 config/.npmrc
 startuptime.txt
 *.log
+
+# We don't want this right now
+.vim/plugged
