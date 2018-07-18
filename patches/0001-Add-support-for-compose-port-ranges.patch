@@ -1,0 +1,162 @@
+From 59cc89bccf0d9cd3cc9684edaa1f11441cb30bd7 Mon Sep 17 00:00:00 2001
+From: Connor Atherton <connor@connoratherton.com>
+Date: Tue, 17 Jul 2018 18:05:15 -0700
+Subject: [PATCH] Add support for compose port ranges
+
+---
+ container_transform/compose.py                | 54 ++++++++++++++++++-
+ container_transform/tests/composev2.yml       |  3 ++
+ .../tests/composev2_output.service            | 12 +++--
+ container_transform/utils.py                  | 11 ++++
+ 4 files changed, 76 insertions(+), 4 deletions(-)
+ create mode 100644 container_transform/utils.py
+
+diff --git a/container_transform/compose.py b/container_transform/compose.py
+index 04ad00c..6a4e0a0 100644
+--- a/container_transform/compose.py
++++ b/container_transform/compose.py
+@@ -4,6 +4,7 @@ from functools import reduce
+ import yaml
+ 
+ from .transformer import BaseTransformer
++from .utils import flatten
+ 
+ 
+ class ComposeTransformer(BaseTransformer):
+@@ -95,6 +96,55 @@ class ComposeTransformer(BaseTransformer):
+         }
+         mapping = str(mapping).rstrip('/udp')
+         parts = str(mapping).split(':')
++        is_port_range = '-' in mapping
++
++        if is_port_range:
++          output = []
++
++          # 6060-6061
++          if len(parts) == 1:
++            single_range = str(mapping).split('-')
++
++            for port in single_range:
++              output.append({
++                  'protocol': protocol,
++                  'host_port': int(port),
++                  'container_port': int(port),
++              })
++
++            return output
++
++          elif len(parts) == 2:
++            # 9090-9091:8080-8081
++            if '-' in parts[0] and '-' in parts[1]:
++              first_range = str(parts[0]).split('-')
++              second_range = str(parts[1]).split('-')
++
++              first_range = list(map(int, first_range))
++              second_range = list(map(int, second_range))
++
++              for host, container in zip(first_range, second_range):
++                output.append({
++                    'protocol': protocol,
++                    'host_port': host,
++                    'container_port': container,
++                })
++
++              return output
++
++            # 12400-12500:1240
++            elif '-' in parts[0]:
++              single_range = str(parts[0]).split('-')
++
++              for port in range(int(single_range[0]), int(single_range[1]) + 1):
++                output.append({
++                    'protocol': protocol,
++                    'host_port': int(port),
++                    'container_port': int(parts[1]),
++                })
++
++              return output
++
+         if len(parts) == 1:
+             output.update({
+                 'container_port': int(parts[0])
+@@ -135,7 +185,9 @@ class ComposeTransformer(BaseTransformer):
+         :return: the base schema port_mappings
+         :rtype: list of dict
+         """
+-        return [self._parse_port_mapping(mapping) for mapping in port_mappings]
++        mappings = [self._parse_port_mapping(mapping) for mapping in port_mappings]
++
++        return flatten(mappings)
+ 
+     @staticmethod
+     def _emit_mapping(mapping):
+diff --git a/container_transform/tests/composev2.yml b/container_transform/tests/composev2.yml
+index 3aad484..c612870 100644
+--- a/container_transform/tests/composev2.yml
++++ b/container_transform/tests/composev2.yml
+@@ -5,6 +5,9 @@ services:
+     ports:
+      - "5000:5000"
+      - "53:53/udp"
++     - "3000-3001"
++     - "9090-9091:8080-8081"
++     - "9092-9093:8082"
+     pid: "host"
+     env_file: "./web.env"
+     volumes:
+diff --git a/container_transform/tests/composev2_output.service b/container_transform/tests/composev2_output.service
+index 7ffc16e..2725b65 100644
+--- a/container_transform/tests/composev2_output.service
++++ b/container_transform/tests/composev2_output.service
+@@ -1,8 +1,8 @@
+ # web.service #######################################################################
+ [Unit]
+ Description=Web
+-After=docker.service 
+-Requires=docker.service 
++After=docker.service
++Requires=docker.service
+ 
+ [Service]
+ ExecStartPre=-/usr/bin/docker kill web
+@@ -13,6 +13,12 @@ ExecStart=/usr/bin/docker run \
+     --pid host \
+     -p 5000:5000 \
+     -p 53:53/udp \
++    -p 3000:3000 \
++    -p 3001:3001 \
++    -p 9090:8080 \
++    -p 9091:8081 \
++    -p 9092:8082 \
++    -p 9093:8082 \
+     -v .:/code \
+     --log-driver=gelf \
+     --log-opt gelf-address=udp://127.0.0.1:12900 \
+@@ -20,5 +26,5 @@ ExecStart=/usr/bin/docker run \
+     --label com.example.department="Finance" \
+     --label com.example.description="Accounting webapp" \
+     --label com.example.label-with-empty-value="" \
+-    <image> 
++    <image>
+ ExecStop=/usr/bin/docker stop web
+\ No newline at end of file
+diff --git a/container_transform/utils.py b/container_transform/utils.py
+new file mode 100644
+index 0000000..6dfa5a6
+--- /dev/null
++++ b/container_transform/utils.py
+@@ -0,0 +1,11 @@
++def flatten(lst, final=None):
++  if final is None:
++    final = []
++
++  for val in lst:
++    if isinstance(val, list):
++      flatten(val, final)
++    else:
++      final.append(val)
++
++  return final
+-- 
+2.17.0
+

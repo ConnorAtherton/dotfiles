@@ -1,0 +1,35 @@
+#!/bin/zsh
+
+if [[ $# != 2 ]]; then
+	echo "$0 <string-to-search> <replacement>"
+	return 1
+fi
+
+export FROM="$1"
+export TO="$2"
+
+do_replace() {
+	echo
+	echo ">> Searching '${FROM}' in '${1}' ..."
+
+	echo
+	ag "${FROM}" "${1}"
+
+	# echo
+	# vared -p "Replace in '${1}'? [y/N] " -c REPLY
+
+	# if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+	# 	return 0
+	# fi
+
+	sed -i file.bak "s/${FROM}/${TO}/g" ${1}
+}
+
+## main
+
+echo "Replacing '${FROM}' with '${TO}'"
+echo
+
+ag -l "${FROM}" . | while read file; do
+	do_replace "${file}"
+done
