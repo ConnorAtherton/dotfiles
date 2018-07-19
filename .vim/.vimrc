@@ -253,6 +253,7 @@ autocmd BufWritePre * call DeleteTrailingWhitespace()
 " convert spaces to tabs for Makefiles
 autocmd FileType make set noexpandtab shiftwidth=8 tabstop=8 softtabstop=0
 autocmd FileType go set noexpandtab shiftwidth=4 tabstop=4 softtabstop=0
+autocmd FileType python set tabstop=8 expandtab shiftwidth=4 softtabstop=4
 autocmd BufRead,BufNewFile,FileType java set smartindent expandtab shiftwidth=4 tabstop=4 softtabstop=0
 
 " Save a file when the focus is lost
