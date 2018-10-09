@@ -15,7 +15,7 @@ set shortmess+=I
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
 " Default color scheme
-" colo seoul256
+colo seoul256
 
 "
 " ================ Tabs, Windows, and Buffers ==================
