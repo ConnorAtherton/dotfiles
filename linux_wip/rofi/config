@@ -1,0 +1,16 @@
+rofi.color-enabled: true
+
+! Sizing
+rofi.lines: 15
+rofi.width: 50
+rofi.columns: 1
+
+! Appearance
+rofi.separator-style: solid
+rofi.bw: 1
+rofi.padding: 5
+
+! Behavior
+rofi.cycle: true
+
+

@@ -21,7 +21,7 @@ print_dotfiles_header
 # Symlink files back into correct dir
 #
 start_spinner "Replacing all config files"
-find ./config ! -path . -maxdepth 1 -iname ".*" | while read file
+find ./config -maxdepth 1 ! -path . -iname ".*" | while read file
 do
   local name=$(basename $file)
 
@@ -31,7 +31,7 @@ done
 stop_spinner
 
 start_spinner "Replacing all vim files"
-find ./.vim ! -path . -maxdepth 1 -iname ".*" | while read file
+find ./.vim -maxdepth 1 ! -path . -iname ".*" | while read file
 do
   if echo basename "$file" | grep -E '^.git*' >/dev/null; then
     continue
@@ -42,16 +42,6 @@ do
   remove_from_home $name
   ln -fs $PWD${file:1} $HOME/$name;
 done
-stop_spinner
-
-start_spinner "Checking for oh-my-zsh..."
-if ! [ -e ~/.oh-my-zsh ]; then
-  print_red "Install oh-my-zsh and run it again."
-  print_red ""
-  print_red 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
-  print_red ""
-  exit 1
-fi
 stop_spinner
 
 #
@@ -70,7 +60,7 @@ if ! [ -e ~/.vim/autoload/plug.vim ]; then
 fi
 stop_spinner
 
-if [ os = "Linux" ]; then
+if [ "$(uname -s)" = "Linux" ]; then
   start_spinner "Installing files for Linux"
 else
   start_spinner "OSX detected: installing relevant files"
@@ -85,6 +75,16 @@ else
 
   if ! [ $(which xcode-select) ]; then
     xcode-select --install
+  fi
+  stop_spinner
+
+  start_spinner "Checking for oh-my-zsh..."
+  if ! [ -e ~/.oh-my-zsh ]; then
+    print_red "Install oh-my-zsh and run it again."
+    print_red ""
+    print_red 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+    print_red ""
+    exit 1
   fi
 fi
 stop_spinner

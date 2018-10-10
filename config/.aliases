@@ -67,6 +67,7 @@ alias dcst='docker-compose start'
 # tmux stuff
 #
 # tmux kill all sessions
+alias tmux="tmux -2"
 alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}"
 alias tmuxsrc="tmux source-file ~/.tmux.conf"
 
