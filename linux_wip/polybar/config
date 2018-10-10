@@ -1,10 +1,24 @@
+; Referenced this file https://github.com/mohabaks/dotfiles/blob/master/config/polybar/.config/polybar/config
+
 [colors]
-;background = ${xrdb:color0:#222}
-background = #222
-background-alt = #444
-;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
-foreground-alt = #555
+; Base colors from .Xresources
+bg          =  ${xrdb:background}
+bg-alt      =  #202020
+fg          =  ${xrdb:foreground}
+fg-alt      =  ${xrdb:color8}
+red         =  ${xrdb:color1}
+red-alt     =  ${xrdb:color9}
+green       =  ${xrdb:color2}
+green-alt   =  ${xrdb:color10}
+yellow      =  ${xrdb:color3}
+yellow-alt  =  ${xrdb:color11}
+blue        =  ${xrdb:color4}
+blue-alt    =  ${xrdb:color12}
+magenta     =  ${xrdb:color5}
+magenta-alt =  ${xrdb:color13}
+cyan        =  ${xrdb:color6}
+cyan-alt    =  ${xrdb:color14}
+white       =  ${xrdb:color7}
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -18,28 +32,27 @@ offset-y = 0
 ;radius = 3.0
 override-redirect = false
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.bg}
+foreground = ${colors.fg}
 
-line-size = 3
-line-color = #f01
+line-size = 1
 
 border-size = 4
 border-color = #00000000
 
-padding-left = 0
+padding-left = 2
 padding-right = 2
 
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
+font-0 = FiraCode:pixelsize=9;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = i3
-modules-center = 
-modules-right = filesystem memory cpu wlan eth battery temperature date 
+modules-center =
+modules-right = filesystem memory cpu wlan eth battery temperature date
 
 tray-position = right
 tray-padding = 1
@@ -59,7 +72,7 @@ mount-0 = /
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+label-unmounted-foreground = ${colors.fg-alt}
 
 [module/i3]
 type = internal/i3
@@ -68,7 +81,7 @@ index-sort = true
 wrapping-scroll = false
 
 label-focused = " [%name%] "
-label-focused-foreground = ${colors.foreground-alt}
+label-focused-foreground = ${colors.fg-alt}
 
 label-mode-padding = 2
 label-mode-foreground = #000
@@ -102,7 +115,7 @@ bar-fill-font = 2
 bar-fill-foreground = #9f78e1
 bar-empty = ─
 bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
+bar-empty-foreground = ${colors.fg-alt}
 
 [module/backlight-acpi]
 inherit = module/xbacklight
@@ -113,7 +126,7 @@ card = intel_backlight
 type = internal/cpu
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.fg-alt}
 format-underline = #f90000
 label = %percentage:2%%
 
@@ -121,7 +134,7 @@ label = %percentage:2%%
 type = internal/memory
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.fg-alt}
 format-underline = #4bffdc
 label = %percentage_used%%
 
@@ -138,14 +151,14 @@ format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+;label-disconnected-foreground = ${colors.fg-alt}
 
 ramp-signal-0 = 
 ramp-signal-1 = 
 ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
+ramp-signal-foreground = ${colors.fg-alt}
 
 [module/eth]
 type = internal/network
@@ -154,14 +167,14 @@ interval = 3.0
 
 format-connected-underline = #55aa55
 format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-prefix-foreground = ${colors.fg-alt}
 label-connected = %local_ip%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+;label-disconnected-foreground = ${colors.fg-alt}
 
 [module/date]
 type = internal/date
@@ -174,7 +187,7 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.fg-alt}
 format-underline = #0a6cf5
 
 label = %date% %time%
@@ -204,7 +217,7 @@ bar-volume-fill = ─
 bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-foreground = ${colors.fg-alt}
 
 [module/alsa]
 type = internal/alsa
@@ -214,7 +227,7 @@ label-volume = VOL
 label-volume-foreground = ${root.foreground}
 
 format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
+format-muted-foreground = ${colors.fg-alt}
 label-muted = sound muted
 
 bar-volume-width = 10
@@ -232,7 +245,7 @@ bar-volume-fill = ─
 bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-foreground = ${colors.fg-alt}
 
 [module/battery]
 type = internal/battery
@@ -247,24 +260,24 @@ format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix-foreground = ${colors.fg-alt}
 format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-foreground = ${colors.fg-alt}
 
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-foreground = ${colors.fg-alt}
 animation-charging-framerate = 750
 
 animation-discharging-0 = 
 animation-discharging-1 = 
 animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-foreground = ${colors.fg-alt}
 animation-discharging-framerate = 750
 
 [module/temperature]
@@ -284,7 +297,7 @@ label-warn-foreground = ${colors.secondary}
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+ramp-foreground = ${colors.fg-alt}
 
 [module/powermenu]
 type = custom/menu
@@ -298,7 +311,7 @@ label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+label-separator-foreground = ${colors.fg-alt}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1

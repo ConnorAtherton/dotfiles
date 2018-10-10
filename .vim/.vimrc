@@ -119,6 +119,7 @@ set list listchars=tab:\ \ ,trail:·
 "
 set nowrap             " Don't wrap lines
 set textwidth=120      " But wrap text object at 100 chars
+set nuw=6              " Bump line numbers alongs to have some space on the left
 set formatoptions=qrn1
 set colorcolumn=120    " Show long lines
 set linebreak          " Wrap lines at convenient points

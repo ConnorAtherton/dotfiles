@@ -15,17 +15,6 @@ set $mod Mod4
 # is used in the bar {} block below.
 font pango:Fira Mono 10
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -167,13 +156,20 @@ bindsym $mod+r mode "resize"
 for_window [class=".*"] border pixel 1
 
 # Custom namespace standards
-set $ws1 "1: Terminal"
+set $ws1 "Terminal"
+set $ws2 "Browsing"
+set $ws3 "Document"
+set $ws4 "Chat"
+
+# Assign common programs with a specific namespace
+assign [class="^Firefox$"] $ws2
 
 # i3-gaps
 smart_gaps on
-gaps inner 8
-gaps outer 6
+gaps inner 4
+gaps outer 0
 
 # Always start polybar when starting
 exec_always --no-startup-id xrdb -load ~/.Xresources
+exec_always --no-startup-id compton --config ~/.config/compton/config
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
