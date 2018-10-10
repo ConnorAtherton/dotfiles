@@ -33,7 +33,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/syntastic'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
-  Plug 'Valloric/YouCompleteMe'
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   Plug 'editorconfig/editorconfig-vim'
 
   " Syntax highlighting
@@ -56,7 +56,5 @@ call plug#begin('~/.vim/plugged')
   Plug 'mtth/scratch.vim', { 'on': 'Scratch' }
 
   " Color schemes
-  " Plug 'altercation/vim-colors-solarized'
-  " Plug 'chriskempson/vim-tomorrow-theme'
-  Plug 'junegunn/seoul256.vim'
+  Plug '~/dotfiles/.vim/custom_themes/seoul256.vim'
 call plug#end()
