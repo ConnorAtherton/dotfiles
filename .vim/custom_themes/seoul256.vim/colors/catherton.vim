@@ -1,5 +1,5 @@
 if !exists('s:rgb_map')
-    if get(g:, 'seoul256_srgb', 0)
+    if get(g:, 'catherton_srgb', 0)
         let s:rgb_map =
         \{ 16: '#000000',  17: '#00005f',  18: '#000087',
         \  19: '#0000af',  20: '#0000d7',  21: '#0000ff',
@@ -104,23 +104,23 @@ endif
 let s:background  = &background
 let s:colors_name = get(g:, 'colors_name', '')
 
-silent! unlet s:style s:seoul256_background
+silent! unlet s:style s:catherton_background
 
-" 1. If g:seoul256_background is found
-if exists('g:seoul256_background')
-  let s:seoul256_background = g:seoul256_background
-  if s:seoul256_background >= 233 && s:seoul256_background <= 239
+" 1. If g:catherton_background is found
+if exists('g:catherton_background')
+  let s:catherton_background = g:catherton_background
+  if s:catherton_background >= 233 && s:catherton_background <= 239
     let s:style = 'dark'
-  elseif s:seoul256_background >= 252 && s:seoul256_background <= 256
+  elseif s:catherton_background >= 252 && s:catherton_background <= 256
     let s:style = 'light'
   else
-    unlet s:seoul256_background
+    unlet s:catherton_background
   endif
 endif
 
 if !exists('s:style')
-  " 2. If g:colors_name is NOT 'seoul256' -> dark version
-  if s:colors_name != 'seoul256'
+  " 2. If g:colors_name is NOT 'catherton' -> dark version
+  if s:colors_name != 'catherton'
     let s:style = 'dark'
   " 3. Follow &background setting
   else
@@ -133,11 +133,11 @@ let s:style_idx = s:style == 'light'
 
 " Background colors
 if s:style == 'dark'
-  let s:dark_bg  = 233 " get(s:, 'seoul256_background', 237)
+  let s:dark_bg  = 233 " get(s:, 'catherton_background', 237)
   let s:light_bg = 253
 else
   let s:dark_bg  = 237
-  let s:light_bg = get(s:, 'seoul256_background', 253)
+  let s:light_bg = get(s:, 'catherton_background', 253)
 endif
 let s:dark_bg_2 = s:dark_bg > 233 ? s:dark_bg - 2 : 16
 let s:light_bg_1 = min([s:light_bg + 1, 256])
@@ -397,9 +397,9 @@ hi CursorLine cterm=NONE
 hi CursorLineNr cterm=NONE
 hi VertSplit cterm=NONE ctermbg=NONE ctermfg=NONE
 
-" let g:seoul256_current_fg = [s:dark_fg, s:light_fg][s:style_idx]
-" let g:seoul256_current_bg = [s:dark_bg, s:light_bg][s:style_idx]
-let g:colors_name = 'seoul256'
+" let g:catherton_current_fg = [s:dark_fg, s:light_fg][s:style_idx]
+" let g:catherton_current_bg = [s:dark_bg, s:light_bg][s:style_idx]
+let g:colors_name = 'catherton'
 if s:colors_name != g:colors_name || s:background == s:style
   let &background = s:style
 else

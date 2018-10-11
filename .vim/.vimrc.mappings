@@ -3,9 +3,29 @@
 "/
 nmap <Leader>n :NERDTreeToggle<CR>
 
+" Make it look a little pretty
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
+
+" Behavior that feels more natural
+" Automatically delete buffers from files deleted in NERDTree
+let NERDTreeAutoDeleteBuffer = 1
+
+" Quit NT when opened a file (this matches my usual workflow)
+let NERDTreeQuitOnOpen = 1
+
+" Settings only applicable to NERDTree buffers
+autocmd! BufEnter * call EnableNerdTreeBuffer()
+function! EnableNerdTreeBuffer()
+  if (bufname("%") =~ "NERD_Tree_")
+    setlocal nocursorcolumn
+    setlocal nonumber
+  endif
+endfunction
+
+" Open the file explorer automatically
+autocmd VimEnter * NERDTree
 
 "/
 "/ CTRLP
@@ -96,3 +116,37 @@ let g:jsx_ext_required = 0
 "/
 let g:gitgutter_map_keys = 0
 let g:gitgutter_diff_args = '-w'
+
+"/
+"/  Goyo
+"/
+" TODO:
+" - if filetype is txt or md, enable spelling and grammar
+function! ProseMode()
+  call goyo#execute(0, [])
+  " TODO: Not sure what this does
+  set complete+=s
+  " Check out the goyo hooks for tmux settings in: goyo_ente and goyo_leave
+endfunction
+
+command! ProseMode call ProseMode()
+nmap <Leader>p :ProseMode<CR>
+
+function! s:goyo_enter()
+  silent !tmux set status off
+  set nocursorcolumn
+  set nocursorline
+  set noshowmode
+  set noshowcmd
+endfunction
+
+function! s:goyo_leave()
+  silent !tmux set status on
+  set cursorcolumn
+  set cursorline
+  set showmode
+  set showcmd
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()

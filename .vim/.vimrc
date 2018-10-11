@@ -15,7 +15,16 @@ set shortmess+=I
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
 " Default color scheme
-colo seoul256
+colo catherton
+
+" ALL OVERRIDES CURRENTLY IN PROGRESS
+" TODO: Put this into my eventual color scheme
+hi VertSplit ctermbg=NONE guibg=NONE
+" Makes things look cleaner without any of these splits
+set fillchars=""
+" Force remove this so the numbers end up with the same color
+hi clear LineNr
+hi clear SignColumn
 
 "
 " ================ Tabs, Windows, and Buffers ==================
@@ -61,9 +70,8 @@ set nobackup
 set noswapfile
 set nowritebackup
 
-" Show line numbers relative to the current line
-set number "ine numbers are good
-set relativenumber " Display how far away each line is from the current one
+set number " Line numbers are good
+" set relativenumber " Display how far away each line is from the current one
 
 " This needs to exist so the 'j' key is still snappy in normal
 " mode due to the fact that 'jk' replaces <esc>
@@ -91,7 +99,7 @@ set noeol
 " Turn on syntax highlighting
 syntax on
 set cursorline
-set cursorcolumn
+set cursorcolumn " TODO: Visit
 
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
@@ -119,7 +127,7 @@ set list listchars=tab:\ \ ,trail:·
 "
 set nowrap             " Don't wrap lines
 set textwidth=120      " But wrap text object at 100 chars
-set nuw=6              " Bump line numbers alongs to have some space on the left
+set nuw=3              " Bump line numbers alongs to have some space on the left
 set formatoptions=qrn1
 set colorcolumn=120    " Show long lines
 set linebreak          " Wrap lines at convenient points
@@ -142,7 +150,7 @@ set nofoldenable        "dont fold by default
 " ================ Scrolling ========================
 "
 
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+set scrolloff=10         "Start scrolling when we're 10 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
@@ -201,17 +209,19 @@ nnoremap w!! w !sudo tee % >/dev/null
 " Move visual block on scroll
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" Splits
+nnoremap <leader>hs :split<cr>
 nnoremap <leader>vs :vsplit<cr>
 
 " opens .vimrc in split for easy editing
 nnoremap <leader>ev :vsplit $VIMRC<cr>
 " source .vimrc
 nnoremap <leader>sv :source $VIMRC<cr>
-" opens a new vsplit
-" opens a new vsplit
-nnoremap <leader>hs :split<cr>
+
 " Start using ag and place cursor in the quotes
 nnoremap <leader>s :Ag ""<Left>
+
 " I want to go to the first character far more often
 " than the beginning of the line so let's switch
 nnoremap 0 ^
@@ -222,6 +232,7 @@ nnoremap ^ 0
 "
 
 " Delete trailing whitespace before saving any file
+" TODO: Move to custom functions
 func! DeleteTrailingWhitespace()
   exe "normal mz"
   %s/\s\+$//ge

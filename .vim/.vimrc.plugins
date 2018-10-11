@@ -56,5 +56,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'mtth/scratch.vim', { 'on': 'Scratch' }
 
   " Color schemes
-  Plug '~/dotfiles/.vim/custom_themes/seoul256.vim'
+  " Plug '~/dotfiles/.vim/custom_themes/seoul256.vim'
+  Plug '~/dotfiles/.vim/custom_themes/catherton'
 call plug#end()

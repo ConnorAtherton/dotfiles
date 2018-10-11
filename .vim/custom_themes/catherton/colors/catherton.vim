@@ -1,5 +1,5 @@
 if !exists('s:rgb_map')
-    if get(g:, 'seoul256_srgb', 0)
+    if get(g:, 'catherton_srgb', 0)
         let s:rgb_map =
         \{ 16: '#000000',  17: '#00005f',  18: '#000087',
         \  19: '#0000af',  20: '#0000d7',  21: '#0000ff',
@@ -104,23 +104,23 @@ endif
 let s:background  = &background
 let s:colors_name = get(g:, 'colors_name', '')
 
-silent! unlet s:style s:seoul256_background
+silent! unlet s:style s:catherton_background
 
-" 1. If g:seoul256_background is found
-if exists('g:seoul256_background')
-  let s:seoul256_background = g:seoul256_background
-  if s:seoul256_background >= 233 && s:seoul256_background <= 239
+" 1. If g:catherton_background is found
+if exists('g:catherton_background')
+  let s:catherton_background = g:catherton_background
+  if s:catherton_background >= 233 && s:catherton_background <= 239
     let s:style = 'dark'
-  elseif s:seoul256_background >= 252 && s:seoul256_background <= 256
+  elseif s:catherton_background >= 252 && s:catherton_background <= 256
     let s:style = 'light'
   else
-    unlet s:seoul256_background
+    unlet s:catherton_background
   endif
 endif
 
 if !exists('s:style')
-  " 2. If g:colors_name is NOT 'seoul256' -> dark version
-  if s:colors_name != 'seoul256'
+  " 2. If g:colors_name is NOT 'catherton' -> dark version
+  if s:colors_name != 'catherton'
     let s:style = 'dark'
   " 3. Follow &background setting
   else
@@ -133,11 +133,11 @@ let s:style_idx = s:style == 'light'
 
 " Background colors
 if s:style == 'dark'
-  let s:dark_bg  = 233 " get(s:, 'seoul256_background', 237)
+  let s:dark_bg  = 234 " get(s:, 'catherton_background', 237)
   let s:light_bg = 253
 else
   let s:dark_bg  = 237
-  let s:light_bg = get(s:, 'seoul256_background', 253)
+  let s:light_bg = get(s:, 'catherton_background', 253)
 endif
 let s:dark_bg_2 = s:dark_bg > 233 ? s:dark_bg - 2 : 16
 let s:light_bg_1 = min([s:light_bg + 1, 256])
@@ -172,11 +172,12 @@ endif
 
 call s:hi('Normal', [s:dark_fg, s:light_fg], [s:dark_bg, s:light_bg])
 
-call s:hi('LineNr', [101, 101], [s:dark_bg + 1, s:light_bg - 2])
-call s:hi('Visual', ['', ''], [23, 152])
-call s:hi('VisualNOS', ['', ''], [23, 152])
+" BEFORE: call s:hi('LineNr', [23, 101], [s:dark_bg + 2, s:light_bg - 2])
+call s:hi('LineNr', [23, 101], [s:dark_bg, s:light_bg - 2])
+call s:hi('Visual', ['', ''], [56, 152])
+call s:hi('VisualNOS', ['', ''], [56, 152])
 
-call s:hi('Comment', [65, 65], ['', ''])
+call s:hi('Comment', [240, 65], ['', ''])
 call s:hi('Number', [222, 95], ['', ''])
 call s:hi('Float', [222, 95], ['', ''])
 call s:hi('Boolean', [103, 168], ['', ''])
@@ -243,7 +244,8 @@ call s:hi('CursorLine', ['', ''], [s:dark_bg - 1, s:light_bg - 1])
 call s:hi('CursorLineNr', [131, 131], [s:dark_bg - 1, s:light_bg - 1])
 call s:hi('CursorColumn', ['', ''], [s:dark_bg - 1, s:light_bg - 1])
 
-call s:hi('Directory', [187, 95], ['', ''])
+" Used mostly by NERDTree
+call s:hi('Directory', [12, 95], ['', ''])
 
 call s:hi('DiffAdd',    ['NONE', 'NONE'], [22, 151])
 call s:hi('DiffDelete', ['NONE', 'NONE'], [95, 181])
@@ -256,7 +258,7 @@ call s:hi('Folded', [101, 101], [s:dark_bg + 1, s:light_bg - 2])
 " set foldcolumn=1
 call s:hi('FoldColumn', [144, 94], [s:dark_bg + 1, s:light_bg - 2])
 
-call s:hi('MatchParen', ['', ''], [s:dark_bg + 3, s:light_bg - 3])
+call s:hi('MatchParen', ['', ''], [s:dark_bg + 10, s:light_bg - 3])
 
 " -- INSERT --
 call s:hi('ModeMsg', [173, 173], ['', ''])
@@ -272,7 +274,8 @@ call s:hi('PmenuSel', [s:dark_fg, s:dark_fg], [89, 89])
 call s:hi('PmenuSbar', ['', ''], [65, 65])
 call s:hi('PmenuThumb', ['', ''], [23, 23])
 
-call s:hi('Search', [s:dark_fg, 255], [24, 74])
+" call s:hi('Search', [s:dark_fg, 255], [24, 74])
+call s:hi('Search', [17, 255], [180, 74])
 call s:hi('IncSearch', [220, 220], [s:dark_bg + 1, 238])
 
 " String delimiter, interpolation
@@ -366,28 +369,6 @@ call s:hi('GitGutterChangeDelete', [168, 168], [s:dark_bg + 1, s:light_bg - 2])
 " call s:hi('ALEErrorSign', [161, 161], [s:dark_bg, s:light_bg])
 " call s:hi('ALEWarningSign', [174, 131], [s:dark_bg, s:light_bg])
 
-" vim-signify
-" -----------
-" call s:hi('SignifySignAdd', [108, 65], [s:dark_bg + 1, s:light_bg - 2])
-" call s:hi('SignifySignChange', [68, 68], [s:dark_bg + 1, s:light_bg - 2])
-" call s:hi('SignifySignDelete', [161, 161], [s:dark_bg + 1, s:light_bg - 2])
-
-
-" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-" ---------------------------------------------------^^^^^
-call s:hi('ExtraWhitespace', ['', ''], [s:dark_bg - 1, s:light_bg - 2])
-
-" vim-ruby
-" --------
-" " rubySymbol
-let ruby_operators = 1
-call s:hi('rubyClass', [31, 31], ['', ''])
-" call s:hi('rubyInstanceVariable', [189, 189], ['', ''])
-call s:hi('rubyRegexp', [186, 101], ['', ''])
-call s:hi('rubyRegexpDelimiter', [168, 168], ['', ''])
-call s:hi('rubyArrayDelimiter', [67, 38], ['', ''])
-call s:hi('rubyBlockParameterList', [186, 94], ['', ''])
-call s:hi('rubyCurlyBlockDelimiter', [144, 101], ['', ''])
 
 " ARGV $stdout
 call s:hi('rubyPredefinedIdentifier', [230, 52], ['', ''])
@@ -397,9 +378,9 @@ hi CursorLine cterm=NONE
 hi CursorLineNr cterm=NONE
 hi VertSplit cterm=NONE ctermbg=NONE ctermfg=NONE
 
-" let g:seoul256_current_fg = [s:dark_fg, s:light_fg][s:style_idx]
-" let g:seoul256_current_bg = [s:dark_bg, s:light_bg][s:style_idx]
-let g:colors_name = 'seoul256'
+" let g:catherton_current_fg = [s:dark_fg, s:light_fg][s:style_idx]
+" let g:catherton_current_bg = [s:dark_bg, s:light_bg][s:style_idx]
+let g:colors_name = 'catherton'
 if s:colors_name != g:colors_name || s:background == s:style
   let &background = s:style
 else
