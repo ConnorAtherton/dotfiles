@@ -15,6 +15,12 @@
 #define base0E #c594c5
 #define base0F #ab7967
 
+#define fonts xft:Fira Code:regular:size=12;xft:DejaVu Sans Mono for Powerline:size=12
+
+
+! Global
+*font: xft:Fira Code:size=11, xft:Deja Vu Sans:size=11
+
 *foreground:   base05
 #ifdef background_opacity
 *background:   [background_opacity]base00
@@ -50,13 +56,13 @@
 
 
 ! URxvt options
-#define fonts xft:Fira Code:pixelsize=12
+
 URxvt*scrollBar: false
 URxvt*scrollBar_right: false
 URxvt*scrollBar_floating: false
 URxvt*saveLines: 0
 URxvt*lineSpace: 5
-URxvt*letterSpace: -1
+URxvt*letterSpace: 0
 
 ! Enable clipboard regular behavior
 URxvt.perl-ext-common: default,clipboard,keyboard-select,fullscreen,url-select
@@ -69,9 +75,9 @@ URxvt.internalBorder: 10
 URxvt.externalBorder: 5
 URxvt.cursorBlink: true
 URxvt.loginShell: true
-URxvt.font: fonts
-URxvt.boldFont: fonts
-URxvt.italicFont: fonts
+! URxvt.font: fonts
+! URxvt.boldFont: fonts
+! URxvt.italicFont: fonts
 URxvt.boldMode: true
 
 URxvt*termName: xterm-256color

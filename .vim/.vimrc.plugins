@@ -35,17 +35,20 @@ call plug#begin('~/.vim/plugged')
   Plug 'honza/vim-snippets'
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   Plug 'editorconfig/editorconfig-vim'
+  Plug 'w0rp/ale'
 
   " Syntax highlighting
-  Plug 'digitaltoad/vim-jade'
-  Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-  Plug 'chr4/nginx'
   Plug 'ConnorAtherton/uiscript-vim', { 'for': 'uiscript' }
-  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-  Plug 'leafgarland/typescript-vim'
-  Plug 'fatih/vim-go', { 'for': 'go' }
-  Plug 'mxw/vim-jsx'
-  Plug 'rust-lang/rust.vim'
+  " NOTE: Trying this out over all the ones below, just to manage a single lazy-loaded dep
+  Plug 'sheerun/vim-polyglot'
+  " Plug 'digitaltoad/vim-jade'
+  " Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+  " Plug 'chr4/nginx'
+  " Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+  " Plug 'leafgarland/typescript-vim'
+  " Plug 'fatih/vim-go', { 'for': 'go' }
+  " Plug 'mxw/vim-jsx'
+  " Plug 'rust-lang/rust.vim'
 
   " For CTags
   Plug 'majutsushi/tagbar'

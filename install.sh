@@ -6,14 +6,6 @@
 # the utils files in the home directory after this file runs.
 source $(dirname $0)/config/.utils.zsh
 
-step() {
-  print_green "[ ] $1"
-}
-
-finish() {
-  echo -en "\e[1A"; echo -e "\e[0K\r [x] $version. Done."
-}
-
 # Kick it off, maestro..
 print_dotfiles_header
 
@@ -62,6 +54,14 @@ stop_spinner
 
 if [ "$(uname -s)" = "Linux" ]; then
   start_spinner "Installing files for Linux"
+
+  # Link all config files
+  mkdir -p $HOME/.config
+  find ./linux/.config/* -maxdepth 0 | while read file
+  do
+    local name=$(basename $file)
+    ln -fs $PWD${file:1} $HOME/.config/$name;
+  done
 else
   start_spinner "OSX detected: installing relevant files"
 
@@ -110,7 +110,7 @@ stop_spinner
 # stop_spinner
 
 start_spinner "Sourcing rc file"
-. ~/.zshrc
+# . ~/.zshrc
 stop_spinner
 
 # Add a trap here for SIGINT, or SIGHUP to stop the spinner
