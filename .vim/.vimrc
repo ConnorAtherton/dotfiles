@@ -70,6 +70,10 @@ set nobackup
 set noswapfile
 set nowritebackup
 
+" Enable modeline for have vim settings inline (useful for things like dotfiles)
+set modeline
+set modelines=5
+
 set number " Line numbers are good
 " set relativenumber " Display how far away each line is from the current one
 

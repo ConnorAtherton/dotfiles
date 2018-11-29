@@ -1,7 +1,9 @@
+# vim: set filetype=sh:
+
 #
 # Removed all temporary trash on the computer
 #
-function empty_trash() {
+function util::empty_trash() {
 	sudo rm -rfv /Volumes/*/.Trashes
 	sudo rm -rf ~/Library/Mobile Documents/*/.Trash/*
 	sudo rm -rfv ~/Library/Mobile\ Documents/**/.Trash/*
@@ -13,7 +15,7 @@ function empty_trash() {
 #
 # Determine size of a file or total size of a directory
 #
-function fs() {
+function util::fs() {
 	if du -b /dev/null > /dev/null 2>&1; then
 		local arg=-sbh;
 	else
@@ -29,7 +31,7 @@ function fs() {
 #
 # Create a data URL from a file
 #
-function dataurl() {
+function util::data_url() {
 	local mimeType=$(file -b --mime-type "$1");
 	if [[ $mimeType == text/* ]]; then
 		mimeType="${mimeType};charset=utf-8";

@@ -15,7 +15,6 @@ function sandbox_delete_hooks(){
      unset -f "$hook"
     fi
   done
-
 }
 
 
