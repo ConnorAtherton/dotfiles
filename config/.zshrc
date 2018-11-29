@@ -3,6 +3,9 @@
 #
 rm -f ~/.zcompdump >/dev/null 2>&1
 
+# Enable profiling
+zmodload zsh/zprof
+
 local pathdirs funcdirs
 
 #
@@ -16,8 +19,8 @@ export VIMRC="~/.vimrc"
 export GOPATH=$HOME/code/go
 export GOBIN=$GOPATH/bin
 export TERM=screen-256color
-export NVM_DIR="/usr/local/nvm"
-export NODE_VERSION="lts/boron"
+export NVM_DIR=$HOME/.nvm
+export NODE_VERSION="lts/carbon"
 
 ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
@@ -55,6 +58,9 @@ unset FPATH
 # Create a list of directories to add to the path
 #
 pathdirs=(
+  # Needs to go first for shims
+  $HOME/.rbenv/shims
+
   /usr/local/bin
   # NOTE: Homebrew's sbin
   /usr/local/sbin
@@ -70,7 +76,6 @@ pathdirs=(
   $GOPATH/bin
 
   $HOME/bin
-  $HOME/.rbenv/bin
   $HOME/.cargo/bin
 )
 
@@ -116,6 +121,7 @@ funcdirs=(
   /usr/share/zsh-completions
   /usr/local/share/zsh-completions
   $HOME/functions
+  $HOME/.functions
   $HOME/.dotfiles/functions
   $GOPATH/bin
 )
@@ -128,18 +134,6 @@ for dir ($funcdirs) {
     fpath=($fpath $dir)
   fi
 }
-
-#
-# rbenv init
-#
-eval "$(rbenv init -)"
-# TODO: Move this to a var
-rbenv global 2.3.0
-
-#
-# Node version
-#
-if ! which nvm > /dev/null; then [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; fi
 
 #
 # Go programming
@@ -173,5 +167,10 @@ autoload -Uz peco-kill-process hide-hidden-files md permission \
 #
 # Source everything into the shell
 #
-source $HOME/.aliases
+source ~/.lazy_load
+source ~/.aliases
+source ~/.functions
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Print out profiling
+# zprof

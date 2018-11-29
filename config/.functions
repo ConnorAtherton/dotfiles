@@ -1,0 +1,38 @@
+#
+# Removed all temporary trash on the computer
+#
+function empty_trash() {
+	sudo rm -rfv /Volumes/*/.Trashes
+	sudo rm -rf ~/Library/Mobile Documents/*/.Trash/*
+	sudo rm -rfv ~/Library/Mobile\ Documents/**/.Trash/*
+	sudo rm -rfv ~/.Trash/*
+	sudo rm -rfv /private/var/log/asl/*.asl
+	sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'
+}
+
+#
+# Determine size of a file or total size of a directory
+#
+function fs() {
+	if du -b /dev/null > /dev/null 2>&1; then
+		local arg=-sbh;
+	else
+		local arg=-sh;
+	fi
+	if [[ -n "$@" ]]; then
+		du $arg -- "$@";
+	else
+		du $arg .[^.]* ./*;
+	fi;
+}
+
+#
+# Create a data URL from a file
+#
+function dataurl() {
+	local mimeType=$(file -b --mime-type "$1");
+	if [[ $mimeType == text/* ]]; then
+		mimeType="${mimeType};charset=utf-8";
+	fi
+	echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
+}

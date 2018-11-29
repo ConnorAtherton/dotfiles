@@ -1,0 +1,22 @@
+#!/bin/bash
+
+sandbox_init_nvm(){
+  source $(brew --prefix nvm)/nvm.sh
+
+  # Latest stable release
+  nvm alias default lts/carbon
+}
+
+sandbox_init_rbenv(){
+  eval "$(brew --prefix rbenv)/bin/rbenv init -" >/dev/null
+
+  # Should be the latest stable release
+  rbenv global 2.5.3
+}
+
+sandbox_hook nvm node
+sandbox_hook nvm npm
+
+sandbox_hook rbenv ruby
+sandbox_hook rbenv gem
+sandbox_hook rbenv bundle

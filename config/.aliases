@@ -72,6 +72,14 @@ alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}
 alias tmuxsrc="tmux source-file ~/.tmux.conf"
 
 #
+# Rails
+#
+alias rc="bin/rails console"
+alias rs="bin/rails server"
+alias dbm="bin/rails db:migrate"
+alias dbr="bin/rails db:rollback"
+
+#
 # Journal
 #
 alias journal='mkdir -p ~/Dropbox/journal && cd ~/Dropbox/journal && mkdir -p `date +%B` && cd `data +%B` && vim `date +"%Y-%m-%d"`.md'
