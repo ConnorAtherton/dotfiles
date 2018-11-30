@@ -61,8 +61,8 @@ pathdirs=(
   # Needs to go first for shims
   $HOME/.rbenv/shims
 
+  # Homebrew comes next, to give priority over anything I install
   /usr/local/bin
-  # NOTE: Homebrew's sbin
   /usr/local/sbin
   /usr/local/opt/coreutils/libexec/gnubin
   /usr/local/opt/go/libexec/bin
@@ -74,29 +74,15 @@ pathdirs=(
   /usr/X11/bin
 
   $GOPATH/bin
-
   $HOME/bin
   $HOME/.cargo/bin
 )
 
 #
-# Query the gem configuration to get the correct path
-# XXX: This might cause problems if you alias 'gem' to something else after the path has been setup.
-#
-if [[ -x $(which gem) ]]; then
-  # 's.:.' creates an array by splitting on ':'.
-  gemdirs=(${(s.:.)"$(gem environment gempath)"})
-  # The paths above don't end with /bin.
-  for dir ($gemdirs) { pathdirs=($pathdirs "$dir/bin") }
-fi
-
-#
 # Add directories which exist to the path
 #
 for dir ($pathdirs) {
-  if [[ -d $dir ]]; then
-    path=($path $dir)
-  fi
+   [[ -d $dir ]] && path=($path $dir)
 }
 
 #
@@ -136,6 +122,11 @@ for dir ($funcdirs) {
 }
 
 #
+# Use coreutils utilities instead of BSD
+#
+MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+#
 # Go programming
 #
 mkdir -p "$GOPATH/bin"
@@ -157,6 +148,7 @@ export path
 export fpath
 export PATH
 export FPATH
+export MANPATH
 
 #
 # Autoload functions
