@@ -12,7 +12,6 @@ local pathdirs funcdirs
 # Environment variables
 #
 export ZSH=$HOME/.oh-my-zsh
-export JAVA_HOME="$(/usr/libexec/java_home)"
 export EDITOR='vim'
 export ARCHFLAGS="-arch x86_64"
 export VIMRC="~/.vimrc"
@@ -75,6 +74,8 @@ pathdirs=(
 
   $GOPATH/bin
   $HOME/bin
+
+  # Rust
   $HOME/.cargo/bin
 )
 

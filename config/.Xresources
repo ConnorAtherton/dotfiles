@@ -15,12 +15,9 @@
 #define base0E #c594c5
 #define base0F #ab7967
 
-#define fonts xft:Fira Code:regular:size=12;xft:DejaVu Sans Mono for Powerline:size=12
-
+#define fonts xft:FiraCode:pixelsize=12
 
 ! Global
-*font: xft:Fira Code:size=11, xft:Deja Vu Sans:size=11
-
 *foreground:   base05
 #ifdef background_opacity
 *background:   [background_opacity]base00
@@ -75,9 +72,10 @@ URxvt.internalBorder: 10
 URxvt.externalBorder: 5
 URxvt.cursorBlink: true
 URxvt.loginShell: true
-! URxvt.font: fonts
-! URxvt.boldFont: fonts
-! URxvt.italicFont: fonts
+
+URxvt.font: fonts
+URxvt.boldFont: fonts
+URxvt.italicFont: fonts
 URxvt.boldMode: true
 
 URxvt*termName: xterm-256color

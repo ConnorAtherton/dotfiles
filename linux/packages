@@ -7,3 +7,6 @@ fonts-firacode
 rofi
 compton
 fonts-powerline
+curl
+ca-certificates
+sofware-properties-common
