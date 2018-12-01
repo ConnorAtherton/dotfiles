@@ -3,6 +3,7 @@ dmenu
 tmux
 silversearcher-ag
 zsh
+zsh-syntax-highlighting
 fonts-firacode
 rofi
 compton
@@ -10,3 +11,4 @@ fonts-powerline
 curl
 ca-certificates
 sofware-properties-common
+wget

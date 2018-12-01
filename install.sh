@@ -6,6 +6,11 @@
 # the utils files in the home directory after this file runs.
 source $(dirname $0)/config/.utils.zsh
 
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+  print_red "Must run as root!"
+  exit 1
+fi
+
 # Kick it off, maestro..
 print_dotfiles_header
 
@@ -41,6 +46,13 @@ stop_spinner
 #
 remove_from_home "functions"
 ln -fs $PWD/functions $HOME/functions
+
+#
+# install vim.plug to manage deps
+#
+start_spinner "Creating catherton directories"
+  mkdir -p /usr/local/catherton/bin
+stop_spinner
 
 #
 # install vim.plug to manage deps
@@ -110,7 +122,8 @@ stop_spinner
 # stop_spinner
 
 start_spinner "Sourcing rc file"
-# . ~/.zshrc
+  chsh -s $(which zsh)
+  . ~/.zshrc
 stop_spinner
 
 # Add a trap here for SIGINT, or SIGHUP to stop the spinner

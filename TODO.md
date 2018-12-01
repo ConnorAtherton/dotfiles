@@ -6,3 +6,5 @@ TODO
 - Install i3-lock
 - Document how to connect to other networks on linux mint with the new setup
 
+- Link ~/.ssh/config automatically
+

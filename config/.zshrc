@@ -1,6 +1,3 @@
-# use zsh
-# chsh -s $(which zsh)
-#
 rm -f ~/.zcompdump >/dev/null 2>&1
 
 # Enable profiling
@@ -29,10 +26,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # History settings
 #
 
-# Huge history without duplicates and a nice
-# time format please.
-HISTSIZE=500000
-HISTFILESIZE=100000
+HISTSIZE=1000
+HISTFILESIZE=2000
 HISTCONTROL="erasedups:ignoreboth"
 HISTTIMEFORMAT='%F %T '
 
@@ -40,31 +35,27 @@ HISTTIMEFORMAT='%F %T '
 export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 
 #
-# Gimme that zsh goodness
-#
-source $ZSH/oh-my-zsh.sh
-
-#
 # Unset everything from scratch so we control the
 # variables.
 #
 unset path
-unset fpath
 unset PATH
-unset FPATH
+# unset fpath
+# unset FPATH
 
 #
 # Create a list of directories to add to the path
 #
 pathdirs=(
+  # Location where I install tools manually (allows me to know I can delete)
+  /usr/local/bin/catherton
+
   # Needs to go first for shims
   $HOME/.rbenv/shims
 
   # Homebrew comes next, to give priority over anything I install
   /usr/local/bin
   /usr/local/sbin
-  /usr/local/opt/coreutils/libexec/gnubin
-  /usr/local/opt/go/libexec/bin
 
   /bin
   /sbin
@@ -72,8 +63,8 @@ pathdirs=(
   /usr/bin
   /usr/X11/bin
 
+  # Golang
   $GOPATH/bin
-  $HOME/bin
 
   # Rust
   $HOME/.cargo/bin
@@ -83,7 +74,7 @@ pathdirs=(
 # Add directories which exist to the path
 #
 for dir ($pathdirs) {
-  if [[ -x $dir ]]; then
+  if [[ -d $dir ]]; then
     path=($path $dir)
   fi
 }
@@ -91,34 +82,26 @@ for dir ($pathdirs) {
 #
 # Create a list of function paths for zsh
 #
-local binary=$(which zsh)
-local install_path=$binary:h:h # Strip bin/zsh to find installation path.
-
 funcdirs=(
-  $HOME/.zsh/func
-  $install_path/share/zsh/$ZSH_VERSION/functions
-  $install_path/share/zsh/functions
-  $install_path/share/zsh/site-functions
   /usr/share/zsh/$ZSH_VERSION/functions
   /usr/share/zsh/functions
-  /usr/share/zsh/site-functions
-  /usr/share/zsh-completions
-  /usr/local/share/zsh-completions
-  /usr/share/zsh/$ZSH_VERSION/functions
-  /usr/share/zsh/functions
-  /usr/share/zsh/site-functions
-  /usr/share/zsh-completions
-  /usr/local/share/zsh-completions
+  /usr/share/zsh/vendor-completions
+  /usr/local/share/zsh/$ZSH_VERSION/functions
+  /usr/local/share/zsh/functions
+  /usr/local/share/zsh/site-functions
+
   $HOME/functions
-  $HOME/.functions
-  $HOME/.dotfiles/functions
-  $GOPATH/bin
 )
 
 #
 # Add existing function directories to the fpath
 #
+# working:
+# /usr/share/zsh/functions
 for dir ($funcdirs) {
+  # fpath=($fpath $dir)
+
+  # TODO: Add this check back in when it works...
   if [[ -x $dir ]]; then
     fpath=($fpath $dir)
   fi
@@ -162,10 +145,23 @@ autoload -Uz peco-kill-process hide-hidden-files md permission \
 #
 # Source everything into the shell
 #
-source ~/.lazy_load
+source $ZSH/oh-my-zsh.sh
 source ~/.aliases
 source ~/.functions
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#
+# Gimme that zsh goodness
+#
+# TODO: Different destinations is just a permission thing
+#
+if [ "$(uname -s)" != "Linux" ]; then
+  # TODO: if file if prefixed with uname, symlink it!
+  # This only works for OSX right now
+  source ~/.lazy_load
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # Print out profiling
 # zprof

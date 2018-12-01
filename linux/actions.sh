@@ -1,6 +1,9 @@
 #!/bin/bash
 
+# Change defaults
+# JUst in case the shell was not changed
 update-alternatives --set x-terminal-emulator /usr/bin/urxvt
+usermod -s /usr/bin/zsh $(whoami)
 
 # Install Docker
 # Add Docker’s official GPG key:
@@ -23,3 +26,4 @@ sudo groupadd docker
 # This script assumes that your current user
 # is the one you want to be a docker admin
 sudo usermod -aG docker $USER
+
