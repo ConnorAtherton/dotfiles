@@ -30,7 +30,7 @@ function install_brews() {
   brews=( vim git tmux reattach-to-user-namespace python \
     rename tree wget coreutils make grep \
     peco docker the_silver_searcher gnupg \
-    freetype boost-python glib go zsh-syntax-highlighting \
+    freetype boost-python glib go zsh zsh-syntax-highlighting \
     docker-compose fzf rbenv universal-ctags/universal-ctags/universal-ctags )
 
   for item in "${brews[@]}"
