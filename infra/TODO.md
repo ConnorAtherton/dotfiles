@@ -1,0 +1,2 @@
+- Check that terraform is installed locally
+- Check that jq is installed locally

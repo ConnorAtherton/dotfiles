@@ -11,22 +11,22 @@ resource "digitalocean_tag" "persistent_cluster_machine" {
 }
 
 #
-# Global columes used to store things I need
+# Global volumes, used to store things I need
 #
 resource "digitalocean_volume" "git_storage" {
   region = "${var.digitalocean_region}"
   name = "git_storage"
-  size = "500"
+  size = "100"
 }
 
 resource "digitalocean_volume" "docker_registry_storage" {
   region = "${var.digitalocean_region}"
   name = "docker_registry_storage"
-  size = "500"
+  size = "100"
 }
 
 data "external" "swarm_join_token" {
-  program = ["./scripts/fetch_join_token.sh"]
+  program = ["bash", "${path.root}/scripts/fetch_join_token.sh"]
   query = {
     host = "${digitalocean_droplet.cluster_master.ipv4_address}"
   }
@@ -34,18 +34,19 @@ data "external" "swarm_join_token" {
 
 resource "digitalocean_ssh_key" "cluster_key" {
   name = "${var.digitalocean_key_name}"
-  region = ""
   public_key = "${file(var.public_key_path)}"
 }
 
 resource "digitalocean_droplet" "cluster_master" {
   # TODO: Include an env here
-  name = "cluster_master"
+  name = "cluster-master"
   tags = ["${digitalocean_tag.exposed_cluster_machine.id}"]
   region = "${var.digitalocean_region}"
   size = "${var.digitalocean_master_droplet_size}"
   ssh_keys = ["${digitalocean_ssh_key.cluster_key.id}"]
   image = "${var.digitalocean_image}"
+  private_networking = true
+  ipv6 = true
 
   provisioner "remote-exec" {
     script = "scripts/install_docker.sh"
@@ -53,7 +54,7 @@ resource "digitalocean_droplet" "cluster_master" {
 
   provisioner "remote-exec" {
     inline = [
-      "docker swarm --init --advertise-addr ${digitalocean_droplet.cluster_master.ipv4_address_private}"
+      "docker swarm init --advertise-addr ${digitalocean_droplet.cluster_master.ipv4_address_private}"
     ]
   }
 }
@@ -62,7 +63,7 @@ resource "digitalocean_droplet" "cluster_master" {
 resource "digitalocean_droplet" "cluster_worker" {
   # TODO: This should be configurable
   count = 1
-  name = "cluster_worker-${count.index}"
+  name = "cluster-worker-${count.index}"
 
   # TODO: Include an env here
   region = "${var.digitalocean_region}"
@@ -82,12 +83,14 @@ resource "digitalocean_droplet" "cluster_worker" {
   }
 
   provisioner "remote-exec" {
-    script = "scripts/mount-storage-volumes.sh"
+    script = "scripts/mount_storage_volumes.sh"
   }
 
+  # Add cluster label to worker nodes so we can set constraints for services
   provisioner "remote-exec" {
     inline = [
-      "docker swarm --join ${data.external.swarm_join_token.result.worker} ${digitalocean_droplet.cluster_master.ipv4_address_private}:2377"
+      "docker swarm join ${data.external.swarm_join_token.result.worker} ${digitalocean_droplet.cluster_master.ipv4_address_private}:2377",
+      "docker node --label-add allows=persistence"
     ]
   }
 }
