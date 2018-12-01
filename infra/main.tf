@@ -16,12 +16,14 @@ resource "digitalocean_tag" "persistent_cluster_machine" {
 resource "digitalocean_volume" "git_storage" {
   region = "${var.digitalocean_region}"
   name = "git_storage"
+  initial_filesystem_type = "ext4"
   size = "100"
 }
 
 resource "digitalocean_volume" "docker_registry_storage" {
   region = "${var.digitalocean_region}"
   name = "docker_registry_storage"
+  initial_filesystem_type = "ext4"
   size = "100"
 }
 
@@ -71,6 +73,14 @@ resource "digitalocean_droplet" "cluster_worker" {
   image = "${var.digitalocean_image}"
   ssh_keys = ["${digitalocean_ssh_key.cluster_key.id}"]
   private_networking = true
+
+  user_data = <<EOF
+# cloud-config
+manage-resolv-conf: true
+resolv_conf:
+  nameservers:
+    - '1.1.1.1'
+EOF
 
   # Only worker clusters gets volumes mounted..
   volume_ids = [
