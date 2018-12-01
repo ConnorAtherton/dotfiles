@@ -5,3 +5,6 @@ startuptime.txt
 
 # We don't want this right now
 .vim/plugged
+
+# This is where terraform inits things
+infra/.terraform

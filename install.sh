@@ -24,6 +24,7 @@ do
 
   remove_from_home $name
   ln -fs $PWD${file:1} $HOME/$name;
+  chown "$user:$user" $HOME/$name
 done
 stop_spinner
 
@@ -121,9 +122,9 @@ stop_spinner
 # . $PWD/scripts/npm.zsh
 # stop_spinner
 
-start_spinner "Sourcing rc file"
+start_spinner "Setting shell correctly"
   chsh -s $(which zsh)
-  . ~/.zshrc
+  # . ~/.zshrc
 stop_spinner
 
 # Add a trap here for SIGINT, or SIGHUP to stop the spinner

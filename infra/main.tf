@@ -1,0 +1,93 @@
+provider "digitalocean" {
+  token = "${var.digitalocean_token}"
+}
+
+resource "digitalocean_tag" "exposed_cluster_machine" {
+  name = "exposed_cluster_machine"
+}
+
+resource "digitalocean_tag" "persistent_cluster_machine" {
+  name = "persistent_cluster_machine"
+}
+
+#
+# Global columes used to store things I need
+#
+resource "digitalocean_volume" "git_storage" {
+  region = "${var.digitalocean_region}"
+  name = "git_storage"
+  size = "500"
+}
+
+resource "digitalocean_volume" "docker_registry_storage" {
+  region = "${var.digitalocean_region}"
+  name = "docker_registry_storage"
+  size = "500"
+}
+
+data "external" "swarm_join_token" {
+  program = ["./scripts/fetch_join_token.sh"]
+  query = {
+    host = "${digitalocean_droplet.cluster_master.ipv4_address}"
+  }
+}
+
+resource "digitalocean_ssh_key" "cluster_key" {
+  name = "${var.digitalocean_key_name}"
+  region = ""
+  public_key = "${file(var.public_key_path)}"
+}
+
+resource "digitalocean_droplet" "cluster_master" {
+  # TODO: Include an env here
+  name = "cluster_master"
+  tags = ["${digitalocean_tag.exposed_cluster_machine.id}"]
+  region = "${var.digitalocean_region}"
+  size = "${var.digitalocean_master_droplet_size}"
+  ssh_keys = ["${digitalocean_ssh_key.cluster_key.id}"]
+  image = "${var.digitalocean_image}"
+
+  provisioner "remote-exec" {
+    script = "scripts/install_docker.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "docker swarm --init --advertise-addr ${digitalocean_droplet.cluster_master.ipv4_address_private}"
+    ]
+  }
+}
+
+# TODO: all workers will have the persistent volume mounted
+resource "digitalocean_droplet" "cluster_worker" {
+  # TODO: This should be configurable
+  count = 1
+  name = "cluster_worker-${count.index}"
+
+  # TODO: Include an env here
+  region = "${var.digitalocean_region}"
+  size = "${var.digitalocean_worker_droplet_size}"
+  image = "${var.digitalocean_image}"
+  ssh_keys = ["${digitalocean_ssh_key.cluster_key.id}"]
+  private_networking = true
+
+  # Only worker clusters gets volumes mounted..
+  volume_ids = [
+    "${digitalocean_volume.git_storage.id}",
+    "${digitalocean_volume.docker_registry_storage.id}"
+  ]
+
+  provisioner "remote-exec" {
+    script = "scripts/install_docker.sh"
+  }
+
+  provisioner "remote-exec" {
+    script = "scripts/mount-storage-volumes.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "docker swarm --join ${data.external.swarm_join_token.result.worker} ${digitalocean_droplet.cluster_master.ipv4_address_private}:2377"
+    ]
+  }
+}
