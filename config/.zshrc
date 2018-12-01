@@ -83,7 +83,9 @@ pathdirs=(
 # Add directories which exist to the path
 #
 for dir ($pathdirs) {
-   [[ -d $dir ]] && path=($path $dir)
+  if [[ -x $dir ]]; then
+    path=($path $dir)
+  fi
 }
 
 #
