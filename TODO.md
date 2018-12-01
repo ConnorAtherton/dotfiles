@@ -8,3 +8,4 @@ TODO
 
 - Link ~/.ssh/config automatically
 
+- Get VPN automatically connected in linux (random selection)
