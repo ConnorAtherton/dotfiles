@@ -99,8 +99,8 @@ EOF
   # Add cluster label to worker nodes so we can set constraints for services
   provisioner "remote-exec" {
     inline = [
-      "docker swarm join ${data.external.swarm_join_token.result.worker} ${digitalocean_droplet.cluster_master.ipv4_address_private}:2377",
-      "docker node --label-add allows=persistence"
+      "docker swarm join --token ${data.external.swarm_join_token.result.worker} ${digitalocean_droplet.cluster_master.ipv4_address_private}:2377",
+      "ssh -o StrictHostKeyChecking=no root@${digitalocean_droplet.cluster_master.ipv4_address_private} docker node update --label-add allows=persistence ${self.name}"
     ]
   }
 }
