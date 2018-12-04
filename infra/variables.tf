@@ -1,10 +1,15 @@
-variable "digitalocean_token" {
+variable "digitalocean_token" {}
+variable "public_ip" {}
+
+variable "cluster_name" {
+  default = "aurora"
 }
 
 variable "public_key_path" {
   default = "~/.ssh/catherton-cluster/id_rsa.pub"
 }
 
+# Whatever region I choose here, it must support block storage
 variable "digitalocean_region" {
   default = "nyc3"
 }
@@ -18,10 +23,9 @@ variable "digitalocean_worker_droplet_size" {
 }
 
 variable "digitalocean_image" {
-  default = "ubuntu-16-04-x64"
+  default = "ubuntu-18-04-x64"
 }
 
 variable "digitalocean_key_name" {
   default = "catherton-cluster"
 }
-
