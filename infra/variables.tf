@@ -1,5 +1,7 @@
 variable "digitalocean_token" {}
-variable "public_ip" {}
+
+variable "external_ip" {}
+variable "internal_ip" {}
 
 variable "cluster_name" {
   default = "aurora"

@@ -5,4 +5,5 @@ digitalocean_token = ""
 cluster_name = ""
 
 # Floating ip in the account to re-assign to the new master droplet
-public_ip = ""
+external_ip = ""
+internal_ip = ""
