@@ -12,3 +12,6 @@ curl
 ca-certificates
 sofware-properties-common
 wget
+
+# Installation here https://github.com/sharkdp/fd
+fd-find

@@ -56,6 +56,10 @@ resource "digitalocean_droplet" "cluster_master" {
   }
 
   provisioner "remote-exec" {
+    script = "scripts/provision_linux.sh"
+  }
+
+  provisioner "remote-exec" {
     inline = [
       "docker swarm init --advertise-addr ${digitalocean_droplet.cluster_master.ipv4_address_private}",
     ]
@@ -91,6 +95,10 @@ EOF
 
   provisioner "remote-exec" {
     script = "scripts/install_docker.sh"
+  }
+
+  provisioner "remote-exec" {
+    script = "scripts/provision_linux.sh"
   }
 
   provisioner "remote-exec" {
