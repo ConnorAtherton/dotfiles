@@ -2,10 +2,10 @@
 
 docker run --restart always -d \
   --name git_ui \
-  -p 8080:8080 \
-  -e BASE_GIT_URL="git@g.infra.connoratherton.com" \
-  -e SITE_TITLE="Code" \
-  -v "/mnt/persistent_git_storage:/home/git" \
+  -p 127.0.0.1:8080:8080 \
+  -e BASE_GIT_URL="git@gits" \
+  -e SITE_TITLE="Code collection" \
+  -v "/mnt/persistent_git_storage:/home/git:ro" \
   -w /home/git \
   r.j3ss.co/gitiles
 

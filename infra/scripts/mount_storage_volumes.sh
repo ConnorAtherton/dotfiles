@@ -7,4 +7,7 @@ mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0DO_Volume_sdb /mnt/persi
 # which leaves this as the docker registry one
 mount -o discard,defaults,noatime /dev/disk/by-id/scsi-0DO_Volume_sdc /mnt/persistent_docker_registry_storage
 
+echo '/dev/disk/by-id/scsi-0DO_Volume_sdb /mnt/persistent_git_storage ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
+echo '/dev/disk/by-id/scsi-0DO_Volume_sdc /mnt/persistent_docker_registry_storage ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
+
 exit 0

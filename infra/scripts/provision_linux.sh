@@ -5,4 +5,6 @@ ufw enable
 ufw limit ssh
 ufw allow http
 ufw allow https
+# Git port
+ufw allow 9418
 ufw status
