@@ -4,7 +4,6 @@ function install_homebrew() {
     echo "Installing homebrew"
 
     # TODO: This must be run manually!!!!!
-
     # Adding the CI env variable forces homebrew to not wait for the user and automatically proceed
     CI=true usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
@@ -69,12 +68,13 @@ function install_casks() {
   casks=( dropbox vlc suspicious-package \
     transmission skitch adium caffeine \
     flux iterm2 spectacle \
-    spotify docker \
+    spotify docker alacritty \
     caskroom/versions/firefox-developer-edition )
 
   for item in "${casks[@]}"
   do
-    brew cask install --force $item
+    # Using --force here will upgrade, but it makes running ./install.sh way too much pain
+    brew cask install $item
   done
 }
 

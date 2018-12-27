@@ -1,18 +1,14 @@
 #!/bin/zsh
 
+# NOTE:
+# - on mac, it still includes manually installing the xcode developer tools. Even homebrew requires they be present.
+
 # set -eu
 
 # $0 is buggy as hell but we only ever do this one time. The rest of the scripts looks for
 # the utils files in the home directory after this file runs.
 source $(dirname $0)/config/.utils.zsh
 
-# TODO: Can't run homebrew as root, so this will not work
-# if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-#  print_red "Must run as root!"
-#  exit 1
-# fi
-
-# Kick it off, maestro..
 print_dotfiles_header
 
 #
@@ -85,7 +81,7 @@ else
   # chmod 775 ~/scripts
   # cd ~ && ./.osx
   # install brew
-  # `sh $PWD/scripts/brew.zsh`
+  sh $PWD/scripts/brew.zsh
 
   if ! [ $(which xcode-select) ]; then
     xcode-select --install
@@ -94,11 +90,7 @@ else
 
   start_spinner "Checking for oh-my-zsh..."
   if ! [ -e ~/.oh-my-zsh ]; then
-    print_red "Install oh-my-zsh and run it again."
-    print_red ""
-    print_red 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
-    print_red ""
-    exit 1
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" &>/dev/null
   fi
 fi
 stop_spinner
