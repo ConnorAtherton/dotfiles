@@ -28,31 +28,31 @@ resource "digitalocean_ssh_key" "cluster_key" {
   public_key = "${file(var.public_key_path)}"
 }
 
-resource "digitalocean_droplet" "external_gateway" {
-  name               = "external-gateway"
-  region             = "${var.digitalocean_region}"
-  size               = "${var.digitalocean_master_droplet_size}"
-  ssh_keys           = ["${digitalocean_ssh_key.cluster_key.id}"]
-  image              = "${var.digitalocean_image}"
-  private_networking = true
-  ipv6               = true
+# resource "digitalocean_droplet" "external_gateway" {
+#   name               = "external-gateway"
+#   region             = "${var.digitalocean_region}"
+#   size               = "${var.digitalocean_master_droplet_size}"
+#   ssh_keys           = ["${digitalocean_ssh_key.cluster_key.id}"]
+#   image              = "${var.digitalocean_image}"
+#   private_networking = true
+#   ipv6               = true
 
-  user_data = <<EOF
-# cloud-config
-manage-resolv-conf: true
-resolv_conf:
-  nameservers:
-    - '1.1.1.1'
-EOF
+#   user_data = <<EOF
+# # cloud-config
+# manage-resolv-conf: true
+# resolv_conf:
+#   nameservers:
+#     - '1.1.1.1'
+# EOF
 
-  provisioner "remote-exec" {
-    script = "scripts/install_docker.sh"
-  }
+#   provisioner "remote-exec" {
+#     script = "scripts/install_docker.sh"
+#   }
 
-  provisioner "remote-exec" {
-    script = "scripts/provision_linux.sh"
-  }
-}
+#   provisioner "remote-exec" {
+#     script = "scripts/provision_linux.sh"
+#   }
+# }
 
 resource "digitalocean_droplet" "internal_gateway" {
   name               = "internal-gateway"
@@ -94,10 +94,10 @@ EOF
 # Instead, they are to be created manually before operating these scripts, and are attached differently so terraform
 # does not take them as drift and try to delete them as a dependency of some other resource.
 #
-resource "digitalocean_floating_ip_assignment" "external_ip_assignment" {
-  ip_address = "${data.digitalocean_floating_ip.external_gateway_ip.id}"
-  droplet_id = "${digitalocean_droplet.external_gateway.id}"
-}
+# resource "digitalocean_floating_ip_assignment" "external_ip_assignment" {
+#   ip_address = "${data.digitalocean_floating_ip.external_gateway_ip.id}"
+#   droplet_id = "${digitalocean_droplet.external_gateway.id}"
+# }
 
 resource "digitalocean_floating_ip_assignment" "internal_ip_assignment" {
   ip_address = "${data.digitalocean_floating_ip.internal_gateway_ip.id}"

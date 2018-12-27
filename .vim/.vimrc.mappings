@@ -12,9 +12,6 @@ let g:NERDTreeWinSize = 30
 " Automatically delete buffers from files deleted in NERDTree
 let NERDTreeAutoDeleteBuffer = 1
 
-" Quit NT when opened a file (this matches my usual workflow)
-let NERDTreeQuitOnOpen = 1
-
 " Settings only applicable to NERDTree buffers
 autocmd! BufEnter * call EnableNerdTreeBuffer()
 function! EnableNerdTreeBuffer()

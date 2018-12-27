@@ -7,4 +7,6 @@ ufw allow http
 ufw allow https
 # Git port
 ufw allow 9418
+# Access to git server
+ufw allow 2222/tcp
 ufw status

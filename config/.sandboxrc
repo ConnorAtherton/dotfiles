@@ -4,7 +4,7 @@ sandbox_init_nvm(){
   source $(brew --prefix nvm)/nvm.sh
 
   # Latest stable release
-  nvm alias default lts/carbon
+  nvm alias default lts/dubnium
 }
 
 sandbox_init_rbenv(){
