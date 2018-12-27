@@ -9,6 +9,15 @@
 # the utils files in the home directory after this file runs.
 source $(dirname $0)/config/.utils.zsh
 
+<<<<<<< HEAD
+=======
+#if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+#  print_red "Must run as root!"
+#  exit 1
+#fi
+
+# Kick it off, maestro..
+>>>>>>> Upgraded config with new alacritty version
 print_dotfiles_header
 
 #

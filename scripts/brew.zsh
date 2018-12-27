@@ -5,7 +5,7 @@ function install_homebrew() {
 
     # TODO: This must be run manually!!!!!
     # Adding the CI env variable forces homebrew to not wait for the user and automatically proceed
-    CI=true usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    CI=true /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 }
 
@@ -68,8 +68,8 @@ function install_casks() {
 
   casks=( dropbox vlc suspicious-package \
     transmission skitch adium caffeine \
-    flux iterm2 spectacle firefox \
-    spotify docker alacritty chromium slack)
+    flux spectacle spotify docker alacritty chromium slack \
+    caskroom/versions/firefox-developer-edition )
 
   for item in "${casks[@]}"
   do
