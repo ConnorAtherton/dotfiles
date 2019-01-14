@@ -9,7 +9,6 @@ TODO
 - Start the docker daemon on startup automatically
 - Get VPN automatically connected in linux (random selection)
 - Trap sigint and sigexit for spinners and terminate the script nicely.
-- Automatically install font files
 - Instead of silencing all output, place it in an install tmp file and redirect everything there,
   to help with debugging, or just to see what happened.
 - Automatically install font files

@@ -68,8 +68,13 @@ function install_casks() {
 
   casks=( dropbox vlc suspicious-package \
     transmission skitch adium caffeine \
+<<<<<<< HEAD
     flux spectacle spotify docker alacritty chromium slack \
     caskroom/versions/firefox-developer-edition )
+=======
+    flux iterm2 spectacle firefox \
+    spotify docker alacritty chromium slack)
+>>>>>>> Better tern configuration and more plugins
 
   for item in "${casks[@]}"
   do
