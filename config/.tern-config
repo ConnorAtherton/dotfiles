@@ -1,0 +1,18 @@
+{
+  "plugins": {
+    "es_modules": {},
+    "node": {},
+    "node_resolve": {},
+    "doc_comment": {
+      "fullDocs": true,
+      "strong": true
+    }
+  },
+  "libs": [
+    "browser",
+    "ecmascript",
+    "underscore",
+    "react"
+  ],
+  "ecmaVersion": 6
+}

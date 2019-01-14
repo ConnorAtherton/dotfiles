@@ -2,7 +2,6 @@
 "/ NERDTree
 "/
 nmap <Leader>n :NERDTreeToggle<CR>
-
 " Make it look a little pretty
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
@@ -55,22 +54,15 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_symbols.readonly = '∅'
 
 "/
+"/ Automatic checks
+"/
+" When writing a buffer (no delay), and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750)
+
+"/
 "/ Ale
 "/
 " TODO: Still testing this. Will add config if required.
-
-"/
-"/ YCM
-"/
-"/ I find it easier to use tab for complete and
-"/ other mappings for cycling through ycm suggestions.
-"/
-let g:ycm_key_list_select_completion = []
-let g:ycm_key_list_next_completion = ['<c-j>', '<down>']
-let g:ycm_key_list_previous_completion = ['<c-k>', '<up>']
-
-" We will keep the default conf here for .c and .cc files
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 "/
 "/ Tagbar
@@ -103,6 +95,33 @@ let g:jsx_ext_required = 0
 "/
 let g:gitgutter_map_keys = 0
 let g:gitgutter_diff_args = '-w'
+
+"/
+"/ Deoplete -- for autocompletion
+"/
+let g:deoplete#enable_at_startup = 1
+
+"/
+"/ Color schema configurations
+"/
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_uniform_diff_background = 1
+let g:nord_cursor_line_number_background = 1
+
+"/
+"/ JavaScript configuration
+"/
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
+
+"Add extra filetypes
+let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#sources#ternjs#filetypes = [
+      \ 'js',
+      \ 'jsx',
+      \ 'vue',
+      \ ]
 
 "/
 "/  Goyo

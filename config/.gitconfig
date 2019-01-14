@@ -62,12 +62,6 @@
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
 
-;
-; TODO: Eventually support gpg signed commits.
-;
-; [commit]
-; 	gpgsign = true
-
 ; [http]
 ; 	cookiefile = ~/.gitcookies
 

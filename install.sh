@@ -46,6 +46,8 @@ remove_from_home "functions"
 ln -fs $PWD/functions $HOME/functions
 
 #
+# TODO: node/npm installation needs to happen before this because some vim libraries require those
+ tools to complete post install tasks
 # install vim.plug to manage deps
 #
 start_spinner "Creating catherton directories"

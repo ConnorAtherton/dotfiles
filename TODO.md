@@ -12,3 +12,16 @@ TODO
 - Automatically install font files
 - Instead of silencing all output, place it in an install tmp file and redirect everything there,
   to help with debugging, or just to see what happened.
+- Automatically install font files
+- Download docker on Mac from this known url https://download.docker.com/mac/stable/Docker.dmg
+
+- Git global config
+
+```
+git config --global gpg.program gpg
+git config --global commit.gpgsign true
+```
+
+- Agents to start when computer starts up again
+    - gpg-agent --daemon
+    - sshd

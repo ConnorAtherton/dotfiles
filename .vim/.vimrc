@@ -15,7 +15,13 @@ set shortmess+=I
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
 " Default color scheme
-colo catherton
+" colo catherton
+" let g:nord_italic = 1
+" let g:nord_underline = 1
+" let g:nord_italic_comments = 1
+" let g:nord_uniform_diff_background = 1
+" let g:nord_cursor_line_number_background = 1
+colorscheme nord
 
 " ALL OVERRIDES CURRENTLY IN PROGRESS
 " TODO: Put this into my eventual color scheme

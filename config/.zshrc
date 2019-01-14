@@ -21,6 +21,12 @@ export NODE_VERSION="lts/carbon"
 ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_AUTO_TITLE="true"
+
+#
+# For gpg signing
+#
+export GPG_TTY=$(tty)
 
 #
 # History settings

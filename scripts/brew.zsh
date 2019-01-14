@@ -67,9 +67,8 @@ function install_casks() {
 
   casks=( dropbox vlc suspicious-package \
     transmission skitch adium caffeine \
-    flux iterm2 spectacle \
-    spotify docker alacritty \
-    caskroom/versions/firefox-developer-edition )
+    flux iterm2 spectacle firefox \
+    spotify docker alacritty chromium slack)
 
   for item in "${casks[@]}"
   do

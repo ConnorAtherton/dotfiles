@@ -5,10 +5,6 @@
 "/
 "/ Plugged - Needs to be loaded before installing.
 "/
-"/ NOTE: Setting a huge timeout here because YCM is massive.
-"/
-let g:plug_timeout = 1000
-
 call plug#begin('~/.vim/plugged')
   " Search and file navigation
   Plug 'rking/ag.vim', { 'on': 'Ag' }
@@ -33,9 +29,20 @@ call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/syntastic'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   Plug 'editorconfig/editorconfig-vim'
   Plug 'w0rp/ale'
+
+  " Autocompletion
+  " Plug 'Valloric/YouCompleteMe'
+  Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install --user pynvim' }
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+
+  " Language support
+  Plug 'neomake/neomake'
+  Plug 'pangloss/vim-javascript'
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
 
   " Syntax highlighting
   Plug 'ConnorAtherton/uiscript-vim', { 'for': 'uiscript' }
@@ -44,7 +51,6 @@ call plug#begin('~/.vim/plugged')
   " Plug 'digitaltoad/vim-jade'
   " Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
   " Plug 'chr4/nginx'
-  " Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   " Plug 'leafgarland/typescript-vim'
   " Plug 'fatih/vim-go', { 'for': 'go' }
   " Plug 'mxw/vim-jsx'
@@ -60,5 +66,6 @@ call plug#begin('~/.vim/plugged')
 
   " Color schemes
   " Plug '~/dotfiles/.vim/custom_themes/seoul256.vim'
+  Plug 'arcticicestudio/nord-vim'
   Plug '~/dotfiles/.vim/custom_themes/catherton'
 call plug#end()
