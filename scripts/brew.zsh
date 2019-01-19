@@ -2,7 +2,11 @@ function install_homebrew() {
   # Using default one installed here, because the ruby distribution is managed by homebrew itself
   if ! which brew >/dev/null ; then
     echo "Installing homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+    # TODO: This must be run manually!!!!!
+
+    # Adding the CI env variable forces homebrew to not wait for the user and automatically proceed
+    CI=true usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 }
 
@@ -50,9 +54,9 @@ function install_brews() {
     fi
 
     if [[ -z $args ]]; then
-      brew install $item
+      brew install $item >/dev/null
     else
-      brew install $item "$args"
+      brew install $item "$args" >/dev/null
     fi
   done
 }

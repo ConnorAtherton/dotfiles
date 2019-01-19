@@ -1,6 +1,5 @@
 TODO
 
-- Disable line numbers to start (create a toggle function for quick toggling in each buffer)
 - Pick a bg which will be the same as the Xresources colors
 - Make rofi look pretty
 - Install i3-lock
@@ -9,3 +8,8 @@ TODO
 - Link ~/.ssh/config automatically
 
 - Get VPN automatically connected in linux (random selection)
+
+- trap sigint and sigexit for spinners and terminate the script nicely.
+
+- Instead of silencing all output, place it in an install tmp file and redirect everything there,
+  to help with debugging, or just to see what happened.

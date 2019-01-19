@@ -6,10 +6,11 @@
 # the utils files in the home directory after this file runs.
 source $(dirname $0)/config/.utils.zsh
 
-if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-  print_red "Must run as root!"
-  exit 1
-fi
+# TODO: Can't run homebrew as root, so this will not work
+# if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+#  print_red "Must run as root!"
+#  exit 1
+# fi
 
 # Kick it off, maestro..
 print_dotfiles_header
