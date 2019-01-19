@@ -1,7 +1,8 @@
 #!/bin/bash
 
 sandbox_init_nvm(){
-  source $(brew --prefix nvm)/nvm.sh
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
   # Latest stable release
   # nvm alias default lts/dubnium

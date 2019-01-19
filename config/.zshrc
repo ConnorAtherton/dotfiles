@@ -54,7 +54,7 @@ unset PATH
 #
 pathdirs=(
   # Location where I install tools manually (allows me to know I can delete)
-  /usr/local/bin/catherton
+  $HOME/bin
 
   # Needs to go first for shims
   $HOME/.rbenv/shims

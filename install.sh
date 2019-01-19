@@ -9,6 +9,13 @@
 # the utils files in the home directory after this file runs.
 source $(dirname $0)/config/.utils.zsh
 
+
+echo -e "\033[2J"
+echo -e "\033[H"
+
+trap stop_spinner INT
+
+# Kick it off, maestro..
 print_dotfiles_header
 
 #
@@ -46,12 +53,16 @@ remove_from_home "functions"
 ln -fs $PWD/functions $HOME/functions
 
 #
-# TODO: node/npm installation needs to happen before this because some vim libraries require those
- tools to complete post install tasks
-# install vim.plug to manage deps
+# TODO: node/npm installation needs to happen before this because some vim libraries require those tools to complete
+# post install tasks install vim.plug to manage deps
 #
-start_spinner "Creating catherton directories"
-  mkdir -p /usr/local/catherton/bin
+start_spinner "Creating catherton bin directories"
+  mkdir -p "~/bin"
+
+  ./bin/exa -1 bin | while read file
+  do
+    ln -fs "$PWD/bin/$name" "~/bin/$name"
+  done
 stop_spinner
 
 #
@@ -83,11 +94,11 @@ else
   # chmod 775 ~/scripts
   # cd ~ && ./.osx
   # install brew
-  sh $PWD/scripts/brew.zsh
+  # sh $PWD/scripts/brew.zsh
 
-  if ! [ $(which xcode-select) ]; then
-    xcode-select --install
-  fi
+  # if ! [ $(which xcode-select) ]; then
+  #   xcode-select --install
+  # fi
   stop_spinner
 
   start_spinner "Checking for oh-my-zsh..."

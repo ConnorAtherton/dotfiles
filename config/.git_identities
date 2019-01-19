@@ -4,10 +4,12 @@
 
 [identity:personal]
   name = Connor Atherton
-  email = c.liam.atherton@gmail.com
+  email = connor@connoratherton.com
+  commit.gpgsign = false
 
 [personal]
   ~/oss/**/*
+  ~/dotfiles
 
 [work]
   ~/code/**/*
