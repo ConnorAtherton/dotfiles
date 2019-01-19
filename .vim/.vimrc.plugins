@@ -15,7 +15,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-markdown'
 
   " Look and feel
   Plug 'vim-airline/vim-airline'
@@ -29,14 +28,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/syntastic'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
+  Plug 'plasticboy/vim-markdown'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'w0rp/ale'
 
   " Autocompletion
-  " Plug 'Valloric/YouCompleteMe'
   Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install --user pynvim' }
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'racer-rust/vim-racer'
 
   " Language support
   Plug 'neomake/neomake'
