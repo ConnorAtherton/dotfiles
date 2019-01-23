@@ -8,3 +8,6 @@ startuptime.txt
 
 # This is where terraform inits things
 infra/.terraform
+
+# Nope, no private keys here please
+config/.gnupg/private-keys-v1.d/*
