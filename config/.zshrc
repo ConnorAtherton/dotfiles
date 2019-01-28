@@ -126,6 +126,10 @@ mkdir -p "$GOPATH/bin"
 #
 # FZF fuzzy searching
 #
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
+
+export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #

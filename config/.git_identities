@@ -5,7 +5,6 @@
 [identity:personal]
   name = Connor Atherton
   email = connor@connoratherton.com
-  commit.gpgsign = false
 
 [personal]
   ~/oss/**/*
