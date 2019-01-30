@@ -71,3 +71,7 @@
 [user]
 	name = Connor Atherton
 	email = connor@connoratherton.com
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = false
