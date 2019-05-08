@@ -23,14 +23,13 @@ terraform --version
 pull_github_code() {
   local url=$1
   local folder=$2
-  local current=$(pwd)
 
   if [[ ! -d "$folder" ]]; then
     env git clone --depth=1 "$url" "$folder"
   else
-    cd "$folder"
+    cd "$folder" || exit
     env git pull "$url"
-    cd "$current"
+    cd - ||  exit
   fi
 }
 
@@ -44,7 +43,7 @@ pull_github_code() {
 
 pull_github_code \
   git@github.com:robbyrussell/oh-my-zsh.git \
-  $HOME/.oh-my-zsh
+  "$HOME/.oh-my-zsh"
 
 # pull_github_code \
 #   git@github.com:zsh-users/zsh-syntax-highlighting.git \

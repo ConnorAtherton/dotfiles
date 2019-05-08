@@ -1,4 +1,27 @@
+load_module() {
+  if [ -n "$ABORTED" ]; then
+    return
+  fi
+
+  module="$1"
+  if [ -f "$module" ]; then
+    source $module
+
+    if [ "$?" != "0" ]; then
+      echo "Module $module failed to load. Exiting."
+      export ABORTED=1
+      return
+    fi
+  fi
+}
+
+# Make sure we are running interactively, else stop
+[ -z "$PS1" ] && return
+
 rm -f ~/.zcompdump >/dev/null 2>&1
+
+# Gimme some vi
+set -o vi
 
 # Enable profiling
 zmodload zsh/zprof
@@ -116,7 +139,9 @@ for dir ($funcdirs) {
 #
 # Use coreutils utilities instead of BSD
 #
-MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+# Max line-length in man pages (also respected by Vim's man.vim plugin!)
+export MANWIDTH=100
 
 #
 # Go programming
@@ -131,6 +156,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclu
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 
 #
 # Remap some keys
@@ -156,8 +182,7 @@ autoload -Uz peco-kill-process hide-hidden-files md permission \
 # Source everything into the shell
 #
 source $ZSH/oh-my-zsh.sh
-source ~/.aliases
-source ~/.functions
+# source ~/.aliases
 
 #
 # Gimme that zsh goodness
@@ -172,6 +197,12 @@ if [ "$(uname -s)" != "Linux" ]; then
 else
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+load_module ~/.aliases
+
+for module in ~/dotfiles/functions/*.sh; do
+  load_module $module
+done
 
 # Print out profiling
 # zprof
