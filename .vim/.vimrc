@@ -288,4 +288,13 @@ augroup BgHighlight
   autocmd WinLeave * set nocul
 augroup END
 
+" Replace curly quotes with straight quotes in the entire file.
+function! Nocurly() abort
+  silent! %s/‘/'/g
+  silent! %s/’/'/g
+  silent! %s/“/"/g
+  silent! %s/”/"/g
+endfunction
+command! Nocurly call Nocurly()
+
 source ~/.vimrc.mappings

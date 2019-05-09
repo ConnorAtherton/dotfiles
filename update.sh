@@ -1,6 +1,11 @@
 # Number of seconds to wait before printing a reminder
 UPDATE_THRESHOLD="86400"
 
+list_updated_apt_packages() {
+  apt-get -s upgrade \
+    | awk -F'[][() ]+' "/^Inst/{printf \"${cwhiteb}Prog${cnone}: %s\t${credb}cur${cnone}: %s\t${cgreen}avail${cnone}: %s\n\", \$2,\$3,\$4}"
+}
+
 check_for_updates() {
   [ ! -e $HOME/.last_update ] && touch $HOME/.last_update
 
