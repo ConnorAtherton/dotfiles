@@ -57,9 +57,10 @@ ln -fs $PWD/functions $HOME/functions
 # post install tasks install vim.plug to manage deps
 #
 start_spinner "Creating catherton bin directories"
-  mkdir -p "~/bin"
+  mkdir -p "~/bin" &>/dev/null
 
-  ./bin/exa -1 bin | while read file
+  # TODO: This needs to be installed by cargo
+  exa -1 bin | while read file
   do
     ln -fs "$PWD/bin/$name" "~/bin/$name"
   done
@@ -128,11 +129,14 @@ stop_spinner
 # . $PWD/scripts/npm.zsh
 # stop_spinner
 
-start_spinner "Setting shell correctly"
-  chsh -s $(which zsh)
-  # . ~/.zshrc
-stop_spinner
+# start_spinner "Setting shell correctly"
+#   chsh -s $(which zsh)
+#   # . ~/.zshrc
+# stop_spinner
+#
 
-# Add a trap here for SIGINT, or SIGHUP to stop the spinner
+start_spinner "Sourcing shell modules"
+  . ~/.zshrc
+stop_spinner
 
 exit 0
