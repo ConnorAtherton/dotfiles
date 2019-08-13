@@ -244,10 +244,16 @@ nnoremap ^ 0
 " Delete trailing whitespace before saving any file
 " TODO: Move to custom functions
 func! DeleteTrailingWhitespace()
+" Only strip if the b:noStripeWhitespace variable isn't set
+  if exists('b:noStripWhitespace')
+      return
+  endif
+
   exe "normal mz"
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
+autocmd FileType yaml,perl let b:noStripWhitespace=1
 
 " Don't close window when deleting a buffer, show something else
 command! Bclose call <SID>BufcloseCloseIt()

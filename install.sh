@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+
+RECORD_START=$(date +'%s')
+
 # NOTE:
 # - on mac, it still includes manually installing the xcode developer tools. Even homebrew requires they be present.
 
@@ -138,5 +141,10 @@ stop_spinner
 start_spinner "Sourcing shell modules"
   . ~/.zshrc
 stop_spinner
+
+RECORD_END=$(date +'%s')
+echo ""
+echo "Complete in $(($RECORD_END - $RECORD_START)) seconds"
+echo ""
 
 exit 0

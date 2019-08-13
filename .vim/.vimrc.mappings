@@ -116,6 +116,7 @@ let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
 
 "Add extra filetypes
+let g:tern#arguments = ["--persistent", "--no-port-file"]
 let g:deoplete#sources#ternjs#types = 1
 let g:deoplete#sources#ternjs#filetypes = [
       \ 'js',

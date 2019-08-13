@@ -59,10 +59,11 @@ call plug#begin('~/.vim/plugged')
   " For CTags
   Plug 'majutsushi/tagbar'
 
-  " Writing markdown and note taking
+  " Writing, note taking, diagramming
   Plug 'suan/vim-instant-markdown'
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
   Plug 'mtth/scratch.vim', { 'on': 'Scratch' }
+  Plug 'vim-scripts/DrawIt'
 
   " Color schemes
   " Plug '~/dotfiles/.vim/custom_themes/seoul256.vim'
