@@ -104,6 +104,7 @@ start_spinner() {
   # Store these as globals for when we stop
   spinner_message=$1
   spinner_pid=$!
+  spinner_stage_start_time=$(date +'%s')
 
   disown
 }
@@ -147,6 +148,8 @@ spinner_loop() {
 
 stop_spinner() {
   local pid="${spinner_pid}"
+  local spinner_stage_end_time=$(date +'%s')
+  local elapsed_time=$(($spinner_stage_end_time - $spinner_stage_start_time))
 
   if [[ -z $pid ]]; then
     print_red "Tried to stop spinner but it was not running"
@@ -156,5 +159,5 @@ stop_spinner() {
   kill $pid >/dev/null 2>&1
 
   up_n_lines 1
-  print_green_bold "✔ $spinner_message"
+  print_green_bold "✔ $spinner_message \e[38;05;8m(${elapsed_time}s)\e[0m"
 }
