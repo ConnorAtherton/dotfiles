@@ -24,3 +24,17 @@ git config --global commit.gpgsign true
 - Agents to start when computer starts up again
     - gpg-agent --daemon
     - sshd
+
+- Cron to do some cleanup stuff:
+  -> put all files on desktop into a compressed folder with date timestamp
+  -> backup using restic to external place
+  -> check last time manually backing up things to 1) dropbox and 2) local hd
+
+- Create a rust version of `fokus` to block sites in /etc/hosts
+
+```
+# IPV4
+127.0.0.1 twitter.com
+# IPV6
+::1 twitter.com
+```

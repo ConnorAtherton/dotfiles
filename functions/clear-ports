@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+## TODO: Move to net module
 function clear-ports() {
   local ports=$(echo "$1" | tr " " "\n")
 
