@@ -57,7 +57,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'rust-lang/rust.vim'
 
   " For CTags
-  Plug 'majutsushi/tagbar'
+  " Plug 'majutsushi/tagbar'
 
   " Writing, note taking, diagramming
   Plug 'suan/vim-instant-markdown'
