@@ -30,6 +30,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'honza/vim-snippets'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'w0rp/ale'
+  Plug 'rhysd/conflict-marker.vim'
 
   " Autocompletion
   " Plug 'Valloric/YouCompleteMe'

@@ -102,7 +102,7 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
-" Don’t add empty newlines at the end of files
+" Don't add empty newlines at the end of files
 set binary
 set noeol
 
@@ -294,12 +294,21 @@ augroup BgHighlight
   autocmd WinLeave * set nocul
 augroup END
 
+augroup EnsureFreshVimrc
+  autocmd!
+  autocmd bufwritepost .vimrc source ~/.vimrc
+augroup END
+
+" Preset layouts for splits
+nnoremap <leader>3 :vsplit<CR>:bn<CR>:vsplit<CR>:bn<CR>
+nnoremap <leader>4 :vnew<CR>:bn<CR>:vnew<CR>:bn<CR><C-W><C-L><C-W><C-L>:split<CR>:bn<CR>
+
 " Replace curly quotes with straight quotes in the entire file.
 function! Nocurly() abort
-  silent! %s/‘/'/g
-  silent! %s/’/'/g
-  silent! %s/“/"/g
-  silent! %s/”/"/g
+  silent! %s/'/'/g
+  silent! %s/'/'/g
+  silent! %s/"/"/g
+  silent! %s/"/"/g
 endfunction
 command! Nocurly call Nocurly()
 
