@@ -63,6 +63,7 @@ call plug#begin('~/.vim/plugged')
   " Writing, note taking, diagramming
   Plug 'suan/vim-instant-markdown'
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+  Plug 'junegunn/limelight.vim', { 'on': 'Goyo' }
   Plug 'mtth/scratch.vim', { 'on': 'Scratch' }
   Plug 'vim-scripts/DrawIt'
 

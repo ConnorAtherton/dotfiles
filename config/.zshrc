@@ -97,6 +97,9 @@ pathdirs=(
 
   # Rust
   $HOME/.cargo/bin
+
+  # Tex additions for pandoc
+  /Library/TeX/texbin/
 )
 
 #
