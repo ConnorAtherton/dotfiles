@@ -38,3 +38,11 @@ git config --global commit.gpgsign true
 # IPV6
 ::1 twitter.com
 ```
+
+- Create a script to do local pull reviews in local editor, something like this
+    https://github.com/sirupsen/dotfiles/blob/master/home/.bin/review
+
+- Custom note taking system that uses a local sqllite db for storage
+    https://github.com/sirupsen/dotfiles/blob/master/home/.bin/fts-search.rb
+
+- [easy] Configure ALE correctly with js files for work.

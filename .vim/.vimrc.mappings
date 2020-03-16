@@ -62,7 +62,11 @@ call neomake#configure#automake('nw', 750)
 "/
 "/ Ale
 "/
-" TODO: Still testing this. Will add config if required.
+let g:ale_set_highlights = 0 " signs are enough
+let g:ale_cursor_detail = 0
+let g:ale_close_preview_on_insert = 1
+let g:ale_fixers = {'rust': ['rustfmt'], 'ruby': ['bundle exec rubocop -a'], 'javascript': ['prettier', 'eslint']}
+let g:ale_lint_delay = 1000
 
 "/
 "/ Tagbar

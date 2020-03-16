@@ -34,23 +34,27 @@ function install_brews() {
     rename tree wget coreutils make grep fd \
     peco docker the_silver_searcher gnupg nvm \
     freetype boost-python glib go zsh zsh-syntax-highlighting \
-    docker-compose fzf rbenv universal-ctags/universal-ctags/universal-ctags \
-    exa )
+    docker-compose fzf rbenv \
+
+    #
+    universal-ctags/universal-ctags/universal-ctags \
+
+    # `ls` improvement. I alias this.
+    exa \
+
+    # For querying and filtering json data
+    jq)
 
   for item in "${brews[@]}"
   do
     local args=""
 
-    if [[ $item == "vim" ]]; then
-      args="--override-system-vim"
-    elif [[ $item == "boost-python" ]]; then
-      args="--build-from-source"
-    elif [[ $item == "universal-ctags/universal-ctags/universal-ctags" ]]; then
+    if [[ $item == "universal-ctags/universal-ctags/universal-ctags" ]]; then
       # Head only formula
       args="--HEAD"
-    elif [[ $item == "make" ]] || [[ $item == "grep" ]]; then
-      # By default, gnu tools are installed with a `g`-prefix. We don't want that.
-      args="--with-default-names"
+    # elif [[ $item == "make" ]] || [[ $item == "grep" ]]; then
+    #   # By default, gnu tools are installed with a `g`-prefix. We don't want that.
+    #   args="--with-default-names"
     fi
 
     if [[ -z $args ]]; then
@@ -67,14 +71,9 @@ function install_casks() {
   brew tap homebrew/boneyard
 
   casks=( dropbox vlc suspicious-package \
-    transmission skitch adium caffeine \
-<<<<<<< HEAD
+    adium caffeine \
     flux spectacle spotify docker alacritty chromium slack \
     caskroom/versions/firefox-developer-edition )
-=======
-    flux iterm2 spectacle firefox \
-    spotify docker alacritty chromium slack)
->>>>>>> Better tern configuration and more plugins
 
   for item in "${casks[@]}"
   do

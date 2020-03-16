@@ -47,6 +47,12 @@
   # git reviewone foo.js bar.js
   reviewone = !vim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
 
+  # Prints out just hashes for latest commit. Useful
+  # for plugging into tools further along to check commit status.
+  latest = log --oneline origin/master --first-parent -n 20 --format="%H"
+
+  dangling = branch --no-merged origin/master --sort=-committerdate
+
 [color]
 	# Use colors in Git commands that are capable of colored output when
 	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)

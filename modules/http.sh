@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function http::curl_time() {
+function http::breakdown() {
   curl -so /dev/null -w "\
    namelookup:  %{time_namelookup}s\n\
       connect:  %{time_connect}s\n\

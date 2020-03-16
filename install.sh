@@ -18,8 +18,13 @@ echo -e "\033[H"
 
 trap stop_spinner INT
 
+function symlink {
+  ln -nsf $1 $2
+}
+
 # Kick it off, maestro..
 print_dotfiles_header
+
 
 #
 # Symlink files back into correct dir
@@ -30,7 +35,7 @@ do
   local name=$(basename $file)
 
   remove_from_home $name
-  ln -fs $PWD${file:1} $HOME/$name;
+  symlink "$PWD${file:1}" "$HOME/$name"
   chown "$user:$user" $HOME/$name
 done
 stop_spinner
@@ -45,7 +50,7 @@ do
   local name=$(basename $file)
 
   remove_from_home $name
-  ln -fs $PWD${file:1} $HOME/$name;
+  symlink "$PWD${file:1}" "$HOME/$name"
 done
 stop_spinner
 
@@ -53,7 +58,7 @@ stop_spinner
 # TODO: include this above in find
 #
 remove_from_home "functions"
-ln -fs $PWD/functions $HOME/functions
+symlink "$PWD/functions" "$HOME/functions"
 
 #
 # TODO: node/npm installation needs to happen before this because some vim libraries require those tools to complete
@@ -65,7 +70,7 @@ start_spinner "Creating catherton bin directories"
   # TODO: This needs to be installed by cargo
   exa -1 bin | while read file
   do
-    ln -fs "$PWD/bin/$name" "~/bin/$name"
+    symlink "$PWD/bin/$name" "~/bin/$name"
   done
 stop_spinner
 
@@ -87,7 +92,7 @@ if [ "$(uname -s)" = "Linux" ]; then
   find ./linux/.config/* -maxdepth 0 | while read file
   do
     local name=$(basename $file)
-    ln -fs $PWD${file:1} $HOME/.config/$name;
+    symlink "$PWD${file:1}" "$HOME/.config/$name"
   done
 else
   start_spinner "OSX detected: installing relevant files"
@@ -98,6 +103,8 @@ else
   # chmod 775 ~/scripts
   # cd ~ && ./.osx
   # install brew
+
+  # TODO: If brew already installed, check each formula and ask to run `update::brew` manually to upgrade everything
   # sh $PWD/scripts/brew.zsh
 
   # if ! [ $(which xcode-select) ]; then
@@ -105,7 +112,7 @@ else
   # fi
   stop_spinner
 
-  start_spinner "Checking for oh-my-zsh..."
+  start_spinner "Checking for oh-my-zsh"
   if ! [ -e ~/.oh-my-zsh ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" &>/dev/null
   fi
@@ -124,6 +131,7 @@ stop_spinner
 # stop_spinner
 
 # TODO: This is buggy because it re-installs nvm every time
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash >/dev/null
 # start_spinner "Installing nvm and setting node version"
 # . $PWD/scripts/nvm.zsh
 # stop_spinner

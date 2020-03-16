@@ -34,16 +34,15 @@ call plug#begin('~/.vim/plugged')
 
   " Autocompletion
   " Plug 'Valloric/YouCompleteMe'
-  Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install --user pynvim' }
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
-  Plug 'racer-rust/vim-racer'
+  Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install --user pynvim' }
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
   " Language support
   Plug 'neomake/neomake'
   Plug 'pangloss/vim-javascript'
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-
+  Plug 'racer-rust/vim-racer'
 
   " Syntax highlighting
   Plug 'ConnorAtherton/uiscript-vim', { 'for': 'uiscript' }
