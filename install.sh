@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 RECORD_START=$(date +'%s')
 
 #
