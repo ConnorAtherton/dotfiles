@@ -36,6 +36,9 @@ function install_brews() {
     freetype boost-python glib go zsh zsh-syntax-highlighting \
     docker-compose fzf rbenv \
 
+    # Port scanning
+    nmap \
+
     #
     universal-ctags/universal-ctags/universal-ctags \
 
@@ -72,7 +75,14 @@ function install_casks() {
 
   casks=( dropbox vlc suspicious-package \
     adium caffeine \
-    flux spectacle spotify docker alacritty chromium slack \
+
+    # For image flashing. Use this when working why the Pis
+    balenaetcher \
+
+    # Hotkey window management
+    spectacle \
+
+    flux spotify docker alacritty chromium slack \
     caskroom/versions/firefox-developer-edition )
 
   for item in "${casks[@]}"
