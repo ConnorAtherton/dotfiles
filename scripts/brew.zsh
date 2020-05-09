@@ -39,6 +39,9 @@ function install_brews() {
     # Port scanning
     nmap \
 
+    # I use this for playing with clojure. Latest is fine.
+    java \
+
     #
     universal-ctags/universal-ctags/universal-ctags \
 

@@ -52,16 +52,13 @@ DISABLE_AUTO_TITLE="true"
 export GPG_TTY=$(tty)
 
 #
-# History settings
+# History settings. I use the `hstr` tool to filter this.
 #
-
-HISTSIZE=1000
-HISTFILESIZE=2000
-HISTCONTROL="erasedups:ignoreboth"
-HISTTIMEFORMAT='%F %T '
-
-# Don't record some commands
+export HISTFILESIZE=10000
+export HISTSIZE=${HISTFILESIZE}
+export HISTCONTROL="erasedups:ignoreboth:ignorespace"
 export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+export HISTTIMEFORMAT='%F %T '
 
 #
 # Unset everything from scratch so we control the
@@ -100,6 +97,9 @@ pathdirs=(
 
   # Tex additions for pandoc
   /Library/TeX/texbin/
+
+  # Android development
+  $HOME/Library/Android/sdk/platform-tools
 )
 
 #
@@ -155,9 +155,7 @@ mkdir -p "$GOPATH/bin"
 # FZF fuzzy searching
 #
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
-
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
@@ -209,5 +207,17 @@ done
 
 # Print out profiling
 # zprof
+
+# TOOD: Move this into a module
+function java::version () {
+  export JAVA_HOME=`/usr/libexec/java_home -v $1`
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+  export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+
+  echo "JAVA_HOME:" $JAVA_HOME
+  echo "java -version:"
+
+  java -version
+}
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

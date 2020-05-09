@@ -46,3 +46,5 @@ git config --global commit.gpgsign true
     https://github.com/sirupsen/dotfiles/blob/master/home/.bin/fts-search.rb
 
 - [easy] Configure ALE correctly with js files for work.
+
+- Check out the `bin/prose_*` scripts for proof reading. Make into a single tool for scanning.

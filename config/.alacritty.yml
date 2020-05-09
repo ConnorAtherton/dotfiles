@@ -1,6 +1,4 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator
-
-# Any items in the `env` entry below will be added as
+# Configuration for Alacritty, the GPU enhanced terminal emulator Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty it self.
 env:
@@ -45,7 +43,7 @@ draw_bold_text_with_bright_colors: true
 # Font configuration (changes require restart)
 font:
   normal:
-    family: "Hack Nerd Font"
+    family: "JetBrains Mono"
     style: Regular
   bold:
     family: "Hack Nerd Font"

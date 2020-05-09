@@ -3,6 +3,10 @@
 
 RECORD_START=$(date +'%s')
 
+#
+# TODO:
+# -> Add --debug flag which prints out everything each stage does, like symlinking and whatnot
+
 # NOTE:
 # - on mac, it still includes manually installing the xcode developer tools. Even homebrew requires they be present.
 
@@ -12,19 +16,20 @@ RECORD_START=$(date +'%s')
 # the utils files in the home directory after this file runs.
 source $(dirname $0)/config/.utils.zsh
 
-
 echo -e "\033[2J"
 echo -e "\033[H"
 
 trap stop_spinner INT
 
 function symlink {
+  debug "Symlinking $1 -> $1"
   ln -nsf $1 $2
 }
 
 # Kick it off, maestro..
 print_dotfiles_header
 
+DOTFILES_DEBUG_MODE=1
 
 #
 # Symlink files back into correct dir
@@ -57,20 +62,22 @@ stop_spinner
 #
 # TODO: include this above in find
 #
-remove_from_home "functions"
-symlink "$PWD/functions" "$HOME/functions"
+start_spinner "Replacing all functions"
+  remove_from_home "functions"
+  symlink "$PWD/functions" "$HOME/functions"
+stop_spinner
 
 #
 # TODO: node/npm installation needs to happen before this because some vim libraries require those tools to complete
 # post install tasks install vim.plug to manage deps
 #
 start_spinner "Creating catherton bin directories"
-  mkdir -p "~/bin" &>/dev/null
+  mkdir -p "$HOME/bin" &>/dev/null
 
   # TODO: This needs to be installed by cargo
   exa -1 bin | while read file
   do
-    symlink "$PWD/bin/$name" "~/bin/$name"
+    symlink "$PWD/bin/$name" "$HOME/bin/$name"
   done
 stop_spinner
 

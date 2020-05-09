@@ -35,6 +35,8 @@ remove_from_home () {
       rm $FILEPATH
     fi
   fi
+
+  debug "Removing from home $FILEPATH"
 }
 
 #
@@ -66,14 +68,24 @@ print_color_bold() {
 
 local prependStr=""
 
-print_yellow() { print_color 33 "$prependStr$1" }
+print_yellow() { print_color 3 "$prependStr$1" }
 print_green()  { print_color 48 "$prependStr$1" }
-print_green_bold()  { print_color_bold 48 "$prependStr$1" }
-print_blue()   { print_color 32 "$prependStr$1" }
+
+print_green_bold()  {
+  print_color_bold 48 "$prependStr$1"
+}
+
+print_blue()   { print_color 4 "$prependStr$1" }
 print_gray()   { print_color 8 "$prependStr$1" }
 print_red()    { print_color 196 "$prependStr$1" }
-debug()        { print_red "[DEBUG] $prependStr$1" }
-bold()   { echo -e "\e[1m$1\e[0m" }
+
+debug() {
+  print_color_bold 8 "| \e[38;05;3m$1\e[0m"
+}
+
+bold() {
+  echo -e "\e[1m$1\e[0m"
+}
 
 # Prints the dotfiles header. Only useful for the install script.
 print_dotfiles_header() {
@@ -98,13 +110,19 @@ up_n_lines() {
 #
 # $1 - Optional message to display with the spinner
 start_spinner() {
+  spinner_stage_start_time=$(date +'%s')
+
+  if [[ -v "${DOTFILES_DEBUG_MODE}" ]]; then
+    print_green_bold "$1"
+    return 0
+  fi
+
   echo ""
   spinner_loop "$1" &
 
   # Store these as globals for when we stop
   spinner_message=$1
   spinner_pid=$!
-  spinner_stage_start_time=$(date +'%s')
 
   disown
 }
@@ -147,9 +165,20 @@ spinner_loop() {
 }
 
 stop_spinner() {
-  local pid="${spinner_pid}"
   local spinner_stage_end_time=$(date +'%s')
   local elapsed_time=$(($spinner_stage_end_time - $spinner_stage_start_time))
+
+  if [[ -v "${DOTFILES_DEBUG_MODE}" ]]; then
+    echo "set!"
+    print_green "$1"
+    return
+  fi
+
+  echo -e "\e[38;05;8m Complete in ${elapsed_time}s\e[0m"
+  echo ""
+  return
+
+  local pid="${spinner_pid}"
 
   if [[ -z $pid ]]; then
     print_red "Tried to stop spinner but it was not running"
