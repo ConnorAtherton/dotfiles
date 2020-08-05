@@ -18,7 +18,7 @@ load_module() {
 # Make sure we are running interactively, else stop
 [ -z "$PS1" ] && return
 
-rm -f ~/.zcompdump >/dev/null 2>&1
+rm -f "$HOME/.zcompdump" >/dev/null 2>&1;
 
 # Gimme some vi
 set -o vi

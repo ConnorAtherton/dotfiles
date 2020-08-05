@@ -1,3 +1,11 @@
+#!/bin/bash
+###
+### update — Update package dependencies
+###
+### Options:
+###   -h        Show this message.
+###   -o        OS package deps.
+
 # Number of seconds to wait before printing a reminder
 UPDATE_THRESHOLD="86400"
 

@@ -85,10 +85,13 @@ stop_spinner
 # install vim.plug to manage deps
 #
 start_spinner "Configuring vim"
-if ! [ -e ~/.vim/autoload/plug.vim ]; then
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
+  if ! [ -e ~/.vim/autoload/plug.vim ]; then
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  fi
+
+  vim +PlugClean +qall
+  vim +PlugInstall +qall
 stop_spinner
 
 if [ "$(uname -s)" = "Linux" ]; then
