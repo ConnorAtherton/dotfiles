@@ -49,7 +49,10 @@ function install_brews() {
     exa \
 
     # For querying and filtering json data
-    jq)
+    jq \
+
+    # An improved diff output
+    git-delta)
 
   for item in "${brews[@]}"
   do
