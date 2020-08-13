@@ -152,14 +152,6 @@ export MANWIDTH=100
 mkdir -p "$GOPATH/bin"
 
 #
-# FZF fuzzy searching
-#
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
-export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
-#
 # Remap some keys
 #
 bindkey '^b' beginning-of-line
@@ -183,7 +175,6 @@ autoload -Uz peco-kill-process hide-hidden-files md permission \
 # Source everything into the shell
 #
 source $ZSH/oh-my-zsh.sh
-# source ~/.aliases
 
 #
 # Gimme that zsh goodness
@@ -221,3 +212,12 @@ function java::version () {
 }
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+#
+# FZF fuzzy searching. Note: Must go after
+#
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
+export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+

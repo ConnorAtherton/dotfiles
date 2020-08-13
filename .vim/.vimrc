@@ -221,13 +221,13 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " Splits
-nnoremap <leader>hs :split<cr>
 nnoremap <leader>vs :vsplit<cr>
+nnoremap <leader>hs :split<cr>
 
-" opens .vimrc in split for easy editing
-nnoremap <leader>ev :vsplit $VIMRC<cr>
+" opens .vimrc in split for easy editing. (e)dit or (s)ource config
+nnoremap <leader>ec :vsplit $VIMRC<cr>
 " source .vimrc
-nnoremap <leader>sv :source $VIMRC<cr>
+nnoremap <leader>sc :source $VIMRC<cr>
 
 " Start using ag and place cursor in the quotes
 nnoremap <leader>s :Ag ""<Left>

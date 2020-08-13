@@ -8,8 +8,11 @@
 call plug#begin('~/.vim/plugged')
   " Search and file navigation
   Plug 'rking/ag.vim', { 'on': 'Ag' }
-  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+  Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+  Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'kien/ctrlp.vim'
+  " Auto bracket completion
+  Plug 'jiangmiao/auto-pairs'
 
   " #tpope
   Plug 'tpope/vim-sensible'
@@ -46,15 +49,7 @@ call plug#begin('~/.vim/plugged')
 
   " Syntax highlighting
   Plug 'ConnorAtherton/uiscript-vim', { 'for': 'uiscript' }
-  " NOTE: Trying this out over all the ones below, just to manage a single lazy-loaded dep
   Plug 'sheerun/vim-polyglot'
-  " Plug 'digitaltoad/vim-jade'
-  " Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-  " Plug 'chr4/nginx'
-  " Plug 'leafgarland/typescript-vim'
-  " Plug 'fatih/vim-go', { 'for': 'go' }
-  " Plug 'mxw/vim-jsx'
-  " Plug 'rust-lang/rust.vim'
 
   " For CTags
   " Plug 'majutsushi/tagbar'
