@@ -89,6 +89,7 @@ start_spinner "Configuring vim"
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
 
+  # TODO: Check a timestamp for this instead of running every time
   vim +PlugClean +qall
   vim +PlugInstall +qall
 stop_spinner
@@ -163,5 +164,7 @@ RECORD_END=$(date +'%s')
 echo ""
 echo "Complete in $(($RECORD_END - $RECORD_START)) seconds"
 echo ""
+
+./colorballs.sh
 
 exit 0
