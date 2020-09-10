@@ -1,10 +1,11 @@
 #!/bin/zsh
 
-RECORD_START=$(date +'%s')
-
 #
-# TODO:
-# -> Add --debug flag which prints out everything each stage does, like symlinking and whatnot
+# NOTE:
+# - To enable debugging, set the DOTFILES_DEBUG env var. The value doesn't matter, just so long as it's set.
+#
+
+RECORD_START=$(date +'%s')
 
 # NOTE:
 # - on mac, it still includes manually installing the xcode developer tools. Even homebrew requires they be present.
@@ -15,8 +16,19 @@ RECORD_START=$(date +'%s')
 # the utils files in the home directory after this file runs.
 source $(dirname $0)/config/.utils.zsh
 
+function print_dotfiles_header() {
+	printf ' '
+	for i in 1 2 3 4 5 6 7 8; do
+		printf '\033[9%sm▅▅' "$i"
+	done
+	printf '\033[0m\n'
+  printf ' D O T F I L E S\n'
+	printf '\033[0m\n'
+}
+
 echo -e "\033[2J"
 echo -e "\033[H"
+reset
 
 trap stop_spinner INT
 
@@ -27,8 +39,6 @@ function symlink {
 
 # Kick it off, maestro..
 print_dotfiles_header
-
-DOTFILES_DEBUG_MODE=1
 
 #
 # Symlink files back into correct dir
@@ -160,11 +170,12 @@ start_spinner "Sourcing shell modules"
   . ~/.zshrc
 stop_spinner
 
+echo ""
+./colorballs.sh
 RECORD_END=$(date +'%s')
 echo ""
-echo "Complete in $(($RECORD_END - $RECORD_START)) seconds"
+echo " Complete in $(($RECORD_END - $RECORD_START)) seconds"
 echo ""
 
-./colorballs.sh
 
 exit 0

@@ -80,22 +80,11 @@ print_gray()   { print_color 8 "$prependStr$1" }
 print_red()    { print_color 196 "$prependStr$1" }
 
 debug() {
-  print_color_bold 8 "| \e[38;05;3m$1\e[0m"
+  [[ -v $DOTFILES_DEBUG ]] && print_color_bold 8 "| \e[38;05;3m$1\e[0m"
 }
 
 bold() {
   echo -e "\e[1m$1\e[0m"
-}
-
-# Prints the dotfiles header. Only useful for the install script.
-print_dotfiles_header() {
-  print_color 201 "  __  _ _____              ___ _ _"
-  print_color 13  " /  \/ |____ \       _    / __|_) |"
-  print_color 123 "(_/\__/ _   \ \ ___ | |_ | |__ _| | ____  ___"
-  print_color 155 "       | |   | / _ \|  _)|  __) | |/ _  )/___)"
-  print_color 180 "       | |__/ / |_| | |__| |  | | ( (/ /|___ |"
-  print_color 201 "       |_____/ \___/ \___)_|  |_|_|\____|___/"
-  echo ""
 }
 
 up_n_lines() {
@@ -112,7 +101,7 @@ up_n_lines() {
 start_spinner() {
   spinner_stage_start_time=$(date +'%s')
 
-  if [[ -v "${DOTFILES_DEBUG_MODE}" ]]; then
+  if [[ -v "${DOTFILES_DEBUG}" ]]; then
     print_green_bold "$1"
     return 0
   fi
@@ -131,13 +120,37 @@ start_spinner() {
 SPINNER_DOTS=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
 SPINNER_ARROWS=(▹▹▹▹▹ ▸▹▹▹▹ ▹▸▹▹▹ ▹▹▸▹▹ ▹▹▹▸▹ ▹▹▹▹▸)
 
+stop_spinner() {
+  local spinner_stage_end_time=$(date +'%s')
+  local elapsed_time=$(($spinner_stage_end_time - $spinner_stage_start_time))
+
+  if [[ -v "${DOTFILES_DEBUG}" ]]; then
+    print_green "$1"
+    echo -e "\e[38;05;8m Complete in ${elapsed_time}s\e[0m"
+    echo ""
+    return 0
+  fi
+
+  local pid="${spinner_pid}"
+
+  if [[ -z $pid ]]; then
+    print_red "Tried to stop spinner but it was not running"
+    exit 1
+  fi
+
+  kill $pid >/dev/null 2>&1
+
+  up_n_lines 1
+  print_green_bold "✔ $spinner_message \e[38;05;8m(${elapsed_time}s)\e[0m"
+}
+
 # The actual loop of the spinner.
 #
 # $1 - Optional message to display with the spinner
 #
 # ~private
 spinner_loop() {
-  local delay=0.1
+  local delay=0.05
 
   # NOTE: Doing this because in the future I would like to have multiple different dots to choose
   # from when configuring the dotfiles.
@@ -162,33 +175,6 @@ spinner_loop() {
 
     i=$(($i+1))
   done
-}
-
-stop_spinner() {
-  local spinner_stage_end_time=$(date +'%s')
-  local elapsed_time=$(($spinner_stage_end_time - $spinner_stage_start_time))
-
-  if [[ -v "${DOTFILES_DEBUG_MODE}" ]]; then
-    echo "set!"
-    print_green "$1"
-    return
-  fi
-
-  echo -e "\e[38;05;8m Complete in ${elapsed_time}s\e[0m"
-  echo ""
-  return
-
-  local pid="${spinner_pid}"
-
-  if [[ -z $pid ]]; then
-    print_red "Tried to stop spinner but it was not running"
-    exit 1
-  fi
-
-  kill $pid >/dev/null 2>&1
-
-  up_n_lines 1
-  print_green_bold "✔ $spinner_message \e[38;05;8m(${elapsed_time}s)\e[0m"
 }
 
 # print_theme_color_balls() {
