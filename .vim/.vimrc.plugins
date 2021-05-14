@@ -7,10 +7,12 @@
 "/
 call plug#begin('~/.vim/plugged')
   " Search and file navigation
-  Plug 'rking/ag.vim', { 'on': 'Ag' }
+  " Plug 'rking/ag.vim', { 'on': 'Ag' }
   Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'kien/ctrlp.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
   " Auto bracket completion
   Plug 'jiangmiao/auto-pairs'
 

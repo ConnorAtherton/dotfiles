@@ -51,6 +51,9 @@ function install_brews() {
     # For querying and filtering json data
     jq \
 
+    # For integrating with DO, where things are deployed
+    doctl \
+
     # An improved diff output
     git-delta)
 

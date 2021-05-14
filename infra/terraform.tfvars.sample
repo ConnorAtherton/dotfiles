@@ -1,9 +1,0 @@
-# Used to authenticate with DigitalOcean
-digitalocean_token = ""
-
-# Used to access static resources in the account
-cluster_name = ""
-
-# Floating ip in the account to re-assign to the new master droplet
-external_ip = ""
-internal_ip = ""

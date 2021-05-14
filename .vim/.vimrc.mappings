@@ -36,13 +36,17 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 "/
 "/ CTRLP
 "/
-nnoremap <leader>f :CtrlP<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>T :CtrlPBufTag<CR>
 nnoremap <leader>t :CtrlPTag<CR>
 nnoremap <leader>F :CtrlPCurWD<CR>
 nnoremap <leader>M :CtrlPMRUFiles<CR>
 nnoremap <leader>l :CtrlPLine<CR>
+
+"/
+"/ FZF - replacement for CTRLP
+"/
+nnoremap <leader>f :GFiles<CR>
+nnoremap <leader>b :Buffers<CR>
 
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
 let g:ctrlp_use_caching = 1

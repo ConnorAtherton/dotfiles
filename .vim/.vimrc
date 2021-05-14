@@ -228,9 +228,11 @@ nnoremap <leader>hs :split<cr>
 nnoremap <leader>ec :vsplit $VIMRC<cr>
 " source .vimrc
 nnoremap <leader>sc :source $VIMRC<cr>
+" reload config inlcuding all plugins
+nnoremap <leader>rc :source $VIMRC \| :PlugInstall<cr>
 
-" Start using ag and place cursor in the quotes
-nnoremap <leader>s :Ag ""<Left>
+" Start using ag and place cursor in the quotes. This comes from FZF-vim
+nnoremap <leader>s :Ag<Cr>
 
 " I want to go to the first character far more often
 " than the beginning of the line so let's switch

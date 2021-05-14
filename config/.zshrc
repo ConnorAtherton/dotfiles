@@ -41,7 +41,7 @@ export TERM=screen-256color
 export NVM_DIR=$HOME/.nvm
 export NODE_VERSION="lts/carbon"
 
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 DISABLE_AUTO_TITLE="true"
@@ -59,6 +59,14 @@ export HISTSIZE=${HISTFILESIZE}
 export HISTCONTROL="erasedups:ignoreboth:ignorespace"
 export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 export HISTTIMEFORMAT='%F %T '
+
+#
+# zsh settings
+#
+# Ignore duplicates and filter history
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
 
 #
 # Unset everything from scratch so we control the
@@ -220,4 +228,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclu
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
