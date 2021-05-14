@@ -91,6 +91,15 @@ start_spinner "Creating catherton bin directories"
 stop_spinner
 
 #
+# install pretty shell theme
+#
+start_spinner "Configuring p10k"
+  if ! [ -e ~/powerlevel10k ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+  fi
+stop_spinner
+
+#
 # install vim.plug to manage deps
 #
 start_spinner "Configuring vim"
