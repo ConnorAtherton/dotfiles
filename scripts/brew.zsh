@@ -78,9 +78,7 @@ function install_brews() {
 }
 
 function install_casks() {
-  brew tap caskroom/homebrew-cask
-  brew tap caskroom/versions
-  brew tap homebrew/boneyard
+  brew tap homebrew/cask-versions
 
   casks=( dropbox vlc suspicious-package \
     adium caffeine \
@@ -91,13 +89,15 @@ function install_casks() {
     # Hotkey window management
     spectacle \
 
-    flux spotify docker alacritty chromium slack \
-    caskroom/versions/firefox-developer-edition )
+    flux spotify docker alacritty \
+
+    # Dev browsers
+    firefox-developer-edition chromium )
 
   for item in "${casks[@]}"
   do
     # Using --force here will upgrade, but it makes running ./install.sh way too much pain
-    brew cask install $item
+    brew install $item
   done
 }
 
@@ -105,7 +105,8 @@ function install_casks() {
 install_homebrew
 
 # Install all brew packages and casks
-install_brews && install_casks
+# install_brews && install_casks
+install_casks
 
 # Keep everything up-to-date
 homebrew_maintenance

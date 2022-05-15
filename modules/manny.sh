@@ -5,7 +5,6 @@ NOTES="$HOME/.notes"
 #
 # Idea: Manny keeps track of notes and displays then as man pages, for quick retrieval in the terminal.
 #
-
 manny::view () {
   NOTE="$NOTES"/$1.md
 

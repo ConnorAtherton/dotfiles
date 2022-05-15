@@ -48,3 +48,12 @@ git config --global commit.gpgsign true
 - [easy] Configure ALE correctly with js files for work.
 
 - Check out the `bin/prose_*` scripts for proof reading. Make into a single tool for scanning.
+
+- Upgrade vim to try out nvim:
+  https://github.com/SpaceVim/SpaceVim/tree/master/bundle
+  https://github.com/neovim/nvim-lspconfig/tree/507f8a570ac2b8b8dabdd0f62da3b3194bf822f8
+  https://github.com/lukas-reineke/indent-blankline.nvim/tree/17a83ea765831cb0cc64f768b8c3f43479b90bbe
+  https://github.com/SpaceVim/SpaceVim/blob/master/bundle/tagbar-proto.vim/ftplugin/proto.vim
+  https://github.com/SpaceVim/SpaceVim/tree/master/bundle/vim-bookmarks
+  https://github.com/mhinz/vim-startify
+
