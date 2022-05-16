@@ -30,11 +30,15 @@ function uninstall_homebrew() {
 }
 
 function install_brews() {
-  brews=( vim git tmux reattach-to-user-namespace python \
+  brews=( git tmux reattach-to-user-namespace python \
     rename tree wget coreutils make grep fd \
     peco docker the_silver_searcher gnupg nvm \
     freetype boost-python glib go zsh zsh-syntax-highlighting \
     docker-compose fzf rbenv \
+
+    # I love you vim, but neovim has some tasty lua that I like
+    vim \
+    neovim \
 
     # Port scanning
     nmap \
