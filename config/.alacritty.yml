@@ -175,13 +175,6 @@ mouse:
   triple_click: { threshold: 300 }
   hide_cursor_when_typing: true
 
-  url:
-    # URL launcher
-    #
-    # This program is executed when clicking on a text which is recognized as a URL.
-    # The URL is always added to the command as the last parameter.
-    launcher: open
-
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
