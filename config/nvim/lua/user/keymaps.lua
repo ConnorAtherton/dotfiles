@@ -1,3 +1,20 @@
+local mapper = {}
+
+local function bind(op, outer_opts)
+	outer_opts = vim.tbl_extend("force", { noremap = true, silent = true }, outer_opts or {})
+
+	return function(lhs, rhs, opts)
+		opts = vim.tbl_extend("force", outer_opts, opts or {})
+		vim.keymap.set(op, lhs, rhs, opts)
+	end
+end
+
+mapper.map = bind("")
+mapper.nmap = bind("n", { noremap = false })
+mapper.normal = bind("n")
+mapper.visual = bind("v")
+mapper.insert = bind("i")
+
 local opts = { noremap = true, silent = true }
 
 local term_opts = { silent = true }
@@ -59,3 +76,17 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 
 -- Show tags through tagbar
 keymap("n", "<leader>.", ":Vista<CR>", opts)
+
+-- Turn off highlighted results
+keymap("n", "<leader>no", "<cmd>noh<cr>", opts)
+
+-- Diagnoistics quick navigate
+-- TODO: Can this just be errors? Warnings are annoying.
+mapper.normal("]d", function()
+	vim.diagnostic.goto_next({})
+	vim.api.nvim_feedkeys("zz", "n", false)
+end)
+mapper.normal("[d", function()
+	vim.diagnostic.goto_prev({})
+	vim.api.nvim_feedkeys("zz", "n", false)
+end)

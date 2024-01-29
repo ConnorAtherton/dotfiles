@@ -25,7 +25,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'tomtom/tlib_vim'
 
   -- Useful tools and syntax stuff
-  Plug('ap/vim-css-color', { ['for'] = 'sass, css'  })
+  Plug('NvChad/nvim-colorizer.lua', { ['for'] = 'sass, css'  })
   Plug 'scrooloose/syntastic'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'w0rp/ale'
@@ -60,9 +60,19 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- Plug '~/dotfiles/.vim/custom_themes/seoul256.vim'
   Plug 'arcticicestudio/nord-vim'
   Plug '~/dotfiles/.vim/custom_themes/catherton'
+  -- Look and feel
+  Plug 'stevearc/dressing.nvim'
+  Plug 'j-hui/fidget.nvim'
 
   -- (here down) Newer neovim plugins
   Plug "neovim/nvim-lspconfig"
+  Plug "williamboman/mason.nvim"
+  Plug "williamboman/mason-lspconfig.nvim"
+  Plug "hrsh7th/cmp-nvim-lsp"
+  Plug "nvimtools/none-ls.nvim"
+  Plug "folke/neodev.nvim"
+  -- For code editing
+  Plug 'github/copilot.vim'
 
   -- file picker (think fzf in vim)
   Plug "nvim-telescope/telescope.nvim"
@@ -70,7 +80,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   Plug("nvim-treesitter/nvim-treesitter", {['do'] = vim.fn['TSUpdate']})
   Plug "kyazdani42/nvim-tree.lua"
-  Plug "williamboman/nvim-lsp-installer"
   Plug 'liuchengxu/vista.vim' -- LSP tags integration
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
@@ -83,6 +92,9 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- Plug 'honza/vim-snippets'
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
+
+  -- For code editing
+  Plug 'github/copilot.vim'
 vim.call('plug#end')
 
 -- TODO: Wrap all these plugin configs in guard code in case the plugin is not installed
@@ -97,8 +109,8 @@ require('nvim-tree').setup {
   }
 }
 
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "lua", "rust", "javascript", "graphql", "go" },
+require('nvim-treesitter.configs').setup {
+  ensure_installed = { "c", "lua", "rust", "javascript", "graphql", "go", "vim" },
   highlight = {
     enable = true,
   },
@@ -118,7 +130,7 @@ require('lualine').setup {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
     lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_x = {'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },
@@ -134,10 +146,16 @@ require('lualine').setup {
   extensions = {}
 }
 
+require("dressing").setup()
+require("fidget").setup()
+
+-- This helps with building lsp stuff. Must come before lspconfig
+require("neodev").setup()
+
 -- Language Server Support
 -- The installer must come before any lspconfig setup (we don't want the installer doing the installing for us since we
 -- like to manage that with how we configure everything else on our dev machine)
-require("nvim-lsp-installer").setup({
+require("mason").setup({
     automatic_installation = false,
     ui = {
         icons = {
@@ -148,7 +166,8 @@ require("nvim-lsp-installer").setup({
     }
 })
 
-local cmp = require'cmp'
+
+local cmp = require('cmp')
 
 cmp.setup({
     snippet = {
@@ -162,8 +181,9 @@ cmp.setup({
     },
     window = {
       completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
+
     mapping = cmp.mapping.preset.insert({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -194,11 +214,64 @@ cmp.setup.cmdline(':', {
   })
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-require('lspconfig').gopls.setup{
-  capabilities = capabilities
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local lsp_flags = {
+  debounce_text_changes = 150,
 }
 
-require('lspconfig').sorbet.setup{
+-- Default handlers for LSP
+local default_handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
 }
+
+local lspconfig = require('lspconfig')
+local servers = { 'gopls', 'sorbet', 'tsserver', 'lua_ls' }
+
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    capabilities = capabilities,
+    flags = lsp_flags,
+  }
+end
+
+require("lspconfig.ui.windows").default_options.border = "rounded"
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('CathertonLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<space>f', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = vim.api.nvim_create_augroup("CathertonHighlightYank", { clear = true }),
+	pattern = "*",
+	desc = "Highlight selection on yank",
+	callback = function()
+		vim.highlight.on_yank({ timeout = 200, visual = true })
+	end,
+})
+

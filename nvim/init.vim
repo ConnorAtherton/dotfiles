@@ -60,4 +60,7 @@ call plug#begin()
   " Plug '~/dotfiles/.vim/custom_themes/seoul256.vim'
   Plug 'arcticicestudio/nord-vim'
   Plug '~/dotfiles/.vim/custom_themes/catherton'
+
+  " Code editing
+  Plug "github/copilot.vim"
 call plug#end()

@@ -25,7 +25,6 @@ vim.opt.splitright = true                       -- force all vertical splits to 
 vim.opt.wrap = false             -- Don't wrap lines
 vim.opt.textwidth = 120      -- But wrap text object at 100 chars
 vim.opt.nuw=3              -- Bump line numbers alongs to have some space on the left
-vim.opt.formatoptions=qrn1
 vim.opt.colorcolumn= "120"    -- Show long lines
 vim.opt.linebreak = true          -- Wrap lines at convenient points
 
@@ -33,6 +32,7 @@ vim.opt.linebreak = true          -- Wrap lines at convenient points
 -- Turn on syntax highlighting
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
+-- We want this on always to stop layout jank when signs emerge
 vim.opt.signcolumn = "yes"
 
 --
@@ -48,8 +48,10 @@ vim.opt.shortmess:append "I"
 -- Look and Feel
 --
 vim.opt.showmode = false                        -- we don't need to see things like -- INSERT -- anymo
+vim.opt.mouse = "a"
 
 --
 -- Globals
 --
 vim.g.completeopt="menu,menuone,noselect,noinsert"
+

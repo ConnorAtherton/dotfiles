@@ -52,6 +52,7 @@ call plug#begin('~/.vim/plugged')
   " Syntax highlighting
   Plug 'ConnorAtherton/uiscript-vim', { 'for': 'uiscript' }
   Plug 'sheerun/vim-polyglot'
+  Plug 'github/copilot.vim'
 
   " For CTags
   " Plug 'majutsushi/tagbar'
@@ -67,4 +68,7 @@ call plug#begin('~/.vim/plugged')
   " Plug '~/dotfiles/.vim/custom_themes/seoul256.vim'
   Plug 'arcticicestudio/nord-vim'
   Plug '~/dotfiles/.vim/custom_themes/catherton'
+
+  " Code editing
+  Plug "github/copilot.vim"
 call plug#end()
